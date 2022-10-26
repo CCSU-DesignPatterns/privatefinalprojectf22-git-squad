@@ -19,16 +19,16 @@ public class GamePanel extends JPanel implements Runnable{
 	private static GamePanel instance;
 	
 	// Game Screen Settings
-	final int originalTileSize = 16; // Original art will be 16x16 pixels
-	final int scale = 3; // Art will be scaled up 3x due to larger screen resolution
-	public final int tileSize = originalTileSize * scale;
+	private final int ORIGINAL_TILE_SIZE = 16; // Original art will be 16x16 pixels
+	private final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
+	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
 	
-	final int maxScreenCol = 20; // Screen width will fit 16 tiles
-	final int maxScreenRow = 15; // Screen height will fit 12 tiles
-	final int screenWidth = tileSize * maxScreenCol;
-	final int screenHeight = tileSize * maxScreenRow;
+	private final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
+	private final int MAX_SCREEN_ROW = 15; // Screen height will fit 12 tiles
+	private final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
+	private final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 	
-	int fps = 60;
+	private final int FPS = 60;
 	
 	KeyHandler keyH = new KeyHandler();
 	MouseHandler mouseH = new MouseHandler();
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 //	Player player = new Player(this, keyH);
 	
 	private GamePanel() {
-		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.green);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		
-		double drawInterval = 1000000000/fps;
+		double drawInterval = 1000000000/FPS;
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;
@@ -88,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
-	public void update() {
+	private void update() {
 //		player.update();
 	}
 	

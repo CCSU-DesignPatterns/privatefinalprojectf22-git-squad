@@ -5,7 +5,7 @@ public abstract class Tower extends Entity{
 	protected double fireRate;
 	protected int range;
 	protected int cost;
-	protected String name;
+	protected String type;
 	
 	public Tower(int x, int y, TowerType type) {
 		super(x, y, type.getSprite());
@@ -13,6 +13,8 @@ public abstract class Tower extends Entity{
 		this.fireRate = type.getFireRate();
 		this.range = type.getRange();
 		this.cost = type.getCost();
-		this.name = type.getType();
+		this.type = type.getType();
 	}
+	
+	
 }
