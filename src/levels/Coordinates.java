@@ -1,4 +1,4 @@
-package td.data;
+package levels;
 
 /**
  * Generic coordinates class.

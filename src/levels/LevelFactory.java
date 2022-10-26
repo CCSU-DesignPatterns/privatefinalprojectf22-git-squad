@@ -1,4 +1,4 @@
-package td.data;
+package levels;
 
 public class LevelFactory implements iLevelFactory{
     public LevelFactory() { }

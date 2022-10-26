@@ -1,6 +1,5 @@
-package td.data;
+package levels;
 
-import com.badlogic.gdx.graphics.Pixmap;
 
 public class MapSquare {
     private Coordinates position;
