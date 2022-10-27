@@ -1,6 +1,9 @@
 package levels;
 
-
+/**
+ * ** Work in progress. May get replaced
+ * Defines an area of a level or map
+ */
 public class MapSquare {
     private Coordinates position;
     private int size;   // Not sure if this is needed
