@@ -8,6 +8,11 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 
+/**
+ * {@summary Parent of all entities in the game. Handles basic properties of all entities like position and sprite.}
+ * @author Ryan Sharp
+ *
+ */
 public abstract class Entity {
 	protected int x, y;	
 	protected BufferedImage sprite;
@@ -34,7 +39,14 @@ public abstract class Entity {
 		}
 	}
 	
+	/**
+	 * {@summary Used to update the position/state of this individual entity. Will be called once per frame.}
+	 */
 	protected abstract void update();
 	
+	/**
+	 * {@summary Used to repaint this individual entity after update(). Will be called once per frame.}
+	 * @param g2 Graphics element responsible for drawing on the screen.
+	 */
 	protected abstract void draw(Graphics2D g2);
 }

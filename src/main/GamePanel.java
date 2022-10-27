@@ -10,8 +10,9 @@ import javax.swing.JPanel;
 import entity.Player;
 
 /**
- * 
- * @author RyiSnow, Ryan Sharp
+ * {@summary This class is responsible for rendering the graphics of the game as well as holding the game thread,
+ * which is what allows the game to run continuously without constant user input.}
+ * @author Ryan Sharp, RyiSnow (https://www.youtube.com/c/RyiSnow)
  *
  */
 public class GamePanel extends JPanel implements Runnable{
@@ -21,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// Game Screen Settings
 	private final int ORIGINAL_TILE_SIZE = 16; // Original art will be 16x16 pixels
 	private final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
-	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
+	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // Needs to be public for entities to draw the correct size tiles
 	
 	private final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
 	private final int MAX_SCREEN_ROW = 15; // Screen height will fit 12 tiles
@@ -30,10 +31,10 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	private final int FPS = 60;
 	
+	// Input handling and game thread
 	KeyHandler keyH = new KeyHandler();
 	MouseHandler mouseH = new MouseHandler();
 	Thread gameThread;
-//	Player player = new Player(this, keyH);
 	
 	private GamePanel() {
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -44,17 +45,29 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 	}
 	
+	/**
+	 * {@summary Used to create/get singleton instance of GamePanel. Only one instance should ever exist at a given time.}
+	 * @author Ryan Sharp
+	 */
 	public static GamePanel getInstance() {
 		if(instance == null)
 			instance = new GamePanel();
 		return instance;
 	}
 	
+	/**
+	 * {@summary Used by Main.java to start the game once the JFrame is set up.}
+	 * @author RyiSnow
+	 */
 	void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
+	/**
+	 * {@summary Called automatically by the game thread upon start. Does not need any outside influence, but must be public due to inheritance.}
+	 * @author RyiSnow
+	 */
 	@Override
 	public void run() {
 		
@@ -88,10 +101,16 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
+	/**
+	 * {@summary Responsible for updating the position/state of every graphical component of the game.}
+	 */
 	private void update() {
 //		player.update();
 	}
 	
+	/**
+	 * {@summary Responsible for redrawing every graphical component of the game once all updates have occurred.}
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;

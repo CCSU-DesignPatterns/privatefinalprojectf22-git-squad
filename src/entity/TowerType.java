@@ -1,5 +1,10 @@
 package entity;
 
+/**
+ * {@summary Holds default stats for the different types of towers at creation time.}
+ * @author Ryan Sharp
+ *
+ */
 enum TowerType {
 	TURRET(1, 5.0, 50, 100, "turret", "/towers/test.png"),
 	CANNON(10, 0.5, 25, 250, "cannon", "/towers/test.png"),
@@ -27,5 +32,5 @@ enum TowerType {
 	int getRange() { return RANGE; }
 	int getCost() { return COST; }
 	String getType() { return TYPE; }
-	String getSprite() { return DEFAULT_SPRITE_FILE_PATH; }
+	String getSpriteFilePath() { return DEFAULT_SPRITE_FILE_PATH; }
 }

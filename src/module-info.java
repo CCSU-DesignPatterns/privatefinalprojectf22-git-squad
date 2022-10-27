@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Wizen
+ * @author Ryan Sharp, RyiSnow
  *
  */
 module gitSquadTDGame {

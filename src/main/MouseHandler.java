@@ -3,6 +3,11 @@ package main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * {@summary Handles input detection from the user's mouse.}
+ * @author Ryan Sharp
+ *
+ */
 public class MouseHandler implements MouseListener{
 
 	@Override
