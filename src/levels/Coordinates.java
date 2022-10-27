@@ -2,7 +2,7 @@ package levels;
 
 /**
  * Generic coordinates class.
- * Stores positional data to be used with various objects
+ * Stores positional data to be used with various objects or entities
  */
 public class Coordinates {
     private int xPos = 0;

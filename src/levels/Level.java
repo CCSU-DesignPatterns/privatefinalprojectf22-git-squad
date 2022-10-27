@@ -1,5 +1,8 @@
 package levels;
 
+/**
+ * Abstract Level class that serves as a template for other Levels
+ */
 public abstract class Level implements iLevel {
     private Path path;
     private int mapSize = 0;
@@ -16,13 +19,17 @@ public abstract class Level implements iLevel {
         drawLevel();
     }
 
-    // Spawns a wave of enemies
+    /**
+     * Spawns a wave of enemies
+     */
     public void spawnEnemies() {
         //Not yet implemented. This is for testing only
         System.out.println("Enemies spawned");
     }
 
-    // Draws the level
+    /**
+     * Draws the level on the screen
+     */
     private void drawLevel() {
         //Not yet implemented. This is for testing only
         System.out.println("New level drawn");
