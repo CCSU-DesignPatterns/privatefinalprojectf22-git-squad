@@ -1,24 +1,24 @@
-package enemy.wave;
+package enemy;
 
 import java.util.Objects;
+import entity.Entity;
 
-public abstract class Enemy {
+public abstract class Enemy extends Entity{
 	
 	private Enemy nextEnemy;
 	private Enemy prevEnemy;
 	private int health;
-	private String color;
+	private String sprite;
 	/**
-	 * @param nextEnemy
-	 * @param prevEnemy
-	 * @param health
-	 * @param color
+	 * @param nextEnemy next enemy in the chain, it is null if it is the last in the chain
+	 * @param prevEnemy previous enemy in the chain, it is null if it is the first in the chain
+	 * @param health integer value that represents strength of an enemy.
+
+	 * @param sprite graphical representation of an enemy
 	 */
-	public Enemy(Enemy nextEnemy, Enemy prevEnemy, int health, String color) {
-		this.nextEnemy = nextEnemy;
-		this.prevEnemy = prevEnemy;
+	public Enemy(int health, String sprite) {
 		this.health = health;
-		this.color = color;
+		this.sprite = sprite;
 	}
 	
 	/**

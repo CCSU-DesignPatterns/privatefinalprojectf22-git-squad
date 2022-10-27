@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.Player;
+//import entity.Player;
 
 /**
  * 

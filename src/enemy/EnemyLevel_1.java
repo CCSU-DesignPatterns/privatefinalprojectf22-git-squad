@@ -1,4 +1,4 @@
-package enemy.wave;
+package enemy;
 
 public class EnemyLevel_1 extends Enemy {
 
@@ -6,13 +6,13 @@ public class EnemyLevel_1 extends Enemy {
 	 * @param nextEnemy
 	 * @param prevEnemy
 	 * @param health, level one enemy has health of 1 in a scale of 1 to total different enemies.
-	 * @param color, level one enemies are red.
+	 * @param color, level one enemies are orange.
 	 */
 	
 	
-	public EnemyLevel_1(Enemy nextEnemy, Enemy prevEnemy) {
+	public EnemyLevel_1() {
 		
-		super(nextEnemy, prevEnemy, 1, "red");
+		super(1, "enemy/assets/orange.png");
 		
 	}
 

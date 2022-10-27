@@ -1,4 +1,4 @@
-package enemy.wave;
+package enemy;
 
 public class EnemyLevel_3 extends Enemy{
 	/**
@@ -9,9 +9,9 @@ public class EnemyLevel_3 extends Enemy{
 	 */
 	
 	
-	public EnemyLevel_3(Enemy nextEnemy, Enemy prevEnemy) {
+	public EnemyLevel_3() {
 		
-		super(nextEnemy, prevEnemy, 3, "yellow");
+		super(3, "enemy/assets/yellow.png");
 		
 	}
 
