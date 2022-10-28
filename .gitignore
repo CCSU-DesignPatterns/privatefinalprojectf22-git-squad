@@ -25,4 +25,9 @@ hs_err_pid*
 
 # Files/folders to be ignored
 *.iml
+.gitignore
 /.idea
+/.metadata
+/res
+
+.classpath
