@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import entity.Player;
+//import entity.Player;
 
 /**
  * {@summary This class is responsible for rendering the graphics of the game as well as holding the game thread,
