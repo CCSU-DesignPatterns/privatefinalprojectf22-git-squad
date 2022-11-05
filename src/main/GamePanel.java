@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import tile.TileManager;
+
 //import entity.Player;
 
 /**
@@ -24,25 +26,30 @@ public class GamePanel extends JPanel implements Runnable{
 	private final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // Needs to be public for entities to draw the correct size tiles
 	
-	private final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
-	private final int MAX_SCREEN_ROW = 15; // Screen height will fit 12 tiles
-	private final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
-	private final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
+	public final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
+	public final int MAX_SCREEN_ROW = 15; // Screen height will fit 12 tiles
+	public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
+	public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
 	
 	private final int FPS = 60;
 	
 	// Input handling and game thread
-	KeyHandler keyH = new KeyHandler();
-	MouseHandler mouseH = new MouseHandler();
+	TileManager tileM;
+	KeyHandler keyH;
+	MouseHandler mouseH;
 	Thread gameThread;
 	
 	private GamePanel() {
+		instance = this;
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.green);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.addMouseListener(mouseH);
 		this.setFocusable(true);
+		this.tileM = new TileManager();
+		this.keyH = new KeyHandler();
+		this.mouseH = new MouseHandler();
 	}
 	
 	/**
@@ -114,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-//		player.draw(g2);
+		tileM.draw(g2);
 		g2.dispose();
 	}
 }
