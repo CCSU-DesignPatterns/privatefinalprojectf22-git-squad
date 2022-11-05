@@ -9,6 +9,7 @@ public abstract class Enemy extends Entity{
 	private Enemy prevEnemy;
 	private int health;
 	private String sprite;
+	private String color;
 	/**
 	 * @param nextEnemy next enemy in the chain, it is null if it is the last in the chain
 	 * @param prevEnemy previous enemy in the chain, it is null if it is the first in the chain
@@ -16,9 +17,10 @@ public abstract class Enemy extends Entity{
 
 	 * @param sprite graphical representation of an enemy
 	 */
-	public Enemy(int health, String sprite) {
+	public Enemy(int x, int y, String sprite, int health, String color) {
+		super(x, y, sprite);
 		this.health = health;
-		this.sprite = sprite;
+		this.color = color;
 	}
 	
 	/**

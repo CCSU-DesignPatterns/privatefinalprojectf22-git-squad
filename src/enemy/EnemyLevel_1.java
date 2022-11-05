@@ -1,5 +1,7 @@
 package enemy;
 
+import java.awt.Graphics2D;
+
 public class EnemyLevel_1 extends Enemy {
 
 	/**
@@ -12,7 +14,7 @@ public class EnemyLevel_1 extends Enemy {
 	
 	public EnemyLevel_1() {
 		
-		super(1, "enemy/assets/orange.png");
+		super(0, 0, "enemy/assets/orange.png", 1, "orange");
 		
 	}
 
@@ -20,6 +22,18 @@ public class EnemyLevel_1 extends Enemy {
 	public void calcDamage(int damage) {
 		// TODO Auto-generated method stub
 		super.calcDamage(damage);
+	}
+
+	@Override
+	protected void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void draw(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
