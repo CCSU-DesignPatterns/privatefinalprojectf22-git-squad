@@ -1,5 +1,7 @@
 package levels;
 
+import java.awt.*;
+
 /**
  * Levels interface
  */
@@ -10,5 +12,10 @@ public interface iLevel {
     /**
      * Spawns a wave of enemies
      */
-    void spawnEnemies();
+    //void spawnEnemies();
+
+    /**
+     * Draws the level
+     */
+    public void drawLevel(Graphics2D g2);
 }
