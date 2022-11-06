@@ -1,8 +1,6 @@
 package levels;
 
 import entity.SpriteNotFoundException;
-import tile.Tile;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

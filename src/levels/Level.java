@@ -1,17 +1,7 @@
 package levels;
 
 import main.GamePanel;
-import tile.Tile;
-import java.awt.*;
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import javax.imageio.ImageIO;
-
-import entity.SpriteNotFoundException;
-import main.GamePanel;
 
 /**
  * @author RyiSnow, Ryan Sharp, Ricardo Almeida (refactoring)
