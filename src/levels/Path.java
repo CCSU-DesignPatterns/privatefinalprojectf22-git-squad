@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * Draws a path for enemies to follow (and for the player to defend)
  */
 public class Path {
-    private LinkedList<MapSquare> pathElements;
+    private LinkedList<MapTile> pathElements;
     private int pathLength = 1; // This may not be necessary
 
     /**
