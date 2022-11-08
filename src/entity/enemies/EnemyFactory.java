@@ -1,13 +1,14 @@
 package entity.enemies;
 
 import entity.*;
+import common.*;
 
 /**
  * Concrete implementation for entity factory that creates enemies
  *
  * @author Ricardo Almeida
  */
-public class EnemyFactory implements iEntityFactory {
+public class EnemyFactory {
 
     /**
      * Default constructor
@@ -19,8 +20,17 @@ public class EnemyFactory implements iEntityFactory {
      * @param type Integer value representing the type of enemy
      * @return An iEnemy object instance
      */
-    public iEnemy createEntity(int type) {
-        // Not yet implemented
-        return null;
+    public Enemy createEntity(int type, Coordinates location) {
+        switch(type) {
+        case 1:
+        	return new EnemyType1(location);
+        case 2:
+        	return null;
+        case 3:
+        	return null;
+        default:
+        	return new EnemyType1(location);
+        }
+    	
     }
 }

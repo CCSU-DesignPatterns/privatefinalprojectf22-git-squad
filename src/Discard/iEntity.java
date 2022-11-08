@@ -1,4 +1,4 @@
-package entity;
+package Discard;
 
 import common.Coordinates;
 

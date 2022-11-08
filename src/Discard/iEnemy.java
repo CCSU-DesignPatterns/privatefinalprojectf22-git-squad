@@ -1,6 +1,4 @@
-package entity.enemies;
-
-import entity.iEntity;
+package Discard;
 
 /**
  * Interface for enemy entities

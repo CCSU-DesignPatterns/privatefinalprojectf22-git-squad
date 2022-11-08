@@ -2,7 +2,7 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 
-public class EnemyLevel_3 extends Enemy{
+public class EnemyType3 extends Enemy{
 	/**
 	 * @param nextEnemy
 	 * @param prevEnemy
@@ -11,7 +11,7 @@ public class EnemyLevel_3 extends Enemy{
 	 */
 	
 	
-	public EnemyLevel_3() {
+	public EnemyType3() {
 		
 		super(0, 0, "enemy/assets/yellow.png", 3, "yellow");
 		
