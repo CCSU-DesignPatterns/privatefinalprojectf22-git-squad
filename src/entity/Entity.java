@@ -13,9 +13,8 @@ import main.GamePanel;
  * @author Ryan Sharp
  *
  */
-public abstract class Entity implements iEntity {
+public abstract class Entity {
 	private Coordinates curPos;
-//	protected int x, y;
 	protected BufferedImage sprite;
 	protected GamePanel gp;
 	protected int health = 10;	// Default health is 10
