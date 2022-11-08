@@ -1,89 +1,21 @@
 package entity.enemies;
 
-import common.Coordinates;
+import common.*;
 import entity.Entity;
-import java.util.Objects;
 
-public abstract class Enemy extends Entity implements iEnemy {
-	// Health level. Default is 10
-	private int health = 10;
-//	private String color;
+public abstract class Enemy extends Entity {
+	private int health = 50;	// Health level. Default is 50
+	private int strength = 20;	// Strength. Default is 20
+	private Rectangle collisionBox = new Rectangle(1, 1);
 
 	/**
 	 * @param health integer value that represents strength of an enemy
 	 * @param spritePath graphical representation of an enemy
 	 */
-	public Enemy(Coordinates coordinates, String spritePath, int health, String color) {
+	public Enemy(Coordinates coordinates, String spritePath) {
 		super(coordinates, spritePath);
-		this.health = health;
-//		this.color = color;
 	}
 	
-//	/**
-//	 * Calculates the damage to the enemy entity
-//	 * @param damage Damage to take
-//	 * */
-//	public void calcDamage(int damage) {
-//
-//		if(health > damage && damage > 0) {
-//			health -= damage;
-//			if (health > 0)
-//				downGradeToLevel(health);
-//			else
-//				removeFromChain();
-//		}
-//		else {
-//					damage -= health;
-//					Enemy temp = nextEnemy;
-//					removeFromChain();
-//					if(temp != null && damage > 0)
-//						temp.calcDamage(damage);
-//
-//			}
-//
-//	}
-
-//	/**
-//	 *
-//	 * @param healthPoints The amount of health to subtract
-//	 */
-//	private void downGradeToLevel(int healthPoints) {
-//		if(healthPoints > health) {
-//			health -= healthPoints;
-//		}
-//		else {
-//			health = 0;
-//		}
-//	}
-	
-//	/**
-//	 * @return the nextEnemy
-//	 */
-//	public Enemy getNextEnemy() {
-//		return nextEnemy;
-//	}
-//
-//	/**
-//	 * @param nextEnemy the nextEnemy to set
-//	 */
-//	public void setNextEnemy(Enemy nextEnemy) {
-//		this.nextEnemy = nextEnemy;
-//	}
-//
-//	/**
-//	 * @return the prevEnemy
-//	 */
-//	public Enemy getPrevEnemy() {
-//		return prevEnemy;
-//	}
-//
-//	/**
-//	 * @param prevEnemy the prevEnemy to set
-//	 */
-//	public void setPrevEnemy(Enemy prevEnemy) {
-//		this.prevEnemy = prevEnemy;
-//	}
-
 	/**
 	 * @return the health
 	 */
@@ -92,25 +24,13 @@ public abstract class Enemy extends Entity implements iEnemy {
 	}
 
 	/**
-	 * @param health The health to set
+	 * Causes the enemy instance to take damage
+	 * @param damageAmount Integer representing amount of damage to the enemy instance
 	 */
-	public void setHealth(int health) {
-		this.health = health;
+	public void takeDamage(int damageAmount) {
+		setHealth(this.health - damageAmount);
 	}
-
-//	/**
-//	 * @return the color
-//	 */
-//	public String getColor() {
-//		return color;
-//	}
-
-//	/**
-//	 * @param color the color to set
-//	 */
-//	public void setColor(String color) {
-//		this.color = color;
-//	}
+	
 
 	/**
 	 * @return Hashcode for the current instance of Enemy
@@ -144,5 +64,15 @@ public abstract class Enemy extends Entity implements iEnemy {
 		output.append(String.format("Health: %d", this.getHealth()));
 
 		return output.toString();
+	}
+	
+	// *** Private internal methods ***
+	
+	// Internal method for setting enemy instance health 
+	private void setHealth(int health) {
+		if(health > 0)
+			this.health = health;
+		else
+			this.health = 0;
 	}
 }

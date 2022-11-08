@@ -1,4 +1,4 @@
-package entity;
+package Discard;
 
 /**
  * Generic entity factory for creating different types of entities

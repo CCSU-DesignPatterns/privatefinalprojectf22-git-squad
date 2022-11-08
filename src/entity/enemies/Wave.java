@@ -26,7 +26,7 @@ public class Wave {
 			Enemy tempNext;
 			switch (difficulty) {
 			    case 2:
-			    	this.enemies = new EnemyLevel_2();
+			    	this.enemies = new EnemyType2();
 			    	this.enemies.setPrevEnemy(null);
 			    	tempPrev = this.enemies;
 			    	for(int i = 0; i < ENEMY_AMOUNT * difficulty ;i++) {
@@ -34,7 +34,7 @@ public class Wave {
 			    		if((i+1)==(ENEMY_AMOUNT*difficulty))
 			    			tempPrev.setNextEnemy(null);
 			    		else {
-				    		tempNext = new EnemyLevel_2();
+				    		tempNext = new EnemyType2();
 				    		tempPrev.setNextEnemy(tempNext);
 				    		tempNext.setPrevEnemy(tempPrev);
 				    		tempPrev = tempNext;
@@ -43,7 +43,7 @@ public class Wave {
 			    	}
 			    	break;
 			    case 3:
-			    	this.enemies = new EnemyLevel_3();
+			    	this.enemies = new EnemyType3();
 			    	this.enemies.setPrevEnemy(null);
 			    	tempPrev = this.enemies;
 			    	for(int i = 0; i < ENEMY_AMOUNT * difficulty ;i++) {
@@ -51,7 +51,7 @@ public class Wave {
 			    		if((i+1)==(ENEMY_AMOUNT*difficulty))
 			    			tempPrev.setNextEnemy(null);
 			    		else {
-				    		tempNext = new EnemyLevel_3();
+				    		tempNext = new EnemyType3();
 				    		tempPrev.setNextEnemy(tempNext);
 				    		tempNext.setPrevEnemy(tempPrev);
 				    		tempPrev = tempNext;
@@ -60,7 +60,7 @@ public class Wave {
 			    	}
 			    	break;
 			    default:
-			    	this.enemies = new EnemyLevel_1();
+			    	this.enemies = new EnemyType1();
 			    	this.enemies.setPrevEnemy(null);
 			    	tempPrev = this.enemies;
 			    	for(int i = 0; i < ENEMY_AMOUNT * difficulty ;i++) {
@@ -68,7 +68,7 @@ public class Wave {
 			    		if((i+1)==(ENEMY_AMOUNT*difficulty))
 			    			tempPrev.setNextEnemy(null);
 			    		else {
-					    		tempNext = new EnemyLevel_1();
+					    		tempNext = new EnemyType1();
 					    		tempPrev.setNextEnemy(tempNext);
 					    		tempNext.setPrevEnemy(tempPrev);
 					    		tempPrev = tempNext;
