@@ -1,11 +1,13 @@
-package entity;
+package entity.towers;
+
+import entity.Entity;
 
 /**
  * {@summary Base functionality of towers which defend the path from enemies.}
  * @author Wizen
  *
  */
-public abstract class Tower extends Entity{
+public abstract class Tower extends Entity {
 	protected int damage;
 	protected double fireRate;
 	protected int range;

@@ -1,4 +1,4 @@
-package enemy;
+package entity.enemies;
 /**
 	 * Test case: test that wave class and its componet work as they are supposed to.
 	 * 

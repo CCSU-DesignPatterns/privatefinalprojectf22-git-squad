@@ -1,4 +1,4 @@
-package enemy;
+package entity.enemies;
 
 import java.awt.Graphics2D;
 

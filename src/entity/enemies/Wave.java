@@ -1,4 +1,4 @@
-package enemy;
+package entity.enemies;
 
 public class Wave {
 	 Enemy enemies;

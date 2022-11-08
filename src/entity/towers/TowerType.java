@@ -1,4 +1,4 @@
-package entity;
+package entity.towers;
 
 /**
  * {@summary Holds default stats for the different types of towers at creation time.}

@@ -1,19 +1,20 @@
-package enemy;
+package entity.enemies;
 
 import java.awt.Graphics2D;
 
-public class EnemyLevel_3 extends Enemy{
+public class EnemyLevel_1 extends Enemy {
+
 	/**
 	 * @param nextEnemy
 	 * @param prevEnemy
-	 * @param health, level three enemy has health of 3 in a scale of 1 to total different enemies.
-	 * @param color, level three enemies are yellow.
+	 * @param health, level one enemy has health of 1 in a scale of 1 to total different enemies.
+	 * @param color, level one enemies are orange.
 	 */
 	
 	
-	public EnemyLevel_3() {
+	public EnemyLevel_1() {
 		
-		super(0, 0, "enemy/assets/yellow.png", 3, "yellow");
+		super(0, 0, "enemy/assets/orange.png", 1, "orange");
 		
 	}
 
@@ -33,5 +34,15 @@ public class EnemyLevel_3 extends Enemy{
 	protected void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void attack() {
+
+	}
+
+	@Override
+	public void takeDamage(int damageAmount) {
+
 	}
 }
