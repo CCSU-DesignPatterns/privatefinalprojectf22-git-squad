@@ -6,9 +6,10 @@ package entity.towers;
  *
  */
 enum TowerType {
-	TURRET(1, 5.0, 50, 100, "turret", "/towers/test.png"),
-	CANNON(10, 0.5, 25, 250, "cannon", "/towers/test.png"),
-	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/test.png");
+	TURRET(1, 0.2, 50, 100, "turret", "/towers/Turret.png"),
+	CANNON(10, 2.0, 25, 250, "cannon", "/towers/Cannon.png"),
+	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/Sniper.png"),
+	HOME(0, 0, 0, 0, "home", "/towers/Home.png");
 	
 	private final int DAMAGE;
 	private final double FIRE_RATE;
