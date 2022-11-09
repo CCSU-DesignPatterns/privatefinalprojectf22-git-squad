@@ -31,7 +31,20 @@ public abstract class Enemy extends Entity {
 		setHealth(this.health - damageAmount);
 	}
 	
+	// Sets the strength of the enemy instance 
+	protected void setStrength(int strength) {
+		if(strength > 0)
+			this.strength = strength;
+	}
 
+	// Sets the health of the enemy instance
+	protected void setHealth(int health) {
+		if(health > 0)
+			this.health = health;
+		else
+			this.health = 0;
+	}
+	
 	/**
 	 * @return Hashcode for the current instance of Enemy
 	 */
@@ -64,15 +77,5 @@ public abstract class Enemy extends Entity {
 		output.append(String.format("Health: %d", this.getHealth()));
 
 		return output.toString();
-	}
-	
-	// *** Private internal methods ***
-	
-	// Internal method for setting enemy instance health 
-	private void setHealth(int health) {
-		if(health > 0)
-			this.health = health;
-		else
-			this.health = 0;
 	}
 }

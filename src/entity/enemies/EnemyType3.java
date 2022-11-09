@@ -1,6 +1,7 @@
 package entity.enemies;
 
 import java.awt.Graphics2D;
+import common.*;
 
 public class EnemyType3 extends Enemy{
 	/**
@@ -11,16 +12,10 @@ public class EnemyType3 extends Enemy{
 	 */
 	
 	
-	public EnemyType3() {
-		
-		super(0, 0, "enemy/assets/yellow.png", 3, "yellow");
-		
-	}
-
-	@Override
-	public void calcDamage(int damage) {
-		// TODO Auto-generated method stub
-		super.calcDamage(damage);
+	public EnemyType3(Coordinates location) {
+		super(location, "enemy.assets/yellow.png");
+		setStrength(35);
+		setHealth(90);
 	}
 
 	@Override
@@ -33,5 +28,35 @@ public class EnemyType3 extends Enemy{
 	protected void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Equals override
+	 * @return boolean True or False
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Not yet implemented
+		return false;
+	}
+	
+	/**
+	 * toString override
+	 * @return String representation of the current instance
+	 */
+	@Override
+	public String toString() {
+		// Not yet implemented
+		return null;
+	}
+	
+	/**
+	 * hashCode override
+	 * @return integer representing the hashcode for the current instance
+	 */
+	@Override
+	public int hashCode() {
+		// Not yet implemented
+		return 0;
 	}
 }
