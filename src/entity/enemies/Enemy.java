@@ -3,48 +3,56 @@ package entity.enemies;
 import common.*;
 import entity.Entity;
 
+/**
+ * 
+ * @author Pedro Arias, refactored by Ricardo Almeida
+ *
+ */
 public abstract class Enemy extends Entity {
-	private int health = 50;	// Health level. Default is 50
-	private int strength = 20;	// Strength. Default is 20
-	private Rectangle collisionBox = new Rectangle(1, 1);
-
 	/**
 	 * @param health integer value that represents strength of an enemy
 	 * @param spritePath graphical representation of an enemy
 	 */
 	public Enemy(Coordinates coordinates, String spritePath) {
 		super(coordinates, spritePath);
+		this.setHealth(50);
+		this.setStrength(20);
+		this.setCollisionBox(new Rectangle(10,10));
 	}
+	
+//	/**
+//	 * Causes the enemy instance to take damage
+//	 * @param damageAmount Integer representing amount of damage to the enemy instance
+//	 */
+//	public void takeDamage(int damageAmount) {
+//		setHealth(this.health - damageAmount);
+//	}
 	
 	/**
-	 * @return the health
+	 * Attacks a given entity
+	 * @param target Entity to be attacked
 	 */
-	public int getHealth() {
-		return health;
-	}
-
-	/**
-	 * Causes the enemy instance to take damage
-	 * @param damageAmount Integer representing amount of damage to the enemy instance
-	 */
-	public void takeDamage(int damageAmount) {
-		setHealth(this.health - damageAmount);
-	}
+	public void attack(Entity target) {
+		target.takeDamage(getStrength());
+	};
 	
-	// Sets the strength of the enemy instance 
-	protected void setStrength(int strength) {
-		if(strength > 0)
-			this.strength = strength;
-	}
+//	// Sets the strength of the enemy instance 
+//	protected void setStrength(int strength) {
+//		if(strength > 0)
+//			this.strength = strength;
+//	}
 
-	// Sets the health of the enemy instance
-	protected void setHealth(int health) {
-		if(health > 0)
-			this.health = health;
-		else
-			this.health = 0;
-	}
-	
+//	/**
+//	 * Sets the health of the enemy instance
+//	 * @param health The amount of health to set
+//	 */
+//	protected void setHealth(int health) {
+//		if(health > 0)
+//			this.health = health;
+//		else
+//			this.health = 0;
+//	}
+
 	/**
 	 * @return Hashcode for the current instance of Enemy
 	 */

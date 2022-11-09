@@ -6,7 +6,7 @@ package entity.enemies;
 public class WaveTestCase {
 
 	public static void main(String[] args) {
-		Wave wave = new Wave(1);
+		EnemyWave wave = new EnemyWave(1);
 		
 		Enemy enemies = wave.enemies;
 		

@@ -2,23 +2,15 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 import common.*;
+import entity.Entity;
 
 public class EnemyType2 extends Enemy{
-	/**
-	 * @param nextEnemy
-	 * @param prevEnemy
-	 * @param health, level two enemy has health of 2 in a scale of 1 to total different enemies.
-	 * @param color, level two enemies are blue.
-	 */
-	
-	
+		
 	public EnemyType2(Coordinates location) {
 		super(location, "enemy.assets/blue.png");
 		setStrength(30);
 		setHealth(70);
-	}
-
-	
+	}	
 
 	@Override
 	protected void update() {
@@ -60,5 +52,13 @@ public class EnemyType2 extends Enemy{
 	public int hashCode() {
 		// Not yet implemented
 		return 0;
+	}
+
+
+
+	@Override
+	public void attack(Entity target) {
+		// TODO Auto-generated method stub
+		
 	}
 }

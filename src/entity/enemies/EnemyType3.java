@@ -2,16 +2,10 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 import common.*;
+import entity.Entity;
 
 public class EnemyType3 extends Enemy{
-	/**
-	 * @param nextEnemy
-	 * @param prevEnemy
-	 * @param health, level three enemy has health of 3 in a scale of 1 to total different enemies.
-	 * @param color, level three enemies are yellow.
-	 */
-	
-	
+		
 	public EnemyType3(Coordinates location) {
 		super(location, "enemy.assets/yellow.png");
 		setStrength(35);
@@ -58,5 +52,11 @@ public class EnemyType3 extends Enemy{
 	public int hashCode() {
 		// Not yet implemented
 		return 0;
+	}
+
+	@Override
+	public void attack(Entity target) {
+		// TODO Auto-generated method stub
+		
 	}
 }
