@@ -7,18 +7,22 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import common.Coordinates;
+import common.Rectangle;
 import main.GamePanel;
 
 /**
  * {@summary Parent of all entities in the game. Handles basic properties of all entities like position and sprite.}
- * @author Ryan Sharp
+ * @author Ryan Sharp, refactored by Ricardo Almeida
  *
  */
 public abstract class Entity {
 	private Coordinates curPos;
+	private int health = 10;	// Default health is 10
+	private int strength = 10;	// Default strength is 10
+	private Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
-	protected Rectangle collider;
+  protected Rectangle collider;
 	protected boolean collision = false;
 	protected String direction; // convert this into ENUM
 	
@@ -63,6 +67,47 @@ public abstract class Entity {
 	public Coordinates getCurPos() { return curPos; }
 
 	/**
+	 * @return Entity instance health
+	 */
+	public int getHealth() {
+		return health;
+	}
+	
+	/**
+	 * @return Entity instance strength
+	 */
+	public int getStrength() {
+		return strength;
+	}
+	
+	/**
+	 * @return The collision box
+	 */
+	public Rectangle getCollisionBox() {
+		return collisionBox;
+	}
+	
+	/**
+	 * Sets the health of the entity instance
+	 * @param health The amount of health to set
+	 */
+	protected void setHealth(int health) {
+		if(health > 0)
+			this.health = health;
+		else
+			this.health = 0;
+	}
+	
+	/**
+	 * Sets the strength of the entity instance 
+	 * @param strength Strength to set
+	 */
+	protected void setStrength(int strength) {
+		if(strength > 0)
+			this.strength = strength;
+	}
+	
+	/**
 	 * Sets the entity's current position
 	 * @param curPos Instance of a Coordinates object
 	 */
@@ -70,14 +115,22 @@ public abstract class Entity {
 		this.curPos = curPos;
 	}
 
-	public void takeDamage(int damageAmount) {
-		if(health >= damageAmount) {
-			health -= damageAmount;
-		}
-		else {
-			health = 0;
-		}
+	/**
+	 * Sets the collision box for this instance
+	 * @param box Rectangle object
+	 */
+	protected void setCollisionBox(Rectangle box) {
+		this.collisionBox = box;
 	}
+	
+	/**
+	 * Causes the entity to take damage
+	 * @param damageAmount Integer representing amount of damage to the entity
+	 */
+	public void takeDamage(int damageAmount) {
+		setHealth(this.health - damageAmount);
+	}
+		
 	/**
 	 * {@summary Used to update the position/state of this individual entity. Will be called once per frame.}
 	 */

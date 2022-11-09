@@ -4,15 +4,14 @@ import java.awt.Graphics2D;
 import common.*;
 
 public class EnemyType1 extends Enemy {
-	
+	/**
+	 * Constructor that takes a Coordinates object as an argument
+	 * @param location Coordinates representing the location of this enemy instance
+	 */
 	public EnemyType1(Coordinates location) {		
 		super(location, "enemy.assets/orange.png");
-	}
-
-	@Override
-	public void calcDamage(int damage) {
-		// TODO Auto-generated method stub
-		super.calcDamage(damage);
+		setStrength(25);
+		setHealth(75);
 	}
 
 	@Override
@@ -26,14 +25,34 @@ public class EnemyType1 extends Enemy {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	/**
+	 * Equals override
+	 * @return boolean True or False
+	 */
 	@Override
-	public void attack() {
-		
+	public boolean equals(Object obj) {
+		// Not yet implemented
+		return false;
 	}
-
+	
+	/**
+	 * toString override
+	 * @return String representation of the current instance
+	 */
 	@Override
-	public void takeDamage(int damageAmount) {
-
+	public String toString() {
+		// Not yet implemented
+		return null;
+	}
+	
+	/**
+	 * hashCode override
+	 * @return integer representing the hashcode for the current instance
+	 */
+	@Override
+	public int hashCode() {
+		// Not yet implemented
+		return 0;
 	}
 }

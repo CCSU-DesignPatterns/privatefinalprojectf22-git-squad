@@ -1,10 +1,9 @@
 package entity.enemies;
 
-import entity.*;
 import common.*;
 
 /**
- * Concrete implementation for entity factory that creates enemies
+ * Enemy factory that creates enemy entities
  *
  * @author Ricardo Almeida
  */
@@ -25,12 +24,11 @@ public class EnemyFactory {
         case 1:
         	return new EnemyType1(location);
         case 2:
-        	return null;
+        	return new EnemyType2(location);
         case 3:
-        	return null;
+        	return new EnemyType3(location);
         default:
         	return new EnemyType1(location);
-        }
-    	
+        }    	
     }
 }

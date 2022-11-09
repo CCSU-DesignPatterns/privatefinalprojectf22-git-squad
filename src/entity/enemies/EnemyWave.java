@@ -1,13 +1,13 @@
 package entity.enemies;
 
-public class Wave {
+public class EnemyWave {
 	 Enemy enemies;
 	private int difficulty;
 	private int ENEMY_AMOUNT = 5; //multiplied by difficulty to get ammount of enemies.
 	private String sprite;
 	
 	
-	public Wave(int difficulty) {
+	public EnemyWave(int difficulty) {
 		this.difficulty = difficulty;
 		this.enemies = null;
 		generateWave();
