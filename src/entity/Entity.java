@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -21,7 +22,13 @@ public abstract class Entity {
 	private Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
+  protected Rectangle collider;
+	protected boolean collision = false;
+	protected String direction; // convert this into ENUM
 	
+
+	protected int health = 10;	// Default health is 10
+
 	/**
 	 *
 	 * @param position Coordinates instance representing the
@@ -36,6 +43,7 @@ public abstract class Entity {
 		catch(SpriteNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+		gp.addEntity(this);
 	}
 	
 	protected void setSpriteImage(String spritePath) throws SpriteNotFoundException {
@@ -46,6 +54,11 @@ public abstract class Entity {
 			throw new SpriteNotFoundException(spritePath);
 		}
 	}
+	
+	public Rectangle getCollider() { return collider; }
+	
+	public boolean getCollision() { return collision; }
+		
 
 	/**
 	 * Returns the coordinates of the current Entity object
@@ -121,13 +134,15 @@ public abstract class Entity {
 	/**
 	 * {@summary Used to update the position/state of this individual entity. Will be called once per frame.}
 	 */
-	protected abstract void update();
+	public abstract void update();
 	
 	/**
 	 * {@summary Used to repaint this individual entity after update(). Will be called once per frame.}
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
-	protected abstract void draw(Graphics2D g2);
+
+	public abstract void draw(Graphics2D g2);
+
 
 	/**
 	 * Equals override

@@ -13,13 +13,13 @@ public class EnemyType2 extends Enemy{
 	}	
 
 	@Override
-	protected void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		
 	}

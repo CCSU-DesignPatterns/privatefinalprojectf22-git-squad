@@ -4,7 +4,7 @@ import entity.Entity;
 
 /**
  * {@summary Base functionality of towers which defend the path from enemies.}
- * @author Wizen
+ * @author Ryan Sharp
  *
  */
 public abstract class Tower extends Entity {
