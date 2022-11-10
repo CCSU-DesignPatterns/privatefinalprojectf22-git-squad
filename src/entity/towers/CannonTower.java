@@ -9,12 +9,6 @@ public class CannonTower extends Tower {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void updateTargets() {
 		// TODO Auto-generated method stub
 		
