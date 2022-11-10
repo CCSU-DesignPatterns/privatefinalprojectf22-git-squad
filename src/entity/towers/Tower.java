@@ -8,7 +8,7 @@ import entity.Entity;
  * @author Ryan Sharp
  *
  */
-public abstract class Tower extends Entity {
+public abstract class Tower extends Entity implements ITower {
 	protected int damage;
 	protected double fireRate;
 	protected int range;
@@ -40,7 +40,7 @@ public abstract class Tower extends Entity {
 	 * Used to check if the given tower is a composite or leaf. TowerManager returns itself, all others return null;
 	 * @return TowerManager or null
 	 */
-	public abstract Tower getComposite();
+	public Tower getComposite() { return null; }
 	
 	/**
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.

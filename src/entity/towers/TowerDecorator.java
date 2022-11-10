@@ -1,14 +1,15 @@
 package entity.towers;
 
-public class TowerDecorator extends Tower {
-	
-	protected final Tower decoratedTower;
-	
-	public TowerDecorator(Tower decoratedTower) {
-		super(-100, -100, null);
-		this.decoratedTower = decoratedTower;
-	}
+import java.awt.Graphics2D;
 
+public class TowerDecorator implements ITower {
+	
+	protected final ITower decoratedTower;
+	
+	public TowerDecorator(ITower tower) {
+		decoratedTower = tower;
+	}
+	
 	@Override
 	public void update() {
 		decoratedTower.update();
@@ -33,4 +34,10 @@ public class TowerDecorator extends Tower {
 	public void attack() {
 		decoratedTower.attack();
 	}
+
+	@Override
+	public void draw(Graphics2D g2) {
+		decoratedTower.draw(g2);
+	}
+
 }

@@ -15,11 +15,6 @@ public class SniperTower extends Tower {
 	}
 
 	@Override
-	public Tower getComposite() {
-		return null;
-	}
-
-	@Override
 	public void updateTargets() {
 		// TODO Auto-generated method stub
 		

@@ -20,14 +20,14 @@ public class TowerManager extends Tower {
 		super(-100, -100, null);
 	}
 
-	ArrayList<Tower> children = new ArrayList<Tower>();
+	ArrayList<ITower> children = new ArrayList<ITower>();
 	
 	/**
 	 * Calls the update function on all towers individually.
 	 */
 	@Override
 	public void update() {
-		for(Tower t : children) {
+		for(ITower t : children) {
 			t.update();
 		}
 	}
@@ -37,7 +37,7 @@ public class TowerManager extends Tower {
 	 */
 	@Override
 	public void draw(Graphics2D g2) {
-		for(Tower t : children) {
+		for(ITower t : children) {
 			t.draw(g2);
 		}
 	}
@@ -59,8 +59,8 @@ public class TowerManager extends Tower {
 	 * @param target Tower being searched for
 	 * @return Tower if found, otherwise null
 	 */
-	public Tower getChild(Tower target) {
-		for(Tower t : children) {
+	public ITower getChild(ITower target) {
+		for(ITower t : children) {
 			if(t.equals(target))
 				return t;
 		}
