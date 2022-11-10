@@ -46,13 +46,13 @@ public class TowerManager extends Tower {
 	 * Add a tower to the TowerManager's children.
 	 * @param t Tower to be added
 	 */
-	public void add(Tower t) { children.add(t); }
+	public void add(ITower t) { children.add(t); }
 
 	/**
 	 * Remove a tower from the TowerManager's children.
 	 * @param t Tower to be removed
 	 */
-	public void remove(Tower t) { children.remove(t); }
+	public void remove(ITower t) { children.remove(t); }
 	
 	/**
 	 * Find and return a specific child from TowerManager
@@ -68,7 +68,7 @@ public class TowerManager extends Tower {
 	}
 	
 	@Override
-	public Tower getComposite() { return this; }
+	public ITower getComposite() { return this; }
 
 	@Override
 	public void updateTargets() {

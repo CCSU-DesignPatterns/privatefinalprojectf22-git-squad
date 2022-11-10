@@ -16,7 +16,7 @@ public class TowerDecorator implements ITower {
 	}
 
 	@Override
-	public Tower getComposite() {
+	public ITower getComposite() {
 		return decoratedTower.getComposite();
 	}
 
