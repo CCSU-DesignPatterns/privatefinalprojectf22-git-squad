@@ -18,6 +18,8 @@ public abstract class Tower extends Entity {
 	protected long currentTime;
 	protected double delta;
 	
+	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
+	
 	/**
 	 * {@summary Handles initial position and stats of tower being created.}
 	 * @param x Initial x coordinate
