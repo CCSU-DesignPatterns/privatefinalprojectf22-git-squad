@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.towers.TowerManager;
 import tile.TileManager;
 
 //import entity.Player;
@@ -35,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// Input handling and game thread
 	TileManager tileM;
+	TowerManager towerM;
 	KeyHandler keyH;
 	MouseHandler mouseH;
 	Thread gameThread;
@@ -48,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addMouseListener(mouseH);
 		this.setFocusable(true);
 		this.tileM = new TileManager();
+		this.towerM = new TowerManager();
 		this.keyH = new KeyHandler();
 		this.mouseH = new MouseHandler();
 	}
@@ -112,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable{
 	 * {@summary Responsible for updating the position/state of every graphical component of the game.}
 	 */
 	private void update() {
-//		player.update();
+		towerM.update();
 	}
 	
 	/**
@@ -122,6 +125,7 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		tileM.draw(g2);
+		towerM.draw(g2);
 		g2.dispose();
 	}
 }
