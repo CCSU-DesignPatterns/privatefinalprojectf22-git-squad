@@ -37,9 +37,45 @@ public class Rectangle {
 			this.width = w;
 	}
 	
+	/**
+	 * Returns the length of the rectangle instance
+	 * @return Length of the rectangle
+	 */
+	public int getLength() { return length; }
+	
+	/**
+	 * Returns the width of the rectangle instance
+	 * @return Width of the rectangle
+	 */
+	public int getWidth() { return width; }
+	
+	/**
+	 * Equals override
+	 * @return boolean True or False
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Not yet implemented
+		return false;
+	}
+	
+	/**
+	 * toString override
+	 * @return String representation of the current instance
+	 */
 	@Override
 	public String toString() {
+    // Not yet implemented
 		return null;
-		
+	}
+	
+	/**
+	 * hashCode override
+	 * @return integer representing the hashcode for the current instance
+	 */
+	@Override
+	public int hashCode() {
+		// Not yet implemented
+		return 0;
 	}
 }
