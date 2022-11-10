@@ -16,10 +16,10 @@ import main.GamePanel;
  *
  */
 public abstract class Entity {
-	private Coordinates curPos;
-	private int health = 10;	// Default health is 10
-	private int strength = 10;	// Default strength is 10
-	private Rectangle collisionBox = new Rectangle(1, 1);
+	protected Coordinates curPos;
+	protected int health = 10;	// Default health is 10
+	protected int strength = 10;	// Default strength is 10
+	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
   protected Rectangle collider;
@@ -43,7 +43,6 @@ public abstract class Entity {
 		catch(SpriteNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-		gp.addEntity(this);
 	}
 	
 	protected void setSpriteImage(String spritePath) throws SpriteNotFoundException {
@@ -141,7 +140,9 @@ public abstract class Entity {
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
 
-	public abstract void draw(Graphics2D g2);
+	public void draw(Graphics2D g2) {
+		g2.drawImage(sprite, curPos.getXPos(), curPos.getYPos(), gp.TILE_SIZE, gp.TILE_SIZE, null);		
+	}
 
 
 	/**
