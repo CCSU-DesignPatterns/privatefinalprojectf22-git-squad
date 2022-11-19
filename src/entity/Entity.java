@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import common.Coordinates;
-//import common.Rectangle;
 import main.GamePanel;
 
 /**
@@ -24,7 +23,8 @@ public abstract class Entity {
 	protected GamePanel gp;
 	protected Rectangle collider;
 	protected boolean collision = false;
-	protected String direction; // convert this into ENUM
+	//protected String direction; // convert this into ENUM
+	protected Direction currentDirection = Direction.EAST;	// Default direction is EAST (right)
 	
 	/**
 	 *
@@ -53,8 +53,7 @@ public abstract class Entity {
 	
 	public Rectangle getCollider() { return collider; }
 	
-	public boolean getCollision() { return collision; }
-		
+	public boolean getCollision() { return collision; }		
 
 	/**
 	 * Returns the coordinates of the current Entity object
@@ -82,6 +81,12 @@ public abstract class Entity {
 	public Rectangle getCollisionBox() {
 		return collisionBox;
 	}
+	
+	/**
+	 * Returns the current entity direction
+	 * @return Direction The current entity direction
+	 */
+	public Direction getDirection() { return currentDirection; }
 	
 	/**
 	 * Sets the health of the entity instance
@@ -117,6 +122,14 @@ public abstract class Entity {
 	 */
 	protected void setCollisionBox(Rectangle box) {
 		this.collisionBox = box;
+	}
+	
+	/**
+	 * Sets a new direction for the entity
+	 * @param newDirection The new direction to set
+	 */
+	public void setDirection(Direction newDirection) {
+		currentDirection = newDirection;
 	}
 	
 	/**
