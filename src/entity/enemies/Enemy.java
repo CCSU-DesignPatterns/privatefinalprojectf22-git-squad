@@ -10,6 +10,9 @@ import entity.Entity;
  *
  */
 public abstract class Enemy extends Entity implements iEnemy {
+	// Attributes
+	protected int speed = 1;	// Read this as "tiles per second". Default is 1	
+	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
 	 * a path to a sprite image for this enemy.
@@ -22,7 +25,16 @@ public abstract class Enemy extends Entity implements iEnemy {
 		this.setStrength(type.getStrength());
 		this.setCollisionBox(new Rectangle(10,10));
 	}
-		
+	
+	/**
+	 * Updates the enemy's position
+	 * @param newPos
+	 */
+	protected void move() {
+		// TODO Implement move logic --> Needs direction enum implemented at entity level
+		// Need switch statement for direction cases
+	};
+	
 	/**
 	 * Attacks a given entity
 	 * @param target Entity to be attacked
@@ -32,12 +44,11 @@ public abstract class Enemy extends Entity implements iEnemy {
 	};
 	
 	/**
-	 * Updates this enemy's position
-	 * @param newPos Coordinates representing the new position
+	 * Overrides the default update method 
 	 */
-	public void update(Coordinates newPos) {
-		this.setPos(newPos);
-		//this.draw(null);
+	@Override
+	public void update() {
+		// TODO Implement update logic
 	}
 	
 	/**

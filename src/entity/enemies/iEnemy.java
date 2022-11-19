@@ -8,5 +8,4 @@ import entity.*;
  */
 public interface iEnemy {
 	public void attack(Entity target);
-	public void update();
 }
