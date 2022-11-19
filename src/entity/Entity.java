@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import common.Coordinates;
-import common.Rectangle;
+//import common.Rectangle;
 import main.GamePanel;
 
 /**
@@ -22,13 +22,10 @@ public abstract class Entity {
 	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
-  protected Rectangle collider;
+	protected Rectangle collider;
 	protected boolean collision = false;
 	protected String direction; // convert this into ENUM
 	
-
-	protected int health = 10;	// Default health is 10
-
 	/**
 	 *
 	 * @param position Coordinates instance representing the
