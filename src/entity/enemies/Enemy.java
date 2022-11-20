@@ -11,7 +11,8 @@ import entity.Entity;
  */
 public abstract class Enemy extends Entity implements iEnemy {
 	// Attributes
-	protected int speed = 1;	// Read this as "tiles per second". Default is 1	
+	protected int speed = 2;	// Pixels per update. Default is 2
+	protected int distTraveled = 0;	// The distance traveled in pixels
 	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
@@ -19,11 +20,11 @@ public abstract class Enemy extends Entity implements iEnemy {
 	 * @param health Integer value that represents strength of an enemy
 	 * @param spritePath Path to a graphical representation of an enemy
 	 */
-	public Enemy(Coordinates coordinates, EnemyType type) {
-		super(coordinates, type.getSpritePath());
+	public Enemy(int x, int y, EnemyType type) {
+		super(x, y, type.getSpritePath());
 		this.setHealth(type.getHealth());
 		this.setStrength(type.getStrength());
-		this.setCollisionBox(new Rectangle(10,10));
+		this.setCollisionBox(new Rectangle(10,10));	// This might have to be updated
 	}
 	
 	/**
@@ -31,9 +32,37 @@ public abstract class Enemy extends Entity implements iEnemy {
 	 * @param newPos
 	 */
 	protected void move() {
-		// TODO Implement move logic --> Needs direction enum implemented at entity level
-		// Need switch statement for direction cases
+		switch (this.currentDirection) {
+			case UP:
+				y -= speed;
+				break;
+			case DOWN:
+				y += speed;
+				break;
+			case RIGHT:
+				x += speed;
+				break;
+			case LEFT:
+				x -= speed;
+				break;				
+		}
+		
+		// Add to the distance traveled
+		addDistance();
 	};
+	
+	/**
+	 * Adds to the distance traveled by the Enemy entity
+	 */
+	protected void addDistance() {
+		distTraveled += speed;
+	}
+	
+	/**
+	 * Returns the current speed of the enemy
+	 * @return speed Integer representing the speed of the enemy object
+	 */
+	public int getSpeed() { return speed; }
 	
 	/**
 	 * Attacks a given entity
@@ -43,12 +72,19 @@ public abstract class Enemy extends Entity implements iEnemy {
 		target.takeDamage(this.getStrength());
 	};
 	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+		
 	/**
 	 * Overrides the default update method 
 	 */
 	@Override
 	public void update() {
-		// TODO Implement update logic
+		// Move this enemy to the new position
+		this.move();
+		
+		// TODO Other related update operations if needed
 	}
 	
 	/**
@@ -56,7 +92,7 @@ public abstract class Enemy extends Entity implements iEnemy {
 	 */
 	@Override
 	public int hashCode() {
-		return this.hashCode();
+		return super.hashCode() + speed;
 	}
 
 	/**
@@ -66,7 +102,7 @@ public abstract class Enemy extends Entity implements iEnemy {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(this.equals(obj))
+		if(super.equals((Enemy)obj) && speed == ((Enemy)obj).speed)
 			return true;
 		return false;
 	}
@@ -78,10 +114,8 @@ public abstract class Enemy extends Entity implements iEnemy {
 	@Override
 	public String toString() {
 		StringBuilder output = new StringBuilder();
-		output.append(String.format("Class type: %s", this.getClass().toString()));
-		output.append(String.format("Coordinates: x=%d  y=%d\n", this.getCurPos().getXPos(), this.getCurPos().getYPos()));
-		output.append(String.format("Health: %d", this.getHealth()));
-		output.append(String.format("Strength: %d", this.getStrength()));
+		output.append(String.format("%s", super.toString()));		
+		output.append(String.format("Speed: %d", speed));
 
 		return output.toString();
 	}
