@@ -8,7 +8,7 @@ import entity.Entity;
  * @author Pedro Arias, refactored by Ricardo Almeida
  *
  */
-public abstract class Enemy extends Entity {
+public class Enemy extends Entity implements IEnemy{
 	/**
 	 * @param health integer value that represents strength of an enemy
 	 * @param spritePath graphical representation of an enemy
@@ -85,5 +85,16 @@ public abstract class Enemy extends Entity {
 		output.append(String.format("Health: %d", this.getHealth()));
 
 		return output.toString();
+	}
+
+	@Override
+	public IEnemy getComposite() {
+		return null;
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

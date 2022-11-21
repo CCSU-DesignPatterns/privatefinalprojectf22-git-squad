@@ -9,13 +9,13 @@ public class CannonTower extends Tower {
 	}
 
 	@Override
-	public void updateTargets() {
+	public void attack() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void attack() {
+	public void updateTarget() {
 		// TODO Auto-generated method stub
 		
 	}
