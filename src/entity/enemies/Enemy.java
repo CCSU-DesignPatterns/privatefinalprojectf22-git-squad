@@ -8,58 +8,90 @@ import entity.Entity;
  * @author Pedro Arias, refactored by Ricardo Almeida
  *
  */
-public abstract class Enemy extends Entity {
+public abstract class Enemy extends Entity implements iEnemy {
+	// Attributes
+	protected int speed = 2;	// Pixels per update. Default is 2
+	protected int distTraveled = 0;	// The distance traveled in pixels
+	
 	/**
-	 * @param health integer value that represents strength of an enemy
-	 * @param spritePath graphical representation of an enemy
+	 * Constructor that takes a coordinates object and a String representing
+	 * a path to a sprite image for this enemy.
+	 * @param health Integer value that represents strength of an enemy
+	 * @param spritePath Path to a graphical representation of an enemy
 	 */
-	public Enemy(int x, int y, String spritePath) {
-		super(x, y, spritePath);
-		this.setHealth(50);
-		this.setStrength(20);
-		this.setCollisionBox(new Rectangle(10,10));
+	public Enemy(int x, int y, EnemyType type) {
+		super(x, y, type.getSpritePath());
+		this.setHealth(type.getHealth());
+		this.setStrength(type.getStrength());
+		this.setCollisionBox(new Rectangle(10,10));	// This might have to be updated
 	}
 	
-//	/**
-//	 * Causes the enemy instance to take damage
-//	 * @param damageAmount Integer representing amount of damage to the enemy instance
-//	 */
-//	public void takeDamage(int damageAmount) {
-//		setHealth(this.health - damageAmount);
-//	}
+	/**
+	 * Updates the enemy's position
+	 * @param newPos
+	 */
+	protected void move() {
+		switch (this.currentDirection) {
+			case UP:
+				y -= speed;
+				break;
+			case DOWN:
+				y += speed;
+				break;
+			case RIGHT:
+				x += speed;
+				break;
+			case LEFT:
+				x -= speed;
+				break;				
+		}
+		
+		// Add to the distance traveled
+		addDistance();
+	};
+	
+	/**
+	 * Adds to the distance traveled by the Enemy entity
+	 */
+	protected void addDistance() {
+		distTraveled += speed;
+	}
+	
+	/**
+	 * Returns the current speed of the enemy
+	 * @return speed Integer representing the speed of the enemy object
+	 */
+	public int getSpeed() { return speed; }
 	
 	/**
 	 * Attacks a given entity
 	 * @param target Entity to be attacked
 	 */
 	public void attack(Entity target) {
-		target.takeDamage(getStrength());
+		target.takeDamage(this.getStrength());
 	};
 	
-//	// Sets the strength of the enemy instance 
-//	protected void setStrength(int strength) {
-//		if(strength > 0)
-//			this.strength = strength;
-//	}
-
-//	/**
-//	 * Sets the health of the enemy instance
-//	 * @param health The amount of health to set
-//	 */
-//	protected void setHealth(int health) {
-//		if(health > 0)
-//			this.health = health;
-//		else
-//			this.health = 0;
-//	}
-
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+		
+	/**
+	 * Overrides the default update method 
+	 */
+	@Override
+	public void update() {
+		// Move this enemy to the new position
+		this.move();
+		
+		// TODO Other related update operations if needed
+	}
+	
 	/**
 	 * @return Hashcode for the current instance of Enemy
 	 */
 	@Override
 	public int hashCode() {
-		// Not yet implemented
-		return 1;
+		return super.hashCode() + speed;
 	}
 
 	/**
@@ -69,7 +101,8 @@ public abstract class Enemy extends Entity {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		// Not yet implemented
+		if(super.equals((Enemy)obj) && speed == ((Enemy)obj).speed)
+			return true;
 		return false;
 	}
 
@@ -80,9 +113,8 @@ public abstract class Enemy extends Entity {
 	@Override
 	public String toString() {
 		StringBuilder output = new StringBuilder();
-		output.append(String.format("Class type: %s", this.getClass().toString()));
-		output.append(String.format("Coordinates: x=%d  y=%d\n", x, y));
-		output.append(String.format("Health: %d", this.getHealth()));
+		output.append(String.format("%s", super.toString()));		
+		output.append(String.format("Speed: %d", speed));
 
 		return output.toString();
 	}
