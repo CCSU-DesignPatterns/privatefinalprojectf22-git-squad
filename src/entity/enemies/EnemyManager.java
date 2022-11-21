@@ -38,4 +38,17 @@ public class EnemyManager implements IEnemy {
 		return null;
 	}
 
+	public ArrayList<IEnemy> getChildren() { return children; }
+
+	@Override
+	public int getDistanceTravelled() { return 0; }
+
+	@Override
+	public int getX() { return 0; }
+
+	@Override
+	public int getY() { return 0; }
+	
+	@Override
+	public void takeDamage(int damage) {};
 }

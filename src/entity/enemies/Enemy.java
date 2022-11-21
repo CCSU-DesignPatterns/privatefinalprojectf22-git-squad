@@ -14,6 +14,8 @@ import entity.Entity;
 	protected int distTraveled = 0;	// The distance traveled in pixels
 	
 public class Enemy extends Entity implements IEnemy{
+	public int distanceTravelled;
+	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
 	 * a path to a sprite image for this enemy.
@@ -127,7 +129,11 @@ public class Enemy extends Entity implements IEnemy{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		if(health == 0) {
+			gp.enemyM.remove(this);
+		}
 	}
+
+	@Override
+	public int getDistanceTravelled() { return distanceTravelled; }
 }
