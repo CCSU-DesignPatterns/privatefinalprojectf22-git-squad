@@ -1,7 +1,7 @@
 package entity.towers;
 
-import common.Coordinates;
 import entity.Entity;
+import entity.enemies.Enemy;
 
 /**
  * {@summary Base functionality of towers which defend the path from enemies.}
@@ -17,6 +17,7 @@ public abstract class Tower extends Entity implements ITower {
 	protected long lastTime;
 	protected long currentTime;
 	protected double delta;
+	protected Enemy target;
 	
 	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
 	
@@ -27,7 +28,7 @@ public abstract class Tower extends Entity implements ITower {
 	 * @param type Enum for the type of tower. Contains default stats of that type.
 	 */
 	public Tower(int x, int y, TowerType type) {
-		super(new Coordinates(x, y), type.getSpriteFilePath());
+		super(x, y, type.getSpriteFilePath());
 		this.damage = type.getDamage();
 		this.fireRate = type.getFireRate();
 		this.range = type.getRange();
@@ -46,7 +47,7 @@ public abstract class Tower extends Entity implements ITower {
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.
 	 */
 	public void update() {
-		updateTargets();
+		updateTarget();
 		updateDelta();
 		if(delta > getFireRate()) {
 			attack();
@@ -54,7 +55,7 @@ public abstract class Tower extends Entity implements ITower {
 		}
 	}
 	
-	public abstract void updateTargets();
+	public abstract void updateTarget();
 	
 	/**
 	 * Updates delta every frame to ensure proper fireRate.

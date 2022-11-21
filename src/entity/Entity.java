@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import common.Coordinates;
 import main.GamePanel;
 
 /**
@@ -15,7 +14,6 @@ import main.GamePanel;
  *
  */
 public abstract class Entity {
-	//protected Coordinates curPos;
 	protected int x;
 	protected int y;
 	protected int health = 10;	// Default health is 10
@@ -33,7 +31,8 @@ public abstract class Entity {
 	 * @param spritePath Path to the sprite resource
 	 */
 	public Entity(int x, int y, String spritePath) {
-		setPos(x, y);
+		this.x = x;
+		this.y = y;
 		this.gp = GamePanel.getInstance();
 		try {
 			setSpriteImage(spritePath);
@@ -52,10 +51,14 @@ public abstract class Entity {
 		}
 	}
 	
+	public int getX() { return x; }
+	
+	public int getY() { return y; }
+	
 	public Rectangle getCollider() { return collider; }
 	
 	public boolean getCollision() { return collision; }		
-	
+
 	/**
 	 * @return Entity instance health
 	 */
@@ -101,16 +104,6 @@ public abstract class Entity {
 	protected void setStrength(int strength) {
 		if(strength > 0)
 			this.strength = strength;
-	}
-	
-	/**
-	 * Sets the entity's current x,y position
-	 * @param x The x coordinate
-	 * @param y The y coordinate
-	 */
-	public void setPos(int x, int y) {
-		this.x = x;
-		this.y = y;
 	}
 
 	/**
@@ -158,7 +151,10 @@ public abstract class Entity {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
+		if(!this.getClass().equals(obj.getClass())) {
+			return false;
+		}
+		else if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
 				health == ((Entity)obj).health &&
 				strength == ((Entity)obj).strength &&
 				collisionBox.equals(((Entity)obj).collisionBox) &&
@@ -181,6 +177,7 @@ public abstract class Entity {
 	@Override
 	public int hashCode() {
 		int output = super.hashCode();
+		output += ((Integer)x).hashCode() + ((Integer)y).hashCode() + sprite.hashCode() + gp.hashCode();
 		output += x + y + health + strength + collisionBox.hashCode() + sprite.hashCode() + gp.hashCode() + currentDirection.hashCode();
 
 		return output;

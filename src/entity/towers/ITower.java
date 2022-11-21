@@ -7,7 +7,7 @@ public interface ITower {
 	
 	public void update();
 	
-	public void updateTargets();
+	public void updateTarget();
 	
 	public double getFireRate();
 	

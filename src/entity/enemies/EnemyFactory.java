@@ -1,6 +1,5 @@
 package entity.enemies;
 
-import common.*;
 
 /**
  * Enemy factory that creates enemy entities
@@ -19,16 +18,16 @@ public class EnemyFactory {
      * @param type Integer value representing the type of enemy
      * @return An iEnemy object instance
      */
-    public Enemy createEntity(int type, Coordinates location) {
+    public Enemy createEntity(int type, int x, int y) {
         switch(type) {
         case 1:
-        	return new EnemyType1(location);
+        	return new EnemyType1(x, y);
         case 2:
-        	return new EnemyType2(location);
+        	return new EnemyType2(x, y);
         case 3:
-        	return new EnemyType3(location);
+        	return new EnemyType3(x, y);
         default:
-        	return new EnemyType1(location);
+        	return new EnemyType1(x, y);
         }    	
     }
 }
