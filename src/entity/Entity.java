@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import common.Coordinates;
 import main.GamePanel;
 
 /**
@@ -15,7 +14,8 @@ import main.GamePanel;
  *
  */
 public abstract class Entity {
-	protected Coordinates curPos;
+	protected int x;
+	protected int y;
 	protected int health = 10;	// Default health is 10
 	protected int strength = 10;	// Default strength is 10
 	protected Rectangle collisionBox = new Rectangle(1, 1);
@@ -31,8 +31,9 @@ public abstract class Entity {
 	 * @param position Coordinates instance representing the
 	 * @param spritePath Path to the sprite resource
 	 */
-	public Entity(Coordinates position, String spritePath) {
-		this.curPos = position;
+	public Entity(int x, int y, String spritePath) {
+		this.x = x;
+		this.y = y;
 		this.gp = GamePanel.getInstance();
 		try {
 			setSpriteImage(spritePath);
@@ -51,15 +52,13 @@ public abstract class Entity {
 		}
 	}
 	
+	public int getX() { return x; }
+	
+	public int getY() { return y; }
+	
 	public Rectangle getCollider() { return collider; }
 	
 	public boolean getCollision() { return collision; }		
-
-	/**
-	 * Returns the coordinates of the current Entity object
-	 * @return Coordinates object
-	 */
-	public Coordinates getCurPos() { return curPos; }
 
 	/**
 	 * @return Entity instance health
@@ -107,14 +106,6 @@ public abstract class Entity {
 		if(strength > 0)
 			this.strength = strength;
 	}
-	
-	/**
-	 * Sets the entity's current position
-	 * @param curPos Instance of a Coordinates object
-	 */
-	public void setPos(Coordinates curPos) {
-		this.curPos = curPos;
-	}
 
 	/**
 	 * Sets the collision box for this instance
@@ -151,7 +142,7 @@ public abstract class Entity {
 	 */
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(sprite, curPos.getXPos(), curPos.getYPos(), gp.TILE_SIZE, gp.TILE_SIZE, null);		
+		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);		
 	}
 
 
@@ -164,7 +155,7 @@ public abstract class Entity {
 		if(!this.getClass().equals(obj.getClass())) {
 			return false;
 		}
-		else if(this.curPos.equals(((Entity)obj).getCurPos()) &&
+		else if(this.x == ((Entity)obj).x && this.y == ((Entity)obj).y &&
 				this.gp.equals(((Entity)obj).gp) &&
 				this.sprite.equals(((Entity)obj).sprite)) {
 			return true;
@@ -181,7 +172,7 @@ public abstract class Entity {
 	@Override
 	public int hashCode() {
 		int output = super.hashCode();
-		output += curPos.hashCode() + sprite.hashCode() + gp.hashCode();
+		output += ((Integer)x).hashCode() + ((Integer)y).hashCode() + sprite.hashCode() + gp.hashCode();
 
 		return output;
 	}
@@ -194,7 +185,7 @@ public abstract class Entity {
 	public String toString() {
 		StringBuilder output = new StringBuilder();
 		output.append(String.format("Type: %s\n", this.getClass().toString()));
-		output.append(String.format("Coordinates: x=%d, y=%d\n", this.getCurPos().getXPos(), this.getCurPos().getYPos()));
+		output.append(String.format("Coordinates: x=%d, y=%d\n", x, y));
 		output.append(String.format("Sprite: %s", sprite.toString()));
 
 		return output.toString();

@@ -1,27 +1,26 @@
 package entity.enemies;
 
 import java.awt.Graphics2D;
-import common.*;
 
 public class EnemyType1 extends Enemy {
 	/**
 	 * Constructor that takes a Coordinates object as an argument
 	 * @param location Coordinates representing the location of this enemy instance
 	 */
-	public EnemyType1(Coordinates location) {		
-		super(location, "enemy.assets/orange.png");
+	public EnemyType1(int x, int y) {		
+		super(x, y, "enemy.assets/orange.png");
 		setStrength(25);
 		setHealth(75);
 	}
 
 	@Override
-	protected void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		
 	}

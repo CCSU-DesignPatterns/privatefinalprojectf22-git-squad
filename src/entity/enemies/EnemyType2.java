@@ -1,13 +1,12 @@
 package entity.enemies;
 
 import java.awt.Graphics2D;
-import common.*;
 import entity.Entity;
 
 public class EnemyType2 extends Enemy{
 		
-	public EnemyType2(Coordinates location) {
-		super(location, "enemy.assets/blue.png");
+	public EnemyType2(int x, int y) {
+		super(x, y, "enemy.assets/blue.png");
 		setStrength(30);
 		setHealth(70);
 	}	

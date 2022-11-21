@@ -1,25 +1,24 @@
 package entity.enemies;
 
 import java.awt.Graphics2D;
-import common.*;
 import entity.Entity;
 
 public class EnemyType3 extends Enemy{
 		
-	public EnemyType3(Coordinates location) {
-		super(location, "enemy.assets/yellow.png");
+	public EnemyType3(int x, int y) {
+		super(x, y, "enemy.assets/yellow.png");
 		setStrength(35);
 		setHealth(90);
 	}
 
 	@Override
-	protected void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		
 	}

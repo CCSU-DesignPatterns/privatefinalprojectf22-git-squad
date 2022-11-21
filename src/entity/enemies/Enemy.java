@@ -1,6 +1,6 @@
 package entity.enemies;
 
-import common.*;
+import java.awt.Rectangle;
 import entity.Entity;
 
 /**
@@ -13,8 +13,8 @@ public abstract class Enemy extends Entity {
 	 * @param health integer value that represents strength of an enemy
 	 * @param spritePath graphical representation of an enemy
 	 */
-	public Enemy(Coordinates coordinates, String spritePath) {
-		super(coordinates, spritePath);
+	public Enemy(int x, int y, String spritePath) {
+		super(x, y, spritePath);
 		this.setHealth(50);
 		this.setStrength(20);
 		this.setCollisionBox(new Rectangle(10,10));
@@ -81,7 +81,7 @@ public abstract class Enemy extends Entity {
 	public String toString() {
 		StringBuilder output = new StringBuilder();
 		output.append(String.format("Class type: %s", this.getClass().toString()));
-		output.append(String.format("Coordinates: x=%d  y=%d\n", this.getCurPos().getXPos(), this.getCurPos().getYPos()));
+		output.append(String.format("Coordinates: x=%d  y=%d\n", x, y));
 		output.append(String.format("Health: %d", this.getHealth()));
 
 		return output.toString();

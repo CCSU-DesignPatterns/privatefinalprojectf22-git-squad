@@ -1,6 +1,5 @@
 package entity.towers;
 
-import common.Coordinates;
 import entity.Entity;
 
 /**
@@ -27,7 +26,7 @@ public abstract class Tower extends Entity implements ITower {
 	 * @param type Enum for the type of tower. Contains default stats of that type.
 	 */
 	public Tower(int x, int y, TowerType type) {
-		super(new Coordinates(x, y), type.getSpriteFilePath());
+		super(x, y, type.getSpriteFilePath());
 		this.damage = type.getDamage();
 		this.fireRate = type.getFireRate();
 		this.range = type.getRange();
