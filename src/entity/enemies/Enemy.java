@@ -9,13 +9,10 @@ import entity.Entity;
  * @author Pedro Arias, refactored by Ricardo Almeida
  *
  */
+public class Enemy extends Entity implements iEnemy{
 	// Attributes
 	protected int speed = 2;	// Pixels per update. Default is 2
 	protected int distTraveled = 0;	// The distance traveled in pixels
-	
-public class Enemy extends Entity implements IEnemy{
-	public int distanceTravelled;
-	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
 	 * a path to a sprite image for this enemy.
@@ -126,14 +123,4 @@ public class Enemy extends Entity implements IEnemy{
 	public IEnemy getComposite() {
 		return null;
 	}
-
-	@Override
-	public void update() {
-		if(health == 0) {
-			gp.enemyM.remove(this);
-		}
-	}
-
-	@Override
-	public int getDistanceTravelled() { return distanceTravelled; }
 }
