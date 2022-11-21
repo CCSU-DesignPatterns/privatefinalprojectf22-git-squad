@@ -21,10 +21,9 @@ public abstract class Entity {
 	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
-	protected Rectangle collider;
+	protected Rectangle collider;	// This may be a duplicate
 	protected boolean collision = false;
-	//protected String direction; // convert this into ENUM
-	protected Direction currentDirection = Direction.EAST;	// Default direction is EAST (right)
+	protected Direction currentDirection = Direction.RIGHT;	// Default direction is RIGHT
 	
 	/**
 	 *
@@ -155,9 +154,15 @@ public abstract class Entity {
 		if(!this.getClass().equals(obj.getClass())) {
 			return false;
 		}
-		else if(this.x == ((Entity)obj).x && this.y == ((Entity)obj).y &&
-				this.gp.equals(((Entity)obj).gp) &&
-				this.sprite.equals(((Entity)obj).sprite)) {
+		else if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
+				health == ((Entity)obj).health &&
+				strength == ((Entity)obj).strength &&
+				collisionBox.equals(((Entity)obj).collisionBox) &&
+				sprite.equals(((Entity)obj).sprite) &&
+				gp.equals(((Entity)obj).gp) &&
+				sprite.equals(((Entity)obj).sprite) &&
+				collision == ((Entity)obj).collision &&
+				currentDirection == ((Entity)obj).currentDirection) {
 			return true;
 		}
 		else {
@@ -173,6 +178,7 @@ public abstract class Entity {
 	public int hashCode() {
 		int output = super.hashCode();
 		output += ((Integer)x).hashCode() + ((Integer)y).hashCode() + sprite.hashCode() + gp.hashCode();
+		output += x + y + health + strength + collisionBox.hashCode() + sprite.hashCode() + gp.hashCode() + currentDirection.hashCode();
 
 		return output;
 	}
@@ -186,7 +192,10 @@ public abstract class Entity {
 		StringBuilder output = new StringBuilder();
 		output.append(String.format("Type: %s\n", this.getClass().toString()));
 		output.append(String.format("Coordinates: x=%d, y=%d\n", x, y));
+		output.append(String.format("Health: %d\n", health));
+		output.append(String.format("Strength: %d\n", strength));
 		output.append(String.format("Sprite: %s", sprite.toString()));
+		output.append(String.format("Direction: %s\n", currentDirection.toString()));
 
 		return output.toString();
 	}
