@@ -1,7 +1,11 @@
 package entity.towers;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+
 import entity.Entity;
-import entity.enemies.Enemy;
+import entity.enemies.IEnemy;
 
 /**
  * {@summary Base functionality of towers which defend the path from enemies.}
@@ -17,7 +21,8 @@ public abstract class Tower extends Entity implements ITower {
 	protected long lastTime;
 	protected long currentTime;
 	protected double delta;
-	protected Enemy target;
+	protected IEnemy target;
+	private double angle;
 	
 	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
 	
@@ -35,6 +40,7 @@ public abstract class Tower extends Entity implements ITower {
 		this.cost = type.getCost();
 		this.type = type.getType();
 		this.lastTime = System.nanoTime();
+		this.angle = 0;
 	}
 	
 	/**
@@ -72,5 +78,17 @@ public abstract class Tower extends Entity implements ITower {
 	public double getFireRate() { return  fireRate; }
 	
 	public abstract void attack();
+	
+	/**
+	 * Towers always rotate toward their target
+	 */
+	@Override
+	public void draw(Graphics2D g2) {
+		if(target != null)
+			angle = Math.toRadians(Math.atan2(target.getX() - x,  target.getY() - y));
+		AffineTransform tx = AffineTransform.getRotateInstance(angle, gp.TILE_SIZE / 2, gp.TILE_SIZE / 2);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		g2.drawImage(op.filter(sprite, null), x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);
+	}
 
 }

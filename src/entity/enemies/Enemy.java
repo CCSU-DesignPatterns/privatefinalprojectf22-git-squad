@@ -9,14 +9,16 @@ import entity.Entity;
  *
  */
 public class Enemy extends Entity implements IEnemy{
+	public int distanceTravelled;
+	
 	/**
 	 * @param health integer value that represents strength of an enemy
 	 * @param spritePath graphical representation of an enemy
 	 */
 	public Enemy(int x, int y, String spritePath) {
 		super(x, y, spritePath);
-		this.setHealth(50);
-		this.setStrength(20);
+		this.setHealth(1);
+		this.setStrength(1);
 		this.setCollisionBox(new Rectangle(10,10));
 	}
 	
@@ -94,7 +96,11 @@ public class Enemy extends Entity implements IEnemy{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		if(health == 0) {
+			gp.enemyM.remove(this);
+		}
 	}
+
+	@Override
+	public int getDistanceTravelled() { return distanceTravelled; }
 }

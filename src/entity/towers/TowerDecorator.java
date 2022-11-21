@@ -21,8 +21,8 @@ public class TowerDecorator implements ITower {
 	}
 
 	@Override
-	public void updateTargets() {
-		decoratedTower.updateTargets();
+	public void updateTarget() {
+		decoratedTower.updateTarget();
 	}
 	
 	@Override
