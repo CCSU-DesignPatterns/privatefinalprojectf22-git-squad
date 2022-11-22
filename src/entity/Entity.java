@@ -15,12 +15,11 @@ import main.GamePanel;
 public abstract class Entity {
 	protected int x;
 	protected int y;
-	protected int health = 10;	// Default health is 10
-	protected int strength = 10;	// Default strength is 10
+	protected int health = 1;	// Default health is 1
+	protected int strength = 1;	// Default strength is 1
 	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
 	protected GamePanel gp;
-	protected Rectangle collider;	// This may be a duplicate
 	protected boolean collision = false;
 	protected Direction currentDirection = Direction.RIGHT;	// Default direction is RIGHT
 	
@@ -50,11 +49,13 @@ public abstract class Entity {
 		}
 	}
 	
+	/**
+	 * Returns the entity's x value
+	 * @return <code>int</code> x value 
+	 */
 	public int getX() { return x; }
 	
 	public int getY() { return y; }
-	
-	public Rectangle getCollider() { return collider; }
 	
 	public boolean getCollision() { return collision; }		
 
@@ -138,7 +139,6 @@ public abstract class Entity {
 	 * {@summary Used to repaint this individual entity after update(). Will be called once per frame.}
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
-
 	public void draw(Graphics2D g2) {
 		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);		
 	}
@@ -150,10 +150,7 @@ public abstract class Entity {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(!this.getClass().equals(obj.getClass())) {
-			return false;
-		}
-		else if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
+		if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
 				health == ((Entity)obj).health &&
 				strength == ((Entity)obj).strength &&
 				collisionBox.equals(((Entity)obj).collisionBox) &&
