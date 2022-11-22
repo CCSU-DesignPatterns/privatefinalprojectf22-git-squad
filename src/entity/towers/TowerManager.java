@@ -10,15 +10,7 @@ import java.util.ArrayList;
  * @author Ryan Sharp
  *
  */
-public class TowerManager extends Tower {
-	
-	/**
-	 * Constructor is only included here because it is required. 
-	 * The TowerManager is not a tangible tower in the game, so it should not be seen or displayed on screen.
-	 */
-	public TowerManager() {
-		super(-100, -100, null);
-	}
+public class TowerManager implements ITower {
 
 	ArrayList<ITower> children = new ArrayList<ITower>();
 	
@@ -71,14 +63,11 @@ public class TowerManager extends Tower {
 	public ITower getComposite() { return this; }
 
 	@Override
-	public void updateTargets() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateTarget() {}
 
 	@Override
-	public void attack() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void attack() {}
+
+	@Override
+	public double getFireRate() { return 0; }
 }

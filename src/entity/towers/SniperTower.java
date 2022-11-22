@@ -2,21 +2,25 @@ package entity.towers;
 
 import java.awt.Graphics2D;
 
-public class SniperTower extends Tower {
+import entity.enemies.IEnemy;
+
+public class SniperTower extends Tower implements ITower {
 
 	public SniperTower(int x, int y) {
 		super(x, y, TowerType.SNIPER);
 	}
 
 	@Override
-	public void updateTargets() {
-		// TODO Auto-generated method stub
-		
+	public void attack() {
+		target.takeDamage(damage);
 	}
 
 	@Override
-	public void attack() {
-		// TODO Auto-generated method stub
-		
+	public void updateTarget() {
+		for(IEnemy e : gp.enemyM.getChildren()) {
+			if(e.getDistanceTravelled() > target.getDistanceTravelled()) { // and if enemy is at the front of those within range
+				target = e;
+			}
+		}
 	}
 }
