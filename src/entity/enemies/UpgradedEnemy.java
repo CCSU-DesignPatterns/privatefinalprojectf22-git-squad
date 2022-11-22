@@ -8,25 +8,20 @@ import entity.*;
  * @author Ricardo Almeida
  *
  */
-public abstract class UpgradedEnemy implements iEnemy {
+public abstract class UpgradedEnemy implements IEnemy {
 	
-	protected final Enemy upgradedEnemy;
+	protected final IEnemy baseEnemy;
 	
 	/**
 	 * Basic constructor
-	 * @param enemyEnt Enemy entity to wrap
+	 * @param <code>enemy</code> Enemy entity to wrap
 	 */
-	public UpgradedEnemy(Enemy enemyEnt) {
-		upgradedEnemy = enemyEnt;
+	public UpgradedEnemy(Enemy enemy) {
+		baseEnemy = enemy;
 	}
 	
-	@Override
-	public void attack(Entity target) {
-		upgradedEnemy.attack(target);
-	}
 	
-	@Override
 	public void update() {
-		upgradedEnemy.update();
+		baseEnemy.update();
 	}
 }
