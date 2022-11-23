@@ -2,7 +2,7 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 
-public interface IEnemy {
+public interface IEnemy extends Cloneable {
 	public IEnemy getComposite();
 	
 	public void update();

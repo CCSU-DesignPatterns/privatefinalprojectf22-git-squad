@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import entity.enemies.IEnemy;
 
-public class SniperTower extends Tower implements ITower {
+public class SniperTower extends Tower {
 
 	public SniperTower(int x, int y) {
 		super(x, y, TowerType.SNIPER);
