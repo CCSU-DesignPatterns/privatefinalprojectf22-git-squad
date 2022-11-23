@@ -2,6 +2,11 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 
+/**
+ * Interface for Enemy types
+ * @author Ricardo Almeida, Ryan Sharp
+ *
+ */
 public interface IEnemy extends Cloneable {
 	public IEnemy getComposite();	
 	public void update();	

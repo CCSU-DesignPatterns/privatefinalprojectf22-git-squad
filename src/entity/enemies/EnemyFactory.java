@@ -22,14 +22,14 @@ public class EnemyFactory {
      */
     public IEnemy createEnemy(int x, int y, EnemyType type) {
         switch(type) {
-        case EnemyType1:
-        	return new Enemy(x, y, EnemyType.EnemyType1);
-        case EnemyType2:
-        	return new Enemy(x, y, EnemyType.EnemyType2);
-        case EnemyType3:
-        	return new Enemy(x, y, EnemyType.EnemyType3);
-        default:
-        	return null;
+	        case EnemyType1:
+	        	return new Enemy(x, y, EnemyType.EnemyType1);
+	        case EnemyType2:
+	        	return new Enemy(x, y, EnemyType.EnemyType2);
+	        case EnemyType3:
+	        	return new Enemy(x, y, EnemyType.EnemyType3);
+	        default:
+	        	return null;
         }    	
     }
     

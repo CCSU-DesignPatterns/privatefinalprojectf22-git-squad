@@ -10,17 +10,17 @@ public class UpgradedEnemy30H extends UpgradedEnemy {
 	
 	public UpgradedEnemy30H(Enemy enemy) {
 		super(enemy);
-		super.baseEnemy.setHealth(super.baseEnemy.getHealth() + BonusHealth);
+		baseEnemy.setHealth(super.baseEnemy.getHealth() + BonusHealth);
 	}
 
 	@Override
 	public int getHealth() {
-		return super.baseEnemy.getHealth();
+		return baseEnemy.getHealth();
 	}
 
 
 	@Override
 	public int getStrength() {
-		return super.baseEnemy.getStrength();
+		return baseEnemy.getStrength();
 	}
 }

@@ -26,9 +26,9 @@ public class EnemyWaves {
 		// Create only base enemies for now
 		// Note that the starting position is set to default values
 		// Further development is needed to define the correct starting point
-		enemyFactory.createEnemy(1, 1, EnemyType.EnemyType1);
-		enemyFactory.createEnemy(1, 1, EnemyType.EnemyType2);
-		enemyFactory.createEnemy(1, 1, EnemyType.EnemyType3);
+		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType1));
+		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType2));
+		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType3));
 	}
 	
 	/**
@@ -56,5 +56,7 @@ public class EnemyWaves {
 	/**
 	 * Moves to the next 
 	 */
-	public void nextWave() { }
+	public void nextWave() {
+		// TODO: Implement advance to next wave
+	}
 }
