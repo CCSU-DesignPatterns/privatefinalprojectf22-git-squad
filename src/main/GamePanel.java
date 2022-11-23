@@ -35,27 +35,36 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	private final int FPS = 60;
 	
-	// Input handling and game thread
-	TileManager tileM;
-	TowerManager towerM;
-	public EnemyManager enemyM;
-	KeyHandler keyH;
-	MouseHandler mouseH;
-	Thread gameThread;
+	// Game Object Management
+	private TileManager tileM;
+	private TowerManager towerM;
+	public final EnemyManager ENEMY_MANAGER;
+	
+	// Input Handling
+	private KeyHandler keyH;
+	private MouseHandler mouseH;
+	
+	// Game Variables
+	private GameState state;
+	private StateType stateType;
+	private Thread gameThread;
 	
 	private GamePanel() {
 		instance = this;
+		
+		this.tileM = new TileManager();
+		this.towerM = new TowerManager();
+		this.ENEMY_MANAGER = new EnemyManager();
+		this.keyH = new KeyHandler();
+		this.mouseH = new MouseHandler();
+		this.state = new PlayingState(tileM, towerM, ENEMY_MANAGER);
+		stateType = StateType.PLAY;
+		
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-		this.setBackground(Color.green);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.addMouseListener(mouseH);
 		this.setFocusable(true);
-		this.tileM = new TileManager();
-		this.towerM = new TowerManager();
-		this.enemyM = new EnemyManager();
-		this.keyH = new KeyHandler();
-		this.mouseH = new MouseHandler();
 	}
 	
 	/**
@@ -107,7 +116,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if(timer >= 1000000000) {
-				System.out.println("FPS: " + drawCount);
+//				System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
@@ -118,8 +127,7 @@ public class GamePanel extends JPanel implements Runnable{
 	 * {@summary Responsible for updating the position/state of every graphical component of the game.}
 	 */
 	private void update() {
-		enemyM.update();
-		towerM.update();
+		state.update();
 	}
 	
 	/**
@@ -128,9 +136,21 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		tileM.draw(g2);
-		enemyM.draw(g2);
-		towerM.draw(g2);
-		g2.dispose();
+		state.draw(g2);
+	}
+	
+	public StateType getStateType() { return stateType; }
+	
+	public void updateState(StateType type) {
+		switch(type) {
+		case PLAY:
+			state = new PlayingState(tileM, towerM, ENEMY_MANAGER);
+			stateType = StateType.PLAY;
+			break;
+		case PAUSE:
+			state = new PausedState(tileM, towerM, ENEMY_MANAGER);
+			stateType = StateType.PAUSE;
+			break;
+		}
 	}
 }

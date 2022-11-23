@@ -9,8 +9,10 @@ import java.awt.event.KeyListener;
  *
  */
 public class KeyHandler implements KeyListener{
-
+	
+	private GamePanel gp = GamePanel.getInstance();
 //	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	public boolean escPressed;
 	
 	/**
 	 * {@summary Called automatically when a key is typed.}
@@ -27,20 +29,16 @@ public class KeyHandler implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-//		int code = e.getKeyCode();
-//		
-//		if (code == KeyEvent.VK_W) {
-//			upPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_S) {
-//			downPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_A) {
-//			leftPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_D) {
-//			rightPressed = true;
-//		}
+		int code = e.getKeyCode();
+		
+		if(code == KeyEvent.VK_ESCAPE) {
+			if(gp.getStateType().equals(StateType.PLAY)) {
+				gp.updateState(StateType.PAUSE);
+			}
+			else if (gp.getStateType().equals(StateType.PAUSE)) {
+				gp.updateState(StateType.PLAY);
+			}
+		}
 		
 	}
 	
@@ -63,6 +61,8 @@ public class KeyHandler implements KeyListener{
 //		else if(code == KeyEvent.VK_D) {
 //			rightPressed = false;
 //		}
+		
+		
 	}
 
 }

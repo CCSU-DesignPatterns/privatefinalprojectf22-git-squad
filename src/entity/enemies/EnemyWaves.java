@@ -50,7 +50,7 @@ public class EnemyWaves {
 	 * @param index The ArrayList index of the enemy to spawn
 	 */
 	public void spawnEnemy(int index) { 
-		gp.enemyM.add(enemySet.get(index).clone());
+		gp.ENEMY_MANAGER.add(enemySet.get(index).clone());
 	}
 	
 	/**

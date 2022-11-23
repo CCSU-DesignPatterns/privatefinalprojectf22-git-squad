@@ -17,7 +17,7 @@ public class TurretTower extends Tower {
 
 	@Override
 	public void updateTarget() {
-		for(IEnemy e : gp.enemyM.getChildren()) {
+		for(IEnemy e : gp.ENEMY_MANAGER.getChildren()) {
 			if(Math.sqrt((Math.pow((e.getX() - x), 2) + Math.pow(e.getY() - y, 2))) <= range && // if enemy is within range
 					e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
 				target = e;
