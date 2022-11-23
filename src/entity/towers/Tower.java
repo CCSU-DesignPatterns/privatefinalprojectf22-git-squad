@@ -47,7 +47,7 @@ public abstract class Tower extends Entity implements ITower {
 	 * Used to check if the given tower is a composite or leaf. TowerManager returns itself, all others return null;
 	 * @return TowerManager or null
 	 */
-	public ITower getComposite() { return null; }
+	public TowerManager getComposite() { return null; }
 	
 	/**
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.

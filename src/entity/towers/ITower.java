@@ -3,7 +3,7 @@ package entity.towers;
 import java.awt.Graphics2D;
 
 public interface ITower {
-	public ITower getComposite();
+	public TowerManager getComposite();
 	
 	public void update();
 	
