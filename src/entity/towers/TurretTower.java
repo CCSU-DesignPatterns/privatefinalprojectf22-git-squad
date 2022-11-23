@@ -19,7 +19,7 @@ public class TurretTower extends Tower {
 	public void updateTarget() {
 		for(IEnemy e : gp.enemyM.getChildren()) {
 			if(Math.sqrt((Math.pow((e.getX() - x), 2) + Math.pow(e.getY() - y, 2))) <= range && // if enemy is within range
-					e.getDistanceTravelled() > target.getDistanceTravelled()) { // and if enemy is at the front of those within range
+					e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
 				target = e;
 			}
 		}

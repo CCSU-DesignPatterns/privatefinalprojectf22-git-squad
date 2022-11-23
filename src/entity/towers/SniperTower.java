@@ -18,7 +18,7 @@ public class SniperTower extends Tower {
 	@Override
 	public void updateTarget() {
 		for(IEnemy e : gp.enemyM.getChildren()) {
-			if(e.getDistanceTravelled() > target.getDistanceTravelled()) { // and if enemy is at the front of those within range
+			if(e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
 				target = e;
 			}
 		}

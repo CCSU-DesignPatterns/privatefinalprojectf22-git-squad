@@ -8,7 +8,7 @@ import entity.Entity;
  * @author Pedro Arias, refactored by Ricardo Almeida
  *
  */
-public class Enemy extends Entity implements iEnemy{
+public class Enemy extends Entity implements IEnemy {
 	// Attributes
 	protected int speed = 2;	// Pixels per update. Default is 2
 	protected int distTraveled = 0;	// The distance traveled in pixels
@@ -63,13 +63,9 @@ public class Enemy extends Entity implements iEnemy{
 	public int getSpeed() { return speed; }
 	
 	/**
-	 * Attacks a given entity
-	 * @param target Entity to be attacked
+	 * Sets the speed of the enemy instance
+	 * @param speed
 	 */
-	public void attack(Entity target) {
-		target.takeDamage(this.getStrength());
-	};
-	
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
@@ -83,6 +79,44 @@ public class Enemy extends Entity implements iEnemy{
 		this.move();
 		
 		// TODO Other related update operations if needed
+	}
+	
+	/**
+	 * Returns a clone of an instance of Enemy
+	 */
+	public IEnemy clone() {
+		//TODO Implement object cloning
+		return null;
+	}
+	
+	/**
+	 * TODO Needs implementation
+	 */
+	public IEnemy getComposite() {
+		return null;
+	}
+
+	/**
+	 * Returns the distance traveled by the enemy instance
+	 */
+	public int getDistanceTraveled() {
+		return distTraveled;
+	}
+	
+	/**
+	 * Superclass override for Interface implementation
+	 */
+	@Override
+	public void setHealth(int health) {
+		super.setHealth(health);
+	}
+	
+	/**
+	 * Superclass override for Interface implementation
+	 */
+	@Override
+	public void setStrength(int strength) {
+		super.setStrength(strength);
 	}
 	
 	/**
@@ -116,10 +150,5 @@ public class Enemy extends Entity implements iEnemy{
 		output.append(String.format("Speed: %d", speed));
 
 		return output.toString();
-	}
-
-	@Override
-	public IEnemy getComposite() {
-		return null;
 	}
 }
