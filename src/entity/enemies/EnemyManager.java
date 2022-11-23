@@ -56,4 +56,28 @@ public class EnemyManager implements IEnemy {
 		// Not yet implemented
 		return null;
 	}
+
+	@Override
+	public int getHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getStrength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setHealth(int health) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setStrength(int strength) {
+		// TODO Auto-generated method stub
+		
+	}
 }

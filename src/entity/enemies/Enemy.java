@@ -90,7 +90,7 @@ public class Enemy extends Entity implements IEnemy {
 	}
 	
 	/**
-	 * 
+	 * TODO Needs implementation
 	 */
 	public IEnemy getComposite() {
 		return null;
@@ -101,6 +101,22 @@ public class Enemy extends Entity implements IEnemy {
 	 */
 	public int getDistanceTraveled() {
 		return distTraveled;
+	}
+	
+	/**
+	 * Superclass override for Interface implementation
+	 */
+	@Override
+	public void setHealth(int health) {
+		super.setHealth(health);
+	}
+	
+	/**
+	 * Superclass override for Interface implementation
+	 */
+	@Override
+	public void setStrength(int strength) {
+		super.setStrength(strength);
 	}
 	
 	/**
