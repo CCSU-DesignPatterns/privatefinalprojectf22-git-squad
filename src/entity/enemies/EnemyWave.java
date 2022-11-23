@@ -1,7 +1,17 @@
 package entity.enemies;
 
+import main.GamePanel;
+
 public class EnemyWave {
-	 Enemy enemies;
+	
+	GamePanel gp;
+	
+	IEnemy[] enemyTypes;
+	
+	
+	
+	/* Preserving old logic in case it is needed later
+	Enemy enemies;
 	private int difficulty;
 	private int ENEMY_AMOUNT = 5; //multiplied by difficulty to get ammount of enemies.
 	private String sprite;
@@ -18,9 +28,9 @@ public class EnemyWave {
 		enemies.calcDamage(damage);
 	}
 
-	/**
-	 * I will refactor on later sprints.
-	 * */
+	
+	// I will refactor on later sprints.
+	 
 	private void generateWave(){
 			Enemy tempPrev;
 			Enemy tempNext;
@@ -79,8 +89,7 @@ public class EnemyWave {
 			}
 			
 		}
-	
-	
+	*/
 	
 	
 }
