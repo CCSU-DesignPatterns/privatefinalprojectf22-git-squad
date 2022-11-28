@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.state = new PlayingState(tileM, towerM, ENEMY_MANAGER);
 		stateType = StateType.PLAY;
 		
-		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.addMouseListener(mouseH);
