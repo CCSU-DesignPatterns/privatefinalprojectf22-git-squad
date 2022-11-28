@@ -1,6 +1,10 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 /**
@@ -18,38 +22,46 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		JFrame window = new JFrame();
-//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		window.setResizable(false);
-//		window.setTitle("Tower Defense");
-//		
-//		GamePanel gamePanel = GamePanel.getInstance(); //Updated this to use singleton pattern rather than creating instance variable
-//		window.add(gamePanel);
-//		
-//		window.pack();
-//		
-//		window.setLocationRelativeTo(null);
-//		window.setVisible(true);
-//		
-//		gamePanel.requestFocusInWindow();
-//		gamePanel.startGameThread();
+		JFrame window = new JFrame();
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setResizable(false);
+		window.setTitle("Tower Defense");
 		
-		GamePanel gp = GamePanel.getInstance();
+		GamePanel gamePanel = GamePanel.getInstance(); //Updated this to use singleton pattern rather than creating instance variable
 		
-		JLayeredPane pane = new JLayeredPane();
-		pane.setSize(gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
-		pane.add(gp, Integer.valueOf(1));
+		JLayeredPane pane = window.getLayeredPane();
+		pane.setPreferredSize(new Dimension(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT));
+		pane.add(gamePanel, 0);
 		
-		JFrame frame = new JFrame("TD Game");
-		frame.setSize(gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
-		frame.add(pane);
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(null);
-		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);
-		gp.requestFocusInWindow();
-		gp.startGameThread();
+		//window.add(pane);
+		
+		JLabel test = new JLabel("Test");
+		test.setBackground(Color.gray);
+		test.setForeground(Color.white);
+		test.setBounds(50, 50, 50, 20);
+		test.setVisible(true);
+		pane.add(test, 1);
+		
+		window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
+		
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
+		
+		gamePanel.requestFocusInWindow();
+		gamePanel.startGameThread();
+		
+//		GamePanel gp = GamePanel.getInstance();
+//		
+//		JFrame frame = new JFrame("TD Game");
+//		frame.setSize(gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
+//		frame.getLayeredPane().add(gp, Integer.valueOf(0));
+//		frame.pack();
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setLayout(null);
+//		frame.setVisible(true);
+//		frame.setLocationRelativeTo(null);
+//		gp.requestFocusInWindow();
+//		gp.startGameThread();
 	}
 
 }
