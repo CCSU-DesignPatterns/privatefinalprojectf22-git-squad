@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import entity.enemies.IEnemy;
 
-public class TurretTower extends Tower implements ITower {
+public class TurretTower extends Tower {
 
 	public TurretTower(int x, int y) {
 		super(x, y, TowerType.TURRET);
