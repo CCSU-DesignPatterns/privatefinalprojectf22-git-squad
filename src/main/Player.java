@@ -61,6 +61,9 @@ public class Player {
 	 * @param amt
 	 */
 	public void removeMoney(int amt) throws InsufficientFundsException { 
-		money -= amt; 
+		if(money >= amt)
+			money -= amt; 
+		else
+			throw new InsufficientFundsException("Player does not have " + amt + " money!");
 	}
 }

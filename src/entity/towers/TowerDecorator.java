@@ -2,10 +2,20 @@ package entity.towers;
 
 import java.awt.Graphics2D;
 
+/**
+ * Base class for tower decorations. Should not be applied directly do a tower, as it will not do anything.
+ * @author Ryan Sharp
+ *
+ */
 public class TowerDecorator implements ITower {
 	
+	// Tower or decorator being decorated. Following this to its root always ends in a tower of some kind.
 	protected final ITower decoratedTower;
 	
+	/**
+	 * Create a decorator for the given tower
+	 * @param tower - Tower to be decorated
+	 */
 	public TowerDecorator(ITower tower) {
 		decoratedTower = tower;
 	}

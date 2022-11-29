@@ -21,6 +21,11 @@ import main.GamePanel;
 import main.Main;
 import tile.ImageScaler;
 
+/**
+ * UI class to display the proper UI during the gameplay state
+ * @author Ryan Sharp
+ *
+ */
 public class GameplayUI {
 	
 	private GamePanel gp;
@@ -30,6 +35,10 @@ public class GameplayUI {
 	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop;
 	private Font arial30, arial50;
 	
+	/**
+	 * Create new gameplay UI
+	 * @throws SpriteNotFoundException - Thrown if the images needed cannot be found.
+	 */
 	public GameplayUI() throws SpriteNotFoundException{
 		gp = GamePanel.getInstance();
 		
@@ -124,6 +133,14 @@ public class GameplayUI {
 		Main.getPane().add(moneyLabel, Integer.valueOf(1));
 	}
 	
+	/**
+	 * Helper method to set up labels more concisely. Set the label, font, text, foreground color, and icon of a label.
+	 * @param label
+	 * @param font
+	 * @param text
+	 * @param foreground
+	 * @param icon
+	 */
 	private void setupLabel(JLabel label, Font font, String text, Color foreground, ImageIcon icon) {
 		label.setFont(font);
 		label.setText(text);

@@ -139,16 +139,24 @@ public class GamePanel extends JPanel implements Runnable{
 		state.draw(g2);
 	}
 	
+	/**
+	 * Get the current state of the game.
+	 * @return Enum StateType
+	 */
 	public StateType getStateType() { return stateType; }
 	
-	public void updateState(StateType type) {
-		switch(type) {
+	/**
+	 * Use to change the state of the game
+	 * @param state Game state to be updated to
+	 */
+	public void updateState(StateType state) {
+		switch(state) {
 		case PLAY:
-			state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
+			this.state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
 			stateType = StateType.PLAY;
 			break;
 		case PAUSE:
-			state = new PausedState(tileM, towerM, ENEMY_MANAGER);
+			this.state = new PausedState(tileM, towerM, ENEMY_MANAGER);
 			stateType = StateType.PAUSE;
 			break;
 		}

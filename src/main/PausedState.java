@@ -7,20 +7,31 @@ import entity.towers.TowerManager;
 import tile.TileManager;
 import ui.UI;
 
-public class PausedState implements GameState {
+/**
+ * Game state used when the player is in a level and the game is paused
+ * @author Ryan Sharp
+ *
+ */
+class PausedState implements GameState {
 
 	// Input handling and game thread
-		private TileManager tileM;
-		private TowerManager towerM;
-		private EnemyManager enemyM;
-		private UI ui;
-		
-		public PausedState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
-			this.tileM = tileM;
-			this.towerM = towerM;
-			this.enemyM = enemyM;
-			this.ui = new UI();
-		}
+	private TileManager tileM;
+	private TowerManager towerM;
+	private EnemyManager enemyM;
+	private UI ui;
+	
+	/**
+	 * Create new paused state with the given tile, tower, and enemy managers
+	 * @param tileM
+	 * @param towerM
+	 * @param enemyM
+	 */
+	public PausedState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
+		this.tileM = tileM;
+		this.towerM = towerM;
+		this.enemyM = enemyM;
+		this.ui = new UI();
+	}
 	
 	@Override
 	public void update() {

@@ -5,21 +5,18 @@ import java.awt.event.KeyListener;
 
 /**
  * {@summary Handles input detection from the user's keyboard.}
- * @author RyiSnow
+ * @author Ryan Sharp, RyiSnow
  *
  */
 public class KeyHandler implements KeyListener{
 	
 	private GamePanel gp = GamePanel.getInstance();
-//	public boolean upPressed, downPressed, leftPressed, rightPressed;
-	public boolean escPressed;
 	
 	/**
 	 * {@summary Called automatically when a key is typed.}
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -47,20 +44,6 @@ public class KeyHandler implements KeyListener{
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		int code = e.getKeyCode();
-//		
-//		if (code == KeyEvent.VK_W) {
-//			upPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_S) {
-//			downPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_A) {
-//			leftPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_D) {
-//			rightPressed = false;
-//		}
 		
 		
 	}

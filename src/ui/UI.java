@@ -6,6 +6,11 @@ import java.awt.Graphics2D;
 
 import main.GamePanel;
 
+/**
+ * Test ui class used for learning. Will be refactored as paused state UI
+ * @author Wizen
+ *
+ */
 public class UI {
 	GamePanel gp;
 	Font arial_40;

@@ -42,5 +42,9 @@ public class Main {
 		gamePanel.startGameThread();
 	}
 	
+	/**
+	 * Get the layered pane in the application JFrame. Used by UI classes to add elements on top of GamePanel.
+	 * @return The layered pane of the JFrame
+	 */
 	public static JLayeredPane getPane() { return pane; }
 }

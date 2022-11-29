@@ -4,8 +4,18 @@ import java.awt.Graphics2D;
 
 import entity.enemies.IEnemy;
 
+/**
+ * Turret type tower, able to rapidly attack enemies for a lower damage.
+ * @author Ryan Sharp
+ *
+ */
 public class TurretTower extends Tower {
-
+	
+	/**
+	 * Create Turret Tower at given x and y pixels.
+	 * @param x
+	 * @param y
+	 */
 	public TurretTower(int x, int y) {
 		super(x, y, TowerType.TURRET);
 	}

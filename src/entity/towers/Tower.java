@@ -61,6 +61,9 @@ public abstract class Tower extends Entity implements ITower {
 		}
 	}
 	
+	/**
+	 * Updates which enemy the tower is targeting.
+	 */
 	public abstract void updateTarget();
 	
 	/**
@@ -77,6 +80,9 @@ public abstract class Tower extends Entity implements ITower {
 	 */
 	public double getFireRate() { return  fireRate; }
 	
+	/**
+	 * Called periodically to deal damage to the tower's current target.
+	 */
 	public abstract void attack();
 	
 	/**

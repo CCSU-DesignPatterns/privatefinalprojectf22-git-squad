@@ -8,6 +8,11 @@ import entity.towers.TowerManager;
 import tile.TileManager;
 import ui.GameplayUI;
 
+/**
+ * Game state used when the player is playing a level and the game is not paused
+ * @author Ryan Sharp
+ *
+ */
 public class GameplayState implements GameState {
 
 	// Input handling and game thread
@@ -16,6 +21,12 @@ public class GameplayState implements GameState {
 	private EnemyManager enemyM;
 	private GameplayUI ui;
 	
+	/**
+	 * Create new gameplay state using the given tile, enemy, and tower managers.
+	 * @param tileM
+	 * @param towerM
+	 * @param enemyM
+	 */
 	public GameplayState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
 		this.tileM = tileM;
 		this.towerM = towerM;
@@ -27,7 +38,7 @@ public class GameplayState implements GameState {
 			System.out.println("Error: GameplayUI could not find necessary images.");
 		}
 	}
-	
+
 	@Override
 	public void update() {
 		enemyM.update();
