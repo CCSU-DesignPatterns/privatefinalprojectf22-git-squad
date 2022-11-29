@@ -150,7 +150,7 @@ public abstract class Entity {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
+		if(obj != null && (x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
 				health == ((Entity)obj).health &&
 				strength == ((Entity)obj).strength &&
 				collisionBox.equals(((Entity)obj).collisionBox) &&
