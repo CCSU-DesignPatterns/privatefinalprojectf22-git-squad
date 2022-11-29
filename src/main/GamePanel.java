@@ -57,6 +57,8 @@ public class GamePanel extends JPanel implements Runnable{
 		this.ENEMY_MANAGER = new EnemyManager();
 		this.keyH = new KeyHandler();
 		this.mouseH = new MouseHandler();
+		this.state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
+		this.stateType = StateType.PLAY;
 		
 		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);
@@ -80,8 +82,6 @@ public class GamePanel extends JPanel implements Runnable{
 	 * @author RyiSnow
 	 */
 	void startGameThread() {
-		this.state = new PlayingState(tileM, towerM, ENEMY_MANAGER);
-		this.stateType = StateType.PLAY;
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
@@ -144,7 +144,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void updateState(StateType type) {
 		switch(type) {
 		case PLAY:
-			state = new PlayingState(tileM, towerM, ENEMY_MANAGER);
+			state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
 			stateType = StateType.PLAY;
 			break;
 		case PAUSE:

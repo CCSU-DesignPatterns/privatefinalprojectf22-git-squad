@@ -2,21 +2,31 @@ package main;
 
 import java.awt.Graphics2D;
 
+import entity.SpriteNotFoundException;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
 import tile.TileManager;
+import ui.GameplayUI;
 
-public class PlayingState implements GameState {
+public class GameplayState implements GameState {
 
 	// Input handling and game thread
 	private TileManager tileM;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
+	private GameplayUI ui;
 	
-	public PlayingState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
+	public GameplayState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
 		this.tileM = tileM;
 		this.towerM = towerM;
-		this.enemyM = enemyM;	}
+		this.enemyM = enemyM;
+		try {
+			ui = new GameplayUI();
+		}
+		catch(SpriteNotFoundException e) {
+			System.out.println("Error: GameplayUI could not find necessary images.");
+		}
+	}
 	
 	@Override
 	public void update() {
