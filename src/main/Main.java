@@ -42,6 +42,7 @@ public class Main {
 		test.setForeground(Color.white);
 		test.setBounds(50, 50, 50, 20);
 		test.setVisible(true);
+		test.setOpaque(true);
 		pane.add(test, Integer.valueOf(1));
 		
 		window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
@@ -51,19 +52,6 @@ public class Main {
 		
 		gamePanel.requestFocusInWindow();
 		gamePanel.startGameThread();
-		
-//		GamePanel gp = GamePanel.getInstance();
-//		
-//		JFrame frame = new JFrame("TD Game");
-//		frame.setSize(gp.SCREEN_WIDTH, gp.SCREEN_HEIGHT);
-//		frame.getLayeredPane().add(gp, Integer.valueOf(0));
-//		frame.pack();
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.setLayout(null);
-//		frame.setVisible(true);
-//		frame.setLocationRelativeTo(null);
-//		gp.requestFocusInWindow();
-//		gp.startGameThread();
 	}
 	
 	public JLayeredPane getPane() { return pane; }
