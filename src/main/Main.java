@@ -16,6 +16,8 @@ import javax.swing.JLayeredPane;
  */
 public class Main {
 
+	private static JLayeredPane pane;
+	
 	/**
 	 * {@summary Run this method to start the game!}
 	 * @author RyiSnow
@@ -29,9 +31,9 @@ public class Main {
 		
 		GamePanel gamePanel = GamePanel.getInstance(); //Updated this to use singleton pattern rather than creating instance variable
 		
-		JLayeredPane pane = window.getLayeredPane();
+		pane = window.getLayeredPane();
 		pane.setPreferredSize(new Dimension(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT));
-		pane.add(gamePanel, 0);
+		pane.add(gamePanel, Integer.valueOf(0));
 		
 		//window.add(pane);
 		
@@ -40,7 +42,7 @@ public class Main {
 		test.setForeground(Color.white);
 		test.setBounds(50, 50, 50, 20);
 		test.setVisible(true);
-		pane.add(test, 1);
+		pane.add(test, Integer.valueOf(1));
 		
 		window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
 		
@@ -63,5 +65,6 @@ public class Main {
 //		gp.requestFocusInWindow();
 //		gp.startGameThread();
 	}
-
+	
+	public JLayeredPane getPane() { return pane; }
 }
