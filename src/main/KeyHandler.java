@@ -30,12 +30,14 @@ public class KeyHandler implements KeyListener{
 		
 		if(code == KeyEvent.VK_ESCAPE) {
 			if(gp.getState().getType().equals(StateType.GAMEPLAY)) {
+				GameplayState current = (GameplayState)gp.getState();
 				System.out.println("Pausing game...");
-				gp.updateState(new PausedState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
+				gp.updateState(new PausedState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 			else if (gp.getState().getType().equals(StateType.PAUSE)) {
+				PausedState current = (PausedState)gp.getState();
 				System.out.println("Resuming game...");
-				gp.updateState(new GameplayState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
+				gp.updateState(new GameplayState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 		}
 		

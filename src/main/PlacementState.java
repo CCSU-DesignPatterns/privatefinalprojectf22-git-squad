@@ -17,13 +17,15 @@ public class PlacementState implements GameState {
 	private TileManager tileM;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
+	private Player player;
 	private Tower tower;
 	private GamePanel gp;
 	
-	public PlacementState(TowerManager towerM, TileManager tileM, EnemyManager enemyM, Tower tower) {
+	public PlacementState(TileManager tileM, TowerManager towerM, EnemyManager enemyM, Player player, Tower tower) {
 		this.tileM = tileM;
 		this.towerM = towerM;
 		this.enemyM = enemyM;
+		this.player = player;
 		this.tower = tower;
 		this.gp = GamePanel.getInstance();
 	}
@@ -63,5 +65,29 @@ public class PlacementState implements GameState {
 	 * @return {@link Tower} being placed
 	 */
 	public Tower getTower() { return tower; }
+	
+	/**
+	 * Get this state's tile manager
+	 * @return Current {@link TileManager}
+	 */
+	public TileManager getTileManager() { return tileM; }
+	
+	/**
+	 * Get this state's tower manager
+	 * @return Current {@link TowerManager}
+	 */
+	public TowerManager getTowerManager() { return towerM; }
+	
+	/**
+	 * Get this state's enemy manager
+	 * @return Current {@link EnemyManager}
+	 */
+	public EnemyManager getEnemyManager() { return enemyM; }
+	
+	/**
+	 * Get this state's player
+	 * @return Current {@link Player}
+	 */
+	public Player getPlayer() { return player; }
 	
 }

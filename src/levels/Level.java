@@ -60,7 +60,7 @@ public abstract class Level implements iLevel {
      *
      * @param g2 The Graphics2D object drawing the scene.
      */
-    public void drawLevel(Graphics2D g2) {
+    public void draw(Graphics2D g2) {
         int x = 0, y = 0;
 
         for(int row = 0; row < gp.MAX_SCREEN_ROW; row++) {

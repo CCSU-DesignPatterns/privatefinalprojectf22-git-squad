@@ -21,11 +21,11 @@ public class MouseHandler implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(gp.getState().getType().equals(StateType.PLACEMENT)) {
-			PlacementState currentState = (PlacementState) gp.getState();
-			if(currentState.getTower().getCollision() == false) {
+			PlacementState current = (PlacementState) gp.getState();
+			if(current.getTower().getCollision() == false) {
 				System.out.println("Attempting to place tower...");
-				gp.TOWER_MANAGER.add(currentState.getTower());
-				gp.updateState(new GameplayState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
+				current.getTowerManager().add(current.getTower());
+				gp.updateState(new GameplayState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 		}
 	}

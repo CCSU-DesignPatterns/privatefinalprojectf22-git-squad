@@ -2,6 +2,10 @@ package main;
 
 import java.awt.Graphics2D;
 
+import entity.enemies.EnemyManager;
+import entity.towers.TowerManager;
+import tile.TileManager;
+
 /**
  * Interface for game states. Defines basic functionality that needs to be implemented for every state.
  * @author Ryan Sharp
@@ -29,4 +33,28 @@ public interface GameState {
 	 * @return StateType enum for this type of state
 	 */
 	public StateType getType();
+	
+	/**
+	 * Get this state's tile manager
+	 * @return Current {@link TileManager}
+	 */
+	public TileManager getTileManager();
+	
+	/**
+	 * Get this state's tower manager
+	 * @return Current {@link TowerManager}
+	 */
+	public TowerManager getTowerManager();
+	
+	/**
+	 * Get this state's enemy manager
+	 * @return Current {@link EnemyManager}
+	 */
+	public EnemyManager getEnemyManager();
+	
+	/**
+	 * Get this state's player
+	 * @return Current {@link Player}
+	 */
+	public Player getPlayer();
 }

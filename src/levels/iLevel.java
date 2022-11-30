@@ -17,5 +17,5 @@ public interface iLevel {
     /**
      * Draws the level
      */
-    public void drawLevel(Graphics2D g2);
+    public void draw(Graphics2D g2);
 }

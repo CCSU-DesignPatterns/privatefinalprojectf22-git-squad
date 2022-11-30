@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
+import levels.LevelDifficulty;
 import tile.TileManager;
 
 //import entity.Player;
@@ -36,9 +37,6 @@ public class GamePanel extends JPanel implements Runnable{
 	private final int FPS = 60;
 	
 	// Game Object Management
-	public final TileManager TILE_MANAGER;
-	public final TowerManager TOWER_MANAGER;
-	public final EnemyManager ENEMY_MANAGER;
 	
 	// Input Handling
 	public final KeyHandler KEY_HANDLER;
@@ -51,12 +49,9 @@ public class GamePanel extends JPanel implements Runnable{
 	private GamePanel() {
 		instance = this;
 		
-		this.TILE_MANAGER = new TileManager();
-		this.TOWER_MANAGER = new TowerManager();
-		this.ENEMY_MANAGER = new EnemyManager();
 		this.KEY_HANDLER = new KeyHandler();
 		this.MOUSE_HANDLER = new MouseHandler();
-		this.state = new GameplayState(TILE_MANAGER, TOWER_MANAGER, ENEMY_MANAGER);
+		this.state = new GameplayState(new TileManager(), new TowerManager(), new EnemyManager(), new Player(LevelDifficulty.MEDIUM.getStartingHealth(), LevelDifficulty.MEDIUM.getStartingMoney()));
 		
 		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);

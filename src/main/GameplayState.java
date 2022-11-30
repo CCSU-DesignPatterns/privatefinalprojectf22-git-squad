@@ -20,6 +20,7 @@ public class GameplayState implements GameState {
 	private TileManager tileM;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
+	private Player player;
 	private GameplayUI ui;
 	
 	/**
@@ -28,10 +29,11 @@ public class GameplayState implements GameState {
 	 * @param towerM
 	 * @param enemyM
 	 */
-	public GameplayState(TileManager tileM, TowerManager towerM, EnemyManager enemyM) {
+	public GameplayState(TileManager tileM, TowerManager towerM, EnemyManager enemyM, Player player) {
 		this.tileM = tileM;
 		this.towerM = towerM;
 		this.enemyM = enemyM;
+		this.player = player;
 		try {
 			ui = new GameplayUI();
 		}
@@ -40,7 +42,7 @@ public class GameplayState implements GameState {
 		}
 		
 		TurretTower test = new TurretTower(100, 100);
-		GamePanel.getInstance().TOWER_MANAGER.add(test);
+		towerM.add(test);
 	}
 
 	@Override
@@ -66,5 +68,29 @@ public class GameplayState implements GameState {
 	public void endState() {
 		ui.remove();
 	}
+	
+	/**
+	 * Get this state's tile manager
+	 * @return Current {@link TileManager}
+	 */
+	public TileManager getTileManager() { return tileM; }
+	
+	/**
+	 * Get this state's tower manager
+	 * @return Current {@link TowerManager}
+	 */
+	public TowerManager getTowerManager() { return towerM; }
+	
+	/**
+	 * Get this state's enemy manager
+	 * @return Current {@link EnemyManager}
+	 */
+	public EnemyManager getEnemyManager() { return enemyM; }
+	
+	/**
+	 * Get this state's player
+	 * @return Current {@link Player}
+	 */
+	public Player getPlayer() { return player; }
 
 }

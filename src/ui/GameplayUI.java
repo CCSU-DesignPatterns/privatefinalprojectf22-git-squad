@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import entity.SpriteNotFoundException;
 import entity.towers.CannonTower;
@@ -24,6 +26,7 @@ import entity.towers.SniperTower;
 import entity.towers.TowerType;
 import entity.towers.TurretTower;
 import main.GamePanel;
+import main.GameplayState;
 import main.Main;
 import main.PlacementState;
 import tile.ImageScaler;
@@ -191,18 +194,20 @@ public class GameplayUI {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Player pressed button: " + e.getActionCommand());
 			
-			int x = MouseInfo.getPointerInfo().getLocation().x;
-			int y = MouseInfo.getPointerInfo().getLocation().y;
+			Point p = MouseInfo.getPointerInfo().getLocation();
+			SwingUtilities.convertPointFromScreen(p, gp);
+			
+			GameplayState current = (GameplayState)gp.getState();
 			
 			switch(e.getActionCommand()) {
 			case ("Buy Turret"):
-				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new TurretTower(x, y)));
+				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new TurretTower(p.x, p.y)));
 				break;
 			case ("Buy Cannon"):
-				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new CannonTower(x, y)));
+				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new CannonTower(p.x, p.y)));
 				break;
 			case("Buy Sniper"):
-				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new SniperTower(x, y)));
+				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new SniperTower(p.x, p.y)));
 				break;
 			}
 			
