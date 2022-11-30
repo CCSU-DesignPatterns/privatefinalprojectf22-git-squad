@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 /**
  * Interface defining basic functionality that any tower or tower substitute needs to be able to fulfill
@@ -13,6 +14,12 @@ public interface ITower {
 	 * @return Itself if it is the TowerManager, null otherwise.
 	 */
 	public TowerManager getComposite();
+	
+	/**
+	 * Get this tower's collision box
+	 * @return {@link Rectangle} collision box
+	 */
+	public Rectangle getCollisionBox();
 	
 	/**
 	 * Perform any updates needed between frames

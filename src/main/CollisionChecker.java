@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.towers.ITower;
 import levels.Level;
 import levels.MapTile;
 
@@ -35,12 +36,19 @@ public class CollisionChecker {
 			MapTile tile3 = currentTileSet[currentMap[entityRightCol][entityTopRow]];
 			MapTile tile4 = currentTileSet[currentMap[entityRightCol][entityBottomRow]];
 			
+			boolean collision = false;
+			
 			if(tile1.getCollision() || tile2.getCollision() || tile3.getCollision() || tile4.getCollision()) {
-				entity.setCollision(true);
+				collision = true;
 			}
-			else {
-				entity.setCollision(false);
+			
+			for(ITower e : gp.getState().getTowerManager().getChildren()) {
+				if(entity.getCollisionBox().intersects(e.getCollisionBox())) {
+					collision = true;
+				}
 			}
+			
+			entity.setCollision(collision);
 		}
 	}
 }

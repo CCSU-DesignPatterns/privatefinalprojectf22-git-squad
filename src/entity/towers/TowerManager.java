@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,12 @@ public class TowerManager implements ITower {
 		return null;
 	}
 	
+	/**
+	 * Get the list of towers managed by this TowerManager
+	 * @return List of {@link ITower} objects
+	 */
+	public List<ITower> getChildren() { return children; }
+	
 	@Override
 	public TowerManager getComposite() { return this; }
 
@@ -71,4 +78,9 @@ public class TowerManager implements ITower {
 
 	@Override
 	public double getFireRate() { return 0; }
+
+	@Override
+	public Rectangle getCollisionBox() {
+		return null;
+	}
 }
