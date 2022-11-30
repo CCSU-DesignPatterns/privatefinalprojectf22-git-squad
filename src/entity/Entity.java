@@ -78,6 +78,12 @@ public abstract class Entity {
 	public boolean getCollision() { return collision; }		
 
 	/**
+	 * Set whether an entity has collided with an object
+	 * @param col - true if collided, otherwise false
+	 */
+	public void setCollision(boolean col) { collision = col; }
+	
+	/**
 	 * @return Entity instance health
 	 */
 	public int getHealth() {

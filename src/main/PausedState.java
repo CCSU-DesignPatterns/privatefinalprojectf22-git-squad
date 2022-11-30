@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
+import levels.Level;
 import tile.TileManager;
 import ui.UI;
 
@@ -15,7 +16,7 @@ import ui.UI;
 class PausedState implements GameState {
 
 	// Input handling and game thread
-	private TileManager tileM;
+	private Level level;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
 	private Player player;
@@ -27,8 +28,8 @@ class PausedState implements GameState {
 	 * @param towerM
 	 * @param enemyM
 	 */
-	public PausedState(TileManager tileM, TowerManager towerM, EnemyManager enemyM, Player player) {
-		this.tileM = tileM;
+	public PausedState(Level level, TowerManager towerM, EnemyManager enemyM, Player player) {
+		this.level = level;
 		this.towerM = towerM;
 		this.enemyM = enemyM;
 		this.player = player;
@@ -43,7 +44,7 @@ class PausedState implements GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		tileM.draw(g2);
+		level.draw(g2);
 		enemyM.draw(g2);
 		towerM.draw(g2);
 		ui.draw(g2);
@@ -65,7 +66,7 @@ class PausedState implements GameState {
 	 * Get this state's tile manager
 	 * @return Current {@link TileManager}
 	 */
-	public TileManager getTileManager() { return tileM; }
+	public Level getLevel() { return level; }
 	
 	/**
 	 * Get this state's tower manager

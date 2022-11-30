@@ -6,6 +6,7 @@ import entity.SpriteNotFoundException;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
 import entity.towers.TurretTower;
+import levels.Level;
 import tile.TileManager;
 import ui.GameplayUI;
 
@@ -17,7 +18,7 @@ import ui.GameplayUI;
 public class GameplayState implements GameState {
 
 	// Input handling and game thread
-	private TileManager tileM;
+	private Level level;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
 	private Player player;
@@ -29,8 +30,8 @@ public class GameplayState implements GameState {
 	 * @param towerM
 	 * @param enemyM
 	 */
-	public GameplayState(TileManager tileM, TowerManager towerM, EnemyManager enemyM, Player player) {
-		this.tileM = tileM;
+	public GameplayState(Level level, TowerManager towerM, EnemyManager enemyM, Player player) {
+		this.level = level;
 		this.towerM = towerM;
 		this.enemyM = enemyM;
 		this.player = player;
@@ -53,7 +54,7 @@ public class GameplayState implements GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		tileM.draw(g2);
+		level.draw(g2);
 		enemyM.draw(g2);
 		towerM.draw(g2);
 		g2.dispose();
@@ -73,7 +74,7 @@ public class GameplayState implements GameState {
 	 * Get this state's tile manager
 	 * @return Current {@link TileManager}
 	 */
-	public TileManager getTileManager() { return tileM; }
+	public Level getLevel() { return level; }
 	
 	/**
 	 * Get this state's tower manager

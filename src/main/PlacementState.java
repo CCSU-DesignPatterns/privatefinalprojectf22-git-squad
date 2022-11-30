@@ -9,20 +9,21 @@ import javax.swing.SwingUtilities;
 import entity.enemies.EnemyManager;
 import entity.towers.Tower;
 import entity.towers.TowerManager;
+import levels.Level;
 import tile.TileManager;
 
 public class PlacementState implements GameState {
 
 	// Input handling and game thread
-	private TileManager tileM;
+	private Level level;
 	private TowerManager towerM;
 	private EnemyManager enemyM;
 	private Player player;
 	private Tower tower;
 	private GamePanel gp;
 	
-	public PlacementState(TileManager tileM, TowerManager towerM, EnemyManager enemyM, Player player, Tower tower) {
-		this.tileM = tileM;
+	public PlacementState(Level level, TowerManager towerM, EnemyManager enemyM, Player player, Tower tower) {
+		this.level = level;
 		this.towerM = towerM;
 		this.enemyM = enemyM;
 		this.player = player;
@@ -42,7 +43,7 @@ public class PlacementState implements GameState {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		tileM.draw(g2);
+		level.draw(g2);
 		enemyM.draw(g2);
 		towerM.draw(g2);
 		tower.draw(g2);
@@ -70,7 +71,7 @@ public class PlacementState implements GameState {
 	 * Get this state's tile manager
 	 * @return Current {@link TileManager}
 	 */
-	public TileManager getTileManager() { return tileM; }
+	public Level getLevel() { return level; }
 	
 	/**
 	 * Get this state's tower manager

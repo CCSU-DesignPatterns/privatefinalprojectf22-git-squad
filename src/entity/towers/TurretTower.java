@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import entity.enemies.IEnemy;
 
@@ -18,6 +19,7 @@ public class TurretTower extends Tower {
 	 */
 	public TurretTower(int x, int y) {
 		super(x, y, TowerType.TURRET);
+		this.setCollisionBox(new Rectangle(2, 2, 12, 12));
 	}
 
 	@Override

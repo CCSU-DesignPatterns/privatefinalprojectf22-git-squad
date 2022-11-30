@@ -34,7 +34,7 @@ public class Level1 extends Level {
     @Override
     protected void loadMap() {
         try {
-            InputStream is = getClass().getResourceAsStream(levelData);
+            InputStream is = getClass().getResourceAsStream("/levels/level01.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             for(int row = 0; row < gp.MAX_SCREEN_ROW; row++) {
@@ -50,7 +50,7 @@ public class Level1 extends Level {
             br.close();
         }
         catch(Exception e) {
-
+        	System.out.println("Could not find level data");
         }
     }
 }

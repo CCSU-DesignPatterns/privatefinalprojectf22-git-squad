@@ -30,6 +30,7 @@ import main.GameplayState;
 import main.Main;
 import main.PlacementState;
 import tile.ImageScaler;
+import levels.Level;
 
 /**
  * UI class to display the proper UI during the gameplay state
@@ -201,13 +202,13 @@ public class GameplayUI {
 			
 			switch(e.getActionCommand()) {
 			case ("Buy Turret"):
-				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new TurretTower(p.x, p.y)));
+				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new TurretTower(p.x, p.y)));
 				break;
 			case ("Buy Cannon"):
-				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new CannonTower(p.x, p.y)));
+				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new CannonTower(p.x, p.y)));
 				break;
 			case("Buy Sniper"):
-				gp.updateState(new PlacementState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new SniperTower(p.x, p.y)));
+				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new SniperTower(p.x, p.y)));
 				break;
 			}
 			

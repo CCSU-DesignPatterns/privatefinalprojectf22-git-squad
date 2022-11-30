@@ -25,7 +25,7 @@ public class MouseHandler implements MouseListener{
 			if(current.getTower().getCollision() == false) {
 				System.out.println("Attempting to place tower...");
 				current.getTowerManager().add(current.getTower());
-				gp.updateState(new GameplayState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 		}
 	}

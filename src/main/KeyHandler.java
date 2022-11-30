@@ -32,12 +32,12 @@ public class KeyHandler implements KeyListener{
 			if(gp.getState().getType().equals(StateType.GAMEPLAY)) {
 				GameplayState current = (GameplayState)gp.getState();
 				System.out.println("Pausing game...");
-				gp.updateState(new PausedState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+				gp.updateState(new PausedState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 			else if (gp.getState().getType().equals(StateType.PAUSE)) {
 				PausedState current = (PausedState)gp.getState();
 				System.out.println("Resuming game...");
-				gp.updateState(new GameplayState(current.getTileManager(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
 		}
 		

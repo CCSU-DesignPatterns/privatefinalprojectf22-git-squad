@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
+import levels.Level;
 import tile.TileManager;
 
 /**
@@ -35,10 +36,10 @@ public interface GameState {
 	public StateType getType();
 	
 	/**
-	 * Get this state's tile manager
-	 * @return Current {@link TileManager}
+	 * Get this state's level
+	 * @return Current {@link Level}
 	 */
-	public TileManager getTileManager();
+	public Level getLevel();
 	
 	/**
 	 * Get this state's tower manager

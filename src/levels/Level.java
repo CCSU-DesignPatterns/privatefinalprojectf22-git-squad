@@ -16,15 +16,15 @@ import java.awt.Graphics2D;
  */
 public abstract class Level implements iLevel {
     // The panel to draw the level in
-    GamePanel gp;
+    protected GamePanel gp;
 
     /* This array contains references to each of the distinct tiles that can be drawn in the level.
      * Think of this as your "artist's palette" when drawing a level. */
-    MapTile[] tileSet;
+    protected MapTile[] tileSet;
 
     /* This 2D array contains the index of the tile in tileSet that is to be drawn on each tile of the screen.
      * This is the actual layout of the level. */
-    int levelMap[][];
+    protected int levelMap[][];
 
     /**
      * Default constructor
