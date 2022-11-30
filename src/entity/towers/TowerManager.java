@@ -40,7 +40,11 @@ public class TowerManager implements ITower {
 	 * Add a tower to the TowerManager's children.
 	 * @param t Tower to be added
 	 */
-	public void add(ITower t) { children.add(t); }
+	public void add(ITower t) { 
+		t.getCollisionBox().setLocation(t.getCollisionBox().getLocation().x + t.getX(), t.getCollisionBox().getLocation().y + t.getY());
+		System.out.println("Collision box at X=" + t.getCollisionBox().getLocation().x + ", Y=" + t.getCollisionBox().getLocation().y);
+		children.add(t); 
+	}
 
 	/**
 	 * Remove a tower from the TowerManager's children.
@@ -82,5 +86,23 @@ public class TowerManager implements ITower {
 	@Override
 	public Rectangle getCollisionBox() {
 		return null;
+	}
+
+	@Override
+	public void setCollisionBox(Rectangle box) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

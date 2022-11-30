@@ -22,6 +22,24 @@ public interface ITower {
 	public Rectangle getCollisionBox();
 	
 	/**
+	 * Sets the collision box for this instance
+	 * @param box Rectangle object
+	 */
+	public void setCollisionBox(Rectangle box);
+	
+	/**
+	 * Returns the ITower's x value
+	 * @return <code>int</code> x value 
+	 */
+	public int getX();
+	
+	/**
+	 * Returns the ITower's y value
+	 * @return <code>int</code> y value 
+	 */
+	public int getY();
+	
+	/**
 	 * Perform any updates needed between frames
 	 */
 	public void update();

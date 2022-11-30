@@ -29,7 +29,10 @@ public class CannonTower extends Tower {
 	 */
 	public CannonTower(int x, int y) {
 		super(x, y, TowerType.CANNON);
-		this.setCollisionBox(new Rectangle(4 * gp.SCALE, 3 * gp.SCALE, 8 * gp.SCALE, 11 * gp.SCALE));
+		this.setCollisionBox(new Rectangle(TowerType.CANNON.getCollisionInfo()[0] * gp.SCALE,
+				TowerType.CANNON.getCollisionInfo()[1] * gp.SCALE,
+				TowerType.CANNON.getCollisionInfo()[2] * gp.SCALE,
+				TowerType.CANNON.getCollisionInfo()[3] * gp.SCALE));
 	}
 
 	@Override

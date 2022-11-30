@@ -42,8 +42,6 @@ public class GameplayState implements GameState {
 			System.out.println("Error: GameplayUI could not find necessary images.");
 		}
 		
-		TurretTower test = new TurretTower(100, 100);
-		towerM.add(test);
 	}
 
 	@Override

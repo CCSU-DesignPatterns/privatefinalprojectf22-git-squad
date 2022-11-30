@@ -56,4 +56,19 @@ public class TowerDecorator implements ITower {
 		return decoratedTower.getCollisionBox();
 	}
 
+	@Override
+	public void setCollisionBox(Rectangle box) {
+		decoratedTower.setCollisionBox(box);
+	}
+
+	@Override
+	public int getX() {
+		return decoratedTower.getX();
+	}
+
+	@Override
+	public int getY() {
+		return decoratedTower.getY();
+	}
+
 }
