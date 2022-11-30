@@ -34,6 +34,7 @@ public class MapTile {
             setSprite(path);
         }
         catch (SpriteNotFoundException e) {
+        	System.out.println("Could not find sprite at " + path);
             // Needs to be set to a "default" sprite
             setSprite("/tiles/Grass.png");
         }

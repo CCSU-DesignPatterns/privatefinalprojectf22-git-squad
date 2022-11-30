@@ -2,6 +2,7 @@ package entity.towers;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class acts as a composite, allowing GamePanel to update and draw all the player's towers at once rather
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TowerManager implements ITower {
 
-	ArrayList<ITower> children = new ArrayList<ITower>();
+	protected List<ITower> children = new ArrayList<ITower>();
 	
 	/**
 	 * Calls the update function on all towers individually.
@@ -60,7 +61,7 @@ public class TowerManager implements ITower {
 	}
 	
 	@Override
-	public ITower getComposite() { return this; }
+	public TowerManager getComposite() { return this; }
 
 	@Override
 	public void updateTarget() {}

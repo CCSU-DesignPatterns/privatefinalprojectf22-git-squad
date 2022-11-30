@@ -5,7 +5,7 @@ package entity.towers;
  * @author Ryan Sharp
  *
  */
-enum TowerType {
+public enum TowerType {
 	TURRET(1, 0.2, 50, 100, "turret", "/towers/Turret.png"),
 	CANNON(10, 2.0, 25, 250, "cannon", "/towers/Cannon.png"),
 	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/Sniper.png"),
@@ -28,10 +28,39 @@ enum TowerType {
 		this.DEFAULT_SPRITE_FILE_PATH = DEFAULT_SPRITE_FILE_PATH;
 	}
 	
-	int getDamage() { return DAMAGE; }
-	double getFireRate() { return FIRE_RATE; }
-	int getRange() { return RANGE; }
-	int getCost() { return COST; }
-	String getType() { return TYPE; }
-	String getSpriteFilePath() { return DEFAULT_SPRITE_FILE_PATH; }
+	/**
+	 * Get the default damage of a tower type
+	 * @return damage
+	 */
+	public int getDamage() { return DAMAGE; }
+	
+	/**
+	 * Get the default fire rate delay of a tower type
+	 * @return fire rate
+	 */
+	public double getFireRate() { return FIRE_RATE; }
+	
+	/**
+	 * Get the default range of a tower type
+	 * @return range
+	 */
+	public int getRange() { return RANGE; }
+	
+	/**
+	 * Get the default cost of a tower type
+	 * @return cost
+	 */
+	public int getCost() { return COST; }
+	
+	/**
+	 * Get the type of a tower in string form
+	 * @return type
+	 */
+	public String getType() { return TYPE; }
+	
+	/**
+	 * Get the default sprite file path of a tower type
+	 * @return file path
+	 */
+	public String getSpriteFilePath() { return DEFAULT_SPRITE_FILE_PATH; }
 }

@@ -55,10 +55,34 @@ public abstract class Entity {
 	 */
 	public int getX() { return x; }
 	
+	/**
+	 * Returns the entity's y value
+	 * @return <code>int</code> y value 
+	 */
 	public int getY() { return y; }
 	
+	/**
+	 * Set the position of an entity to the given x and y pixel coordinates
+	 * @param x
+	 * @param y
+	 */
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Check whether an entity has collided with an object
+	 * @return true if collided, otherwise false
+	 */
 	public boolean getCollision() { return collision; }		
 
+	/**
+	 * Set whether an entity has collided with an object
+	 * @param col - true if collided, otherwise false
+	 */
+	public void setCollision(boolean col) { collision = col; }
+	
 	/**
 	 * @return Entity instance health
 	 */

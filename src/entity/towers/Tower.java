@@ -47,7 +47,7 @@ public abstract class Tower extends Entity implements ITower {
 	 * Used to check if the given tower is a composite or leaf. TowerManager returns itself, all others return null;
 	 * @return TowerManager or null
 	 */
-	public ITower getComposite() { return null; }
+	public TowerManager getComposite() { return null; }
 	
 	/**
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.
@@ -55,12 +55,15 @@ public abstract class Tower extends Entity implements ITower {
 	public void update() {
 		updateTarget();
 		updateDelta();
-		if(delta > getFireRate()) {
+		if(delta > getFireRate() && target != null) {
 			attack();
 			delta = 0;
 		}
 	}
 	
+	/**
+	 * Updates which enemy the tower is targeting.
+	 */
 	public abstract void updateTarget();
 	
 	/**
@@ -77,6 +80,9 @@ public abstract class Tower extends Entity implements ITower {
 	 */
 	public double getFireRate() { return  fireRate; }
 	
+	/**
+	 * Called periodically to deal damage to the tower's current target.
+	 */
 	public abstract void attack();
 	
 	/**
@@ -86,9 +92,11 @@ public abstract class Tower extends Entity implements ITower {
 	public void draw(Graphics2D g2) {
 		if(target != null)
 			angle = Math.toRadians(Math.atan2(target.getX() - x,  target.getY() - y));
-		AffineTransform tx = AffineTransform.getRotateInstance(angle, gp.TILE_SIZE / 2, gp.TILE_SIZE / 2);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		g2.drawImage(op.filter(sprite, null), x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);
+		AffineTransform original = g2.getTransform();
+		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
+		g2.setTransform(tx);
+		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);
+		g2.setTransform(original);
 	}
 
 }

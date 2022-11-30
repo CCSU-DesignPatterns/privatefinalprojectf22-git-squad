@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="src/|res/" kind="src" path=""/>
+	<classpathentry excluding="res/|src/" kind="src" path=""/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="towers/" kind="src" path="res"/>
+	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
