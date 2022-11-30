@@ -1,6 +1,7 @@
 package entity.enemies;
 
 import java.util.*;
+import java.io.*;
 import main.*;
 
 public class EnemyWaves {
@@ -10,6 +11,7 @@ public class EnemyWaves {
 	private int spawnRate = 1;				// Enemy spawn rate. Default is 1
 	private int frameCount = 12;			// Spawn enemies every n frames. Default is 12
 	private EnemyFactory enemyFactory = new EnemyFactory();
+	private int currentWave = 0;
 	
 	/**
 	 * Default constructor
@@ -17,6 +19,7 @@ public class EnemyWaves {
 	public EnemyWaves(GamePanel gp) { 
 		this.gp = gp;
 		enemySet = new ArrayList<IEnemy>();
+		loadEnemySet();
 	}
 	
 	/**
@@ -34,8 +37,31 @@ public class EnemyWaves {
 	/**
 	 * Loads the enemy wave array data
 	 */
-	public void loadEnemyWaves() { 
-		// TODO Implement logic to load the array data
+	public void loadEnemyWaves(String filePath) { 
+		BufferedReader fileReader;
+		
+		try {
+			fileReader = new BufferedReader(new FileReader(filePath));
+			String line[] = new String[1];
+			int lineIndex = 0;
+			
+			while(line != null) {
+				line = fileReader.readLine().split(" ");
+				
+				for(int i = 0; i < line.length; i++) {
+					int digit = Integer.parseInt(line[i]);
+					enemyWaves[lineIndex][i] = digit;
+				}
+				
+				lineIndex++;
+			}
+			
+			// Close the reader
+			fileReader.close();
+		}
+		catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	/**
@@ -57,6 +83,6 @@ public class EnemyWaves {
 	 * Moves to the next 
 	 */
 	public void nextWave() {
-		// TODO: Implement advance to next wave
+		currentWave++;
 	}
 }
