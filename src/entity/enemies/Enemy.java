@@ -12,6 +12,7 @@ public class Enemy extends Entity implements IEnemy {
 	// Attributes
 	protected int speed = 2;	// Pixels per update. Default is 2
 	protected int distTraveled = 0;	// The distance traveled in pixels
+	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
 	 * a path to a sprite image for this enemy.
