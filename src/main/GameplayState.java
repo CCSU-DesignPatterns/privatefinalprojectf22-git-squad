@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import entity.SpriteNotFoundException;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
+import entity.towers.TurretTower;
 import tile.TileManager;
 import ui.GameplayUI;
 
@@ -37,6 +38,9 @@ public class GameplayState implements GameState {
 		catch(SpriteNotFoundException e) {
 			System.out.println("Error: GameplayUI could not find necessary images.");
 		}
+		
+		TurretTower test = new TurretTower(100, 100);
+		GamePanel.getInstance().TOWER_MANAGER.add(test);
 	}
 
 	@Override
@@ -51,6 +55,16 @@ public class GameplayState implements GameState {
 		enemyM.draw(g2);
 		towerM.draw(g2);
 		g2.dispose();
+	}
+
+	@Override
+	public StateType getType() {
+		return StateType.GAMEPLAY;
+	}
+
+	@Override
+	public void endState() {
+		ui.remove();
 	}
 
 }

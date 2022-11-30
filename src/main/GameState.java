@@ -18,4 +18,15 @@ public interface GameState {
 	 * @param g2 - {@link Graphics2D} object used to draw
 	 */
 	public void draw(Graphics2D g2);
+	
+	/**
+	 * Perform any actions necessary before switching states
+	 */
+	public void endState();
+	
+	/**
+	 * Get the type of this state
+	 * @return StateType enum for this type of state
+	 */
+	public StateType getType();
 }

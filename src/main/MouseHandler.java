@@ -9,7 +9,9 @@ import java.awt.event.MouseListener;
  *
  */
 public class MouseHandler implements MouseListener{
-
+	
+	GamePanel gp = GamePanel.getInstance();
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -18,8 +20,14 @@ public class MouseHandler implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(gp.getState().getType().equals(StateType.PLACEMENT)) {
+			PlacementState currentState = (PlacementState) gp.getState();
+			if(currentState.getTower().getCollision() == false) {
+				System.out.println("Attempting to place tower...");
+				gp.TOWER_MANAGER.add(currentState.getTower());
+				gp.updateState(new GameplayState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
+			}
+		}
 	}
 
 	@Override

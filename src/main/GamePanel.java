@@ -36,34 +36,32 @@ public class GamePanel extends JPanel implements Runnable{
 	private final int FPS = 60;
 	
 	// Game Object Management
-	private TileManager tileM;
-	private TowerManager towerM;
+	public final TileManager TILE_MANAGER;
+	public final TowerManager TOWER_MANAGER;
 	public final EnemyManager ENEMY_MANAGER;
 	
 	// Input Handling
-	private KeyHandler keyH;
-	private MouseHandler mouseH;
+	public final KeyHandler KEY_HANDLER;
+	public final MouseHandler MOUSE_HANDLER;
 	
 	// Game Variables
 	private GameState state;
-	private StateType stateType;
 	private Thread gameThread;
 	
 	private GamePanel() {
 		instance = this;
 		
-		this.tileM = new TileManager();
-		this.towerM = new TowerManager();
+		this.TILE_MANAGER = new TileManager();
+		this.TOWER_MANAGER = new TowerManager();
 		this.ENEMY_MANAGER = new EnemyManager();
-		this.keyH = new KeyHandler();
-		this.mouseH = new MouseHandler();
-		this.state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
-		this.stateType = StateType.PLAY;
+		this.KEY_HANDLER = new KeyHandler();
+		this.MOUSE_HANDLER = new MouseHandler();
+		this.state = new GameplayState(TILE_MANAGER, TOWER_MANAGER, ENEMY_MANAGER);
 		
 		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);
-		this.addKeyListener(keyH);
-		this.addMouseListener(mouseH);
+		this.addKeyListener(KEY_HANDLER);
+		this.addMouseListener(MOUSE_HANDLER);
 		this.setFocusable(true);
 	}
 	
@@ -141,24 +139,16 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	/**
 	 * Get the current state of the game.
-	 * @return Enum StateType
+	 * @return {@link GameState} Current state of game
 	 */
-	public StateType getStateType() { return stateType; }
+	public GameState getState() { return state; }
 	
 	/**
 	 * Use to change the state of the game
 	 * @param state Game state to be updated to
 	 */
-	public void updateState(StateType state) {
-		switch(state) {
-		case PLAY:
-			this.state = new GameplayState(tileM, towerM, ENEMY_MANAGER);
-			stateType = StateType.PLAY;
-			break;
-		case PAUSE:
-			this.state = new PausedState(tileM, towerM, ENEMY_MANAGER);
-			stateType = StateType.PAUSE;
-			break;
-		}
+	public void updateState(GameState state) {
+		this.state.endState();
+		this.state = state;
 	}
 }

@@ -48,4 +48,15 @@ class PausedState implements GameState {
 		g2.dispose();
 	}
 
+	@Override
+	public StateType getType() {
+		return StateType.PAUSE;
+	}
+
+	@Override
+	public void endState() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

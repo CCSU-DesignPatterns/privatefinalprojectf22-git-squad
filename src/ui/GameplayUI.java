@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.MouseInfo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
@@ -16,9 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entity.SpriteNotFoundException;
+import entity.towers.CannonTower;
+import entity.towers.SniperTower;
 import entity.towers.TowerType;
+import entity.towers.TurretTower;
 import main.GamePanel;
 import main.Main;
+import main.PlacementState;
 import tile.ImageScaler;
 
 /**
@@ -34,6 +41,7 @@ public class GameplayUI {
 	private JButton turretButton, cannonButton, sniperButton;
 	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop;
 	private Font arial30, arial50;
+	private GameplayUIButtonHandler listener;
 	
 	/**
 	 * Create new gameplay UI
@@ -41,6 +49,7 @@ public class GameplayUI {
 	 */
 	public GameplayUI() throws SpriteNotFoundException{
 		gp = GamePanel.getInstance();
+		listener = new GameplayUIButtonHandler();
 		
 		arial30 = new Font("arial", Font.PLAIN, 30);
 		arial50 = new Font("arial", Font.PLAIN, 50);
@@ -73,7 +82,6 @@ public class GameplayUI {
 		shop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		shop.setBackground(new Color(94, 67, 15));
 		shop.setOpaque(true);
-		Main.getPane().add(shop, Integer.valueOf(1));
 		
 		shopLabel = new JLabel();
 		setupLabel(shopLabel, arial50, "SHOP", Color.white, null);
@@ -85,6 +93,8 @@ public class GameplayUI {
 		turretButton = new JButton(new ImageIcon(turretShop));
 		turretButton.setBorder(BorderFactory.createEmptyBorder());
 		turretButton.setContentAreaFilled(false);
+		turretButton.addActionListener(listener);
+		turretButton.setActionCommand("Buy Turret");
 		c.gridy++;
 		shop.add(turretButton, c);
 		
@@ -97,6 +107,8 @@ public class GameplayUI {
 		cannonButton = new JButton(new ImageIcon(cannonShop));
 		cannonButton.setBorder(BorderFactory.createEmptyBorder());
 		cannonButton.setContentAreaFilled(false);
+		cannonButton.addActionListener(listener);
+		cannonButton.setActionCommand("Buy Cannon");
 		c.gridy++;
 		shop.add(cannonButton, c);
 		
@@ -109,6 +121,8 @@ public class GameplayUI {
 		sniperButton = new JButton(new ImageIcon(sniperShop));
 		sniperButton.setBorder(BorderFactory.createEmptyBorder());
 		sniperButton.setContentAreaFilled(false);
+		sniperButton.addActionListener(listener);
+		sniperButton.setActionCommand("Buy Sniper");
 		c.gridy++;
 		shop.add(sniperButton, c);
 		
@@ -117,6 +131,8 @@ public class GameplayUI {
 		sniperLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(sniperLabel, c);
+		
+		Main.getPane().add(shop, Integer.valueOf(1));
 		
 		healthLabel = new JLabel();
 		setupLabel(healthLabel, arial30, String.valueOf(200), Color.white, new ImageIcon(heart));
@@ -146,6 +162,53 @@ public class GameplayUI {
 		label.setText(text);
 		label.setForeground(foreground);
 		label.setIcon(icon);
+	}
+	
+	/**
+	 * Removes the UI from the screen. Used when switching states. Otherwise the UI will still be visible in other states.
+	 */
+	public void remove() {
+		Main.getPane().remove(shop);
+		Main.getPane().remove(healthLabel);
+		Main.getPane().remove(moneyLabel);
+	}
+	
+	/**
+	 * Set the text of the health label to the value given
+	 * @param amt - Value label should be set to
+	 */
+	public void setHealth(int amt) { healthLabel.setText(String.valueOf(amt)); }
+	
+	/**
+	 * Set the text of the money lable to the value given
+	 * @param amt - Value label should be set to
+	 */
+	public void setMoney(int amt) { moneyLabel.setText(String.valueOf(amt)); }
+	
+	private class GameplayUIButtonHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Player pressed button: " + e.getActionCommand());
+			
+			int x = MouseInfo.getPointerInfo().getLocation().x;
+			int y = MouseInfo.getPointerInfo().getLocation().y;
+			
+			switch(e.getActionCommand()) {
+			case ("Buy Turret"):
+				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new TurretTower(x, y)));
+				break;
+			case ("Buy Cannon"):
+				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new CannonTower(x, y)));
+				break;
+			case("Buy Sniper"):
+				gp.updateState(new PlacementState(gp.TOWER_MANAGER, gp.TILE_MANAGER, gp.ENEMY_MANAGER, new SniperTower(x, y)));
+				break;
+			}
+			
+			gp.requestFocusInWindow();
+		}
+		
 	}
 	
 }

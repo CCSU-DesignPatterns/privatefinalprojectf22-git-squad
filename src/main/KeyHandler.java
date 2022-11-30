@@ -29,11 +29,13 @@ public class KeyHandler implements KeyListener{
 		int code = e.getKeyCode();
 		
 		if(code == KeyEvent.VK_ESCAPE) {
-			if(gp.getStateType().equals(StateType.PLAY)) {
-				gp.updateState(StateType.PAUSE);
+			if(gp.getState().getType().equals(StateType.GAMEPLAY)) {
+				System.out.println("Pausing game...");
+				gp.updateState(new PausedState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
 			}
-			else if (gp.getStateType().equals(StateType.PAUSE)) {
-				gp.updateState(StateType.PLAY);
+			else if (gp.getState().getType().equals(StateType.PAUSE)) {
+				System.out.println("Resuming game...");
+				gp.updateState(new GameplayState(gp.TILE_MANAGER, gp.TOWER_MANAGER, gp.ENEMY_MANAGER));
 			}
 		}
 		
