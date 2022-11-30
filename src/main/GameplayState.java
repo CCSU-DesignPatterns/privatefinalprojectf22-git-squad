@@ -48,6 +48,8 @@ public class GameplayState implements GameState {
 
 	@Override
 	public void update() {
+		ui.setHealth(player.getHealth());
+		ui.setMoney(player.getMoney());
 		enemyM.update();
 		towerM.update();
 	}

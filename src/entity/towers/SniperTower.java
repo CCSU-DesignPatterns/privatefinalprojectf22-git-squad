@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import entity.enemies.IEnemy;
 
@@ -18,6 +19,7 @@ public class SniperTower extends Tower {
 	 */
 	public SniperTower(int x, int y) {
 		super(x, y, TowerType.SNIPER);
+		this.setCollisionBox(new Rectangle(5 * gp.SCALE, 0 * gp.SCALE, 6 * gp.SCALE, 15 * gp.SCALE));
 	}
 
 	@Override

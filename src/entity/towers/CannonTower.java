@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import entity.enemies.IEnemy;
@@ -28,6 +29,7 @@ public class CannonTower extends Tower {
 	 */
 	public CannonTower(int x, int y) {
 		super(x, y, TowerType.CANNON);
+		this.setCollisionBox(new Rectangle(4 * gp.SCALE, 3 * gp.SCALE, 8 * gp.SCALE, 11 * gp.SCALE));
 	}
 
 	@Override

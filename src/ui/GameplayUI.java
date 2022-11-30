@@ -27,6 +27,7 @@ import entity.towers.TowerType;
 import entity.towers.TurretTower;
 import main.GamePanel;
 import main.GameplayState;
+import main.InsufficientFundsException;
 import main.Main;
 import main.PlacementState;
 import tile.ImageScaler;
@@ -202,13 +203,34 @@ public class GameplayUI {
 			
 			switch(e.getActionCommand()) {
 			case ("Buy Turret"):
-				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new TurretTower(p.x, p.y)));
+				try {
+					gp.getState().getPlayer().removeMoney(TowerType.TURRET.getCost());
+					gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new TurretTower(p.x, p.y)));
+				}
+				catch(InsufficientFundsException ex) {
+					System.out.println(ex.getMessage());
+				}
+			
 				break;
 			case ("Buy Cannon"):
-				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new CannonTower(p.x, p.y)));
+				try {
+					gp.getState().getPlayer().removeMoney(TowerType.CANNON.getCost());
+					gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new CannonTower(p.x, p.y)));
+				}
+				catch(InsufficientFundsException ex) {
+					System.out.println(ex.getMessage());
+				}
+				
 				break;
 			case("Buy Sniper"):
-				gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new SniperTower(p.x, p.y)));
+				try {
+					gp.getState().getPlayer().removeMoney(TowerType.SNIPER.getCost());
+					gp.updateState(new PlacementState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer(), new SniperTower(p.x, p.y)));
+				}
+				catch(InsufficientFundsException ex) {
+					System.out.println(ex.getMessage());
+				}
+				
 				break;
 			}
 			

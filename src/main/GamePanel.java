@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// Game Screen Settings
 	private final int ORIGINAL_TILE_SIZE = 16; // Original art will be 16x16 pixels
-	private final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
+	public final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // Needs to be public for entities to draw the correct size tiles
 	
 	public final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
