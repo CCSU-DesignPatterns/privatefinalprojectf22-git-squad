@@ -19,5 +19,6 @@ public interface IEnemy extends Cloneable {
 	public int getStrength();
 	public void setHealth(int health);
 	public void setStrength(int strength);
+	public void destroy();
 	public IEnemy clone();
 }

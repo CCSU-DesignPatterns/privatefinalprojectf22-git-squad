@@ -37,21 +37,24 @@ public class CannonTower extends Tower {
 
 	@Override
 	public void attack() {
-		int explosionOffsetX = r.nextInt(accuracy*2) - accuracy;
-		int explosionOffsetY = r.nextInt(accuracy*2) - accuracy;
-		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
-			if(Math.sqrt((Math.pow((e.getX() - (target.getX() - explosionOffsetX)), 2) 
-					+ Math.pow(e.getY() - (target.getY() - explosionOffsetY), 2))) <= explosionRadius) { // for each enemy in radius of the explosion
-				e.takeDamage(damage);
+		if(target != null) {
+			int explosionOffsetX = r.nextInt(accuracy*2) - accuracy;
+			int explosionOffsetY = r.nextInt(accuracy*2) - accuracy;
+			for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
+				if(Math.sqrt((Math.pow((e.getX() - (target.getX() - explosionOffsetX)), 2) 
+						+ Math.pow(e.getY() - (target.getY() - explosionOffsetY), 2))) <= explosionRadius) { // for each enemy in radius of the explosion
+					e.takeDamage(damage);
+				}
 			}
 		}
 	}
 
 	@Override
 	public void updateTarget() {
+		target = null;
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 			if(Math.sqrt((Math.pow((e.getX() - x), 2) + Math.pow(e.getY() - y, 2))) <= range && // if enemy is within range
-					e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
+					(target ==  null || e.getDistanceTraveled() > target.getDistanceTraveled())) { // and if enemy is at the front of those within range
 				target = e;
 			}
 		}

@@ -2,6 +2,8 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 
+import main.GamePanel;
+
 /**
  * Enemy upgrades Decorator base class
  * Implements the IEnemy interface
@@ -94,5 +96,9 @@ public abstract class UpgradedEnemy implements IEnemy {
 	 */
 	public IEnemy clone() {
 		return baseEnemy.clone();
+	}
+	
+	public void destroy() {
+		GamePanel.getInstance().getState().getEnemyManager().remove(this);
 	}
 }

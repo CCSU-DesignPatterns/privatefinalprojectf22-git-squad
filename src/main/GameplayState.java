@@ -50,6 +50,9 @@ public class GameplayState implements GameState {
 		ui.setMoney(player.getMoney());
 		enemyM.update();
 		towerM.update();
+		if(enemyM.getWaves().getRunning() == false && enemyM.getChildren().size() == 0) {
+			ui.setWaveRunning(false);
+		}
 	}
 
 	@Override

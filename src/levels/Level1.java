@@ -43,10 +43,15 @@ public class Level1 extends Level {
                 for(int col = 0; col < gp.MAX_SCREEN_COL; col++) {
                     int num = Integer.parseInt(numbers[col]);
                     levelMap[col][row] = num;
+                    if(num == 1)
+                    	pathLength++;
                 }
             }
 
             br.close();
+            
+            pathLength *= gp.TILE_SIZE;
+            pathLength += gp.TILE_SIZE;
         }
         catch(Exception e) {
         	System.out.println("Could not find level data");

@@ -56,6 +56,11 @@ public class Enemy extends Entity implements IEnemy {
 		
 		// Add to the distance traveled
 		addDistance();
+		
+		if(distTraveled >= gp.getState().getLevel().getPathLength()) {
+			gp.getState().getPlayer().removeHealth(health);
+			destroy();
+		}
 	}
 	
 	private void updateDirection() {
@@ -64,7 +69,7 @@ public class Enemy extends Entity implements IEnemy {
 			if(y % gp.TILE_SIZE == 0) {
 				int row = y / gp.TILE_SIZE;
 				int col = x / gp.TILE_SIZE;
-				if(row != 0) { // if not on top of screen
+				if(row > 0) { // if not on top of screen
 					int nextTile = gp.getState().getLevel().getMap()[col][row - 1];
 					if(nextTile == 0) { // if tile above is not path
 						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
@@ -81,7 +86,7 @@ public class Enemy extends Entity implements IEnemy {
 			if(y % gp.TILE_SIZE == 0) {
 				int row = y / gp.TILE_SIZE;
 				int col = x / gp.TILE_SIZE;
-				if(row != gp.MAX_SCREEN_ROW) { // if not on bottom of screen
+				if(row < gp.MAX_SCREEN_ROW - 1) { // if not on bottom of screen
 					int nextTile = gp.getState().getLevel().getMap()[col][row + 1];
 					if(nextTile == 0) { // if tile below is not path
 						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
@@ -98,7 +103,7 @@ public class Enemy extends Entity implements IEnemy {
 			if(x % gp.TILE_SIZE == 0) {
 				int row = y / gp.TILE_SIZE;
 				int col = x / gp.TILE_SIZE;
-				if(col != gp.MAX_SCREEN_COL) { // if not on right of screen
+				if(col < gp.MAX_SCREEN_COL - 1) { // if not on right of screen
 					int nextTile = gp.getState().getLevel().getMap()[col + 1][row];
 					if(nextTile == 0) { // if tile right is not path
 						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
@@ -115,7 +120,7 @@ public class Enemy extends Entity implements IEnemy {
 			if(x % gp.TILE_SIZE == 0) {
 				int row = y / gp.TILE_SIZE;
 				int col = x / gp.TILE_SIZE;
-				if(col != 0) { // if not on right of screen
+				if(col > 0) { // if not on left of screen
 					int nextTile = gp.getState().getLevel().getMap()[col - 1][row];
 					if(nextTile == 0) { // if tile left is not path
 						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
@@ -161,6 +166,14 @@ public class Enemy extends Entity implements IEnemy {
 		this.move();
 		
 		// TODO Other related update operations if needed
+	}
+	
+	@Override
+	public void takeDamage(int damage) {
+		health -= damage;
+		if(health <= 0) {
+			destroy();
+		}
 	}
 	
 	/**
@@ -240,5 +253,10 @@ public class Enemy extends Entity implements IEnemy {
 		output.append(String.format("Speed: %d", speed));
 
 		return output.toString();
+	}
+
+	@Override
+	public void destroy() {
+		gp.getState().getEnemyManager().remove(this);
 	}
 }

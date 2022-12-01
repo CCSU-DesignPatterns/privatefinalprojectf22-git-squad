@@ -198,7 +198,15 @@ public class GameplayUI {
 	 * @param running - True if running, false otherwise
 	 */
 	public void setWaveRunning(boolean running) {
-		waveRunning = running;
+		if(running != waveRunning) {
+			waveRunning = running;
+			if(running) {
+				startButton.setIcon(new ImageIcon(wait));
+			}
+			else {
+				startButton.setIcon(new ImageIcon(start));
+			}
+		}
 	}
 	
 	/**
@@ -257,9 +265,8 @@ public class GameplayUI {
 				break;
 			case("Start"):
 				if(!waveRunning) {
-					//start enemy wave
+					gp.getState().getEnemyManager().getWaves().nextWave();
 					setWaveRunning(true);
-					startButton.setIcon(new ImageIcon(wait));
 				}
 				break;
 			}

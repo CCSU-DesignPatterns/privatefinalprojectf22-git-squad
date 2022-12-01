@@ -13,6 +13,7 @@ public class EnemyWaves {
 	private EnemyFactory enemyFactory = new EnemyFactory();
 	private int currentWave = 0;
 	private int currentIndex = 0;
+	private boolean running;
 	
 	/**
 	 * Default constructor
@@ -78,8 +79,11 @@ public class EnemyWaves {
 		frameCount++;
 		
 		if(frameCount > spawnRate) {
-			if(currentIndex < enemyWaves[0].length) {
+			if(running && currentIndex < enemyWaves[0].length) {
 				spawnNext();
+			}
+			else {
+				running = false;
 			}
 			frameCount = 0;
 		}
@@ -104,7 +108,14 @@ public class EnemyWaves {
 //		for(int i = 0; i < enemyWaves[currentWave].length; i++) {
 //			spawnEnemy(enemyWaves[currentWave][i] - 1);
 //		}
+		running = true;
 		currentIndex = 0;
 		currentWave++;
 	}
+	
+	/**
+	 * Check whether the curret wave is still spawning enemies
+	 * @return true if spawning, false if done
+	 */
+	public boolean getRunning() { return running; }
 }

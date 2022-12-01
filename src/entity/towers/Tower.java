@@ -36,7 +36,7 @@ public abstract class Tower extends Entity implements ITower {
 		super(x, y, type.getSpriteFilePath());
 		this.damage = type.getDamage();
 		this.fireRate = type.getFireRate();
-		this.range = type.getRange();
+		this.range = type.getRange() * gp.SCALE;
 		this.cost = type.getCost();
 		this.type = type;
 		this.lastTime = System.nanoTime();

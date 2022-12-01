@@ -25,6 +25,9 @@ public abstract class Level implements iLevel {
     /* This 2D array contains the index of the tile in tileSet that is to be drawn on each tile of the screen.
      * This is the actual layout of the level. */
     protected int levelMap[][];
+    
+    // length of the path in pixels
+    protected int pathLength;
 
     /**
      * Default constructor
@@ -88,4 +91,10 @@ public abstract class Level implements iLevel {
      */
     public MapTile[] getTileSet() { return tileSet; }
 
+    /**
+     * Get the length of the path on this level in pixels
+     * @return int length of path
+     */
+    public int getPathLength() { return pathLength; }
+    
 }
