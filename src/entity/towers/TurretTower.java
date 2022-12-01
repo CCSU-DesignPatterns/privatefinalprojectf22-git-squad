@@ -28,6 +28,7 @@ public class TurretTower extends Tower {
 	@Override
 	public void attack() {
 		if(target != null) {
+			System.out.println("Target at range " + Math.hypot(target.getX() - x, target.getY() - y));
 			target.takeDamage(damage);
 			if(target.getHealth() <= 0) {
 				target = null;
@@ -37,6 +38,8 @@ public class TurretTower extends Tower {
 
 	@Override
 	public void updateTarget() {
+		if(target != null && Math.hypot(target.getX() - x, target.getY() - y) <= range)
+			target = null;
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 			if(Math.hypot(e.getX() - x, e.getY() - y) <= range && // if enemy is within range
 					(target == null || e.getDistanceTraveled() > target.getDistanceTraveled())) { // and if enemy is at the front of those within range, or there is no current target

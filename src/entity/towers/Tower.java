@@ -42,7 +42,8 @@ public abstract class Tower extends Entity implements ITower {
 		this.cost = type.getCost();
 		this.type = type;
 		this.lastTime = System.nanoTime();
-		this.angle = -45;
+		this.angle = 0;
+		System.out.println(type.getType() + " range is " + range);
 	}
 	
 	/**
@@ -100,8 +101,11 @@ public abstract class Tower extends Entity implements ITower {
 	 */
 	@Override
 	public void draw(Graphics2D g2) {
-		if(target != null) 
-			angle = Math.atan2(target.getX() - x,  target.getY() - y);
+		if(target != null) {
+			angle = (Math.atan2(x - target.getX(), y - target.getY()) * -1) + Math.PI;
+			System.out.println("Tower at position " + x + ", " + y);
+			System.out.println("Current target at position " + target.getX() + " ," + target.getY() + " and angle " + (int)Math.toDegrees(angle) + " degrees");
+		}
 		AffineTransform original = g2.getTransform();
 		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));

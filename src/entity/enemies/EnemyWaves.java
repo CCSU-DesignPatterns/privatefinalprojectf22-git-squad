@@ -7,11 +7,11 @@ import main.*;
 public class EnemyWaves {
 	protected GamePanel gp;					// The main game panel
 	protected List<IEnemy> enemySet;		// List of enemies to be spawned (cloned)
-	protected int enemyWaves[][] = new int[10][25];	// Array that stores the data imported from the enemy waves file
+	protected int enemyWaves[][];	// Array that stores the data imported from the enemy waves file
 	private int spawnRate = 12;				// Enemy spawn rate. Default is 1
 	private int frameCount = 0;				// Spawn enemies every n frames. Default is 12
 	private EnemyFactory enemyFactory = new EnemyFactory();
-	private int currentWave = 0;
+	private int currentWave = -1;
 	private int currentIndex = 0;
 	private boolean running;
 	
@@ -37,10 +37,29 @@ public class EnemyWaves {
 		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType3));
 	}
 	
+	private void createJaggedArray(String filePath) {
+		InputStream is = getClass().getResourceAsStream(filePath);
+        BufferedReader fileReader = new BufferedReader(new InputStreamReader(is));
+        
+        int numLines = 0;
+        try {
+        	while(fileReader.readLine() != null)
+        		numLines++;
+        }
+        catch(IOException e) {
+        	System.out.println("Something went wrong while reading the level waves file!");
+        	e.printStackTrace();
+        }
+        
+        System.out.println(numLines + " lines found");
+        enemyWaves = new int[numLines][];
+	}
+	
 	/**
 	 * Loads the enemy wave array data
 	 */
 	public void loadEnemyWaves(String filePath) { 
+		createJaggedArray(filePath);
 		BufferedReader fileReader;
 		
 		try {
@@ -52,7 +71,8 @@ public class EnemyWaves {
 			
 			while(lineIndex < enemyWaves.length) {
 				line = fileReader.readLine().split(" ");
-				
+				enemyWaves[lineIndex] = new int[line.length];
+				System.out.println("Line " + lineIndex + " has " + line.length + " numbers");
 				for(int i = 0; i < line.length; i++) {
 					int digit = Integer.parseInt(line[i]);
 					enemyWaves[lineIndex][i] = digit;
@@ -79,7 +99,7 @@ public class EnemyWaves {
 		frameCount++;
 		
 		if(frameCount > spawnRate) {
-			if(running && currentIndex < enemyWaves[0].length) {
+			if(running && currentIndex < enemyWaves[currentWave].length) {
 				spawnNext();
 			}
 			else {

@@ -166,7 +166,7 @@ public abstract class Entity {
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
 	public void draw(Graphics2D g2) {
-		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);		
+		g2.drawImage(sprite, x, y, null);		
 	}
 
 
