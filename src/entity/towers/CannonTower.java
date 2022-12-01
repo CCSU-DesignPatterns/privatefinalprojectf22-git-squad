@@ -54,7 +54,7 @@ public class CannonTower extends Tower {
 
 	@Override
 	public void updateTarget() {
-		if(target != null && Math.hypot(target.getX() - x, target.getY() - y) <= range)
+		if(target != null && Math.hypot(target.getX() - x, target.getY() - y) > range)
 			target = null;
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 			if(Math.hypot(e.getX() - x, e.getY() - y) <= range && // if enemy is within range
