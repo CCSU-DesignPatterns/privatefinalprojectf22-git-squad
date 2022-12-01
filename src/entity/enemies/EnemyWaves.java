@@ -7,19 +7,21 @@ import main.*;
 public class EnemyWaves {
 	protected GamePanel gp;					// The main game panel
 	protected List<IEnemy> enemySet;		// List of enemies to be spawned (cloned)
-	protected int enemyWaves[][];			// Array that stores the data imported from the enemy waves file
-	private int spawnRate = 1;				// Enemy spawn rate. Default is 1
-	private int frameCount = 12;			// Spawn enemies every n frames. Default is 12
+	protected int enemyWaves[][] = new int[10][25];	// Array that stores the data imported from the enemy waves file
+	private int spawnRate = 12;				// Enemy spawn rate. Default is 1
+	private int frameCount = 0;				// Spawn enemies every n frames. Default is 12
 	private EnemyFactory enemyFactory = new EnemyFactory();
 	private int currentWave = 0;
+	private int currentIndex = 0;
 	
 	/**
 	 * Default constructor
 	 */
-	public EnemyWaves(GamePanel gp) { 
-		this.gp = gp;
+	public EnemyWaves() { 
+		this.gp = GamePanel.getInstance();
 		enemySet = new ArrayList<IEnemy>();
 		loadEnemySet();
+		loadEnemyWaves("/difficulties/Easy-Difficulty.txt");
 	}
 	
 	/**
@@ -41,17 +43,22 @@ public class EnemyWaves {
 		BufferedReader fileReader;
 		
 		try {
-			fileReader = new BufferedReader(new FileReader(filePath));
+            InputStream is = getClass().getResourceAsStream(filePath);
+            fileReader = new BufferedReader(new InputStreamReader(is));
+			
 			String line[] = new String[1];
 			int lineIndex = 0;
 			
-			while(line != null) {
+			while(lineIndex < enemyWaves.length) {
 				line = fileReader.readLine().split(" ");
 				
 				for(int i = 0; i < line.length; i++) {
 					int digit = Integer.parseInt(line[i]);
 					enemyWaves[lineIndex][i] = digit;
+					System.out.print(digit + " ");
 				}
+				
+				System.out.println();
 				
 				lineIndex++;
 			}
@@ -68,24 +75,34 @@ public class EnemyWaves {
 	 * Updates all enemies/screen data/etc.
 	 */
 	public void update() { 
-		// TODO Implement logic to update all enemies, screen, etc. 
+		frameCount++;
+		
+		if(frameCount > spawnRate) {
+			spawnNext();
+			frameCount = 0;
+		}
 	}
 	
 	/**
 	 * Spawns a new enemy and adds it to the EnemyManager
 	 * @param index The ArrayList index of the enemy to spawn
 	 */
-	public void spawnEnemy(int index) { 
-		gp.getState().getEnemyManager().add(enemySet.get(index).clone());
+	public void spawnNext() {
+		int index = enemyWaves[currentWave][currentIndex] - 1;
+		if(index >= 0) {
+			gp.getState().getEnemyManager().add(enemySet.get(index).clone());	
+		}
+		currentIndex++;
 	}
 	
 	/**
 	 * Spawns the next wave of enemies
 	 */
 	public void nextWave() {
-		for(int i = 0; i < enemyWaves[currentWave].length; i++) {
-			spawnEnemy(enemyWaves[currentWave][i] - 1);
-		}
+//		for(int i = 0; i < enemyWaves[currentWave].length; i++) {
+//			spawnEnemy(enemyWaves[currentWave][i] - 1);
+//		}
+		currentIndex = 0;
 		currentWave++;
 	}
 }

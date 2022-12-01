@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class EnemyManager implements IEnemy {
 
 	ArrayList<IEnemy> children = new ArrayList<IEnemy>();
+	private EnemyWaves waves = new EnemyWaves();
 	
 	@Override
 	public IEnemy getComposite() {
@@ -14,6 +15,7 @@ public class EnemyManager implements IEnemy {
 
 	@Override
 	public void update() {
+		waves.update();
 		for(IEnemy e : children) {
 			e.update();
 		}
