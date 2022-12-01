@@ -44,6 +44,7 @@ public class PlacementState implements GameState {
 		towerM.update();
 		enemyM.update();
 		tower.setPos(p.x - (gp.TILE_SIZE / 2), p.y - (gp.TILE_SIZE / 2));
+		tower.getCollisionBox().setLocation(p.x - ((tower.getType().getCollisionInfo()[2] * gp.SCALE) / 2), p.y - ((tower.getType().getCollisionInfo()[3] * gp.SCALE) / 2));
 		CollisionChecker.check(tower);
 	}
 
