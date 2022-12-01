@@ -87,10 +87,18 @@ public class Enemy extends Entity implements IEnemy {
 	}
 	
 	/**
-	 * Returns a clone of an instance of Enemy
+	 * Returns a clone of the current Enemy instance
 	 */
-	public IEnemy clone() {
-		IEnemy clone = new Enemy(x, y, currentType);
+	public Enemy clone() {
+		Enemy clone = new Enemy(x, y, currentType);
+		clone.setHealth(this.getHealth());
+		clone.setStrength(this.getStrength());
+		clone.setCollisionBox(this.getCollisionBox());
+		clone.x = this.x;
+		clone.y = this.y;
+		clone.gp = this.gp;
+		clone.collision = this.collision;
+		clone.currentDirection = this.currentDirection;
 		return clone;
 	}
 	
