@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.AlphaComposite;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -21,6 +23,7 @@ public class PlacementState implements GameState {
 	private Player player;
 	private Tower tower;
 	private GamePanel gp;
+	Composite transparent, opaque;
 	
 	public PlacementState(Level level, TowerManager towerM, EnemyManager enemyM, Player player, Tower tower) {
 		this.level = level;
@@ -29,6 +32,8 @@ public class PlacementState implements GameState {
 		this.player = player;
 		this.tower = tower;
 		this.gp = GamePanel.getInstance();
+		transparent = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f);
+		opaque = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
 	}
 	
 	@Override
@@ -39,6 +44,7 @@ public class PlacementState implements GameState {
 		towerM.update();
 		enemyM.update();
 		tower.setPos(p.x - (gp.TILE_SIZE / 2), p.y - (gp.TILE_SIZE / 2));
+		CollisionChecker.check(tower);
 	}
 
 	@Override
@@ -46,6 +52,9 @@ public class PlacementState implements GameState {
 		level.draw(g2);
 		enemyM.draw(g2);
 		towerM.draw(g2);
+		if(tower.getCollision()) {
+			g2.setComposite(transparent);
+		}
 		tower.draw(g2);
 		g2.dispose();
 	}

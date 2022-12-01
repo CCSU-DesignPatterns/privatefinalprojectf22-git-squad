@@ -134,7 +134,7 @@ public abstract class Entity {
 	 * Sets the collision box for this instance
 	 * @param box Rectangle object
 	 */
-	protected void setCollisionBox(Rectangle box) {
+	public void setCollisionBox(Rectangle box) {
 		this.collisionBox = box;
 	}
 	

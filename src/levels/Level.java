@@ -75,5 +75,17 @@ public abstract class Level implements iLevel {
             y += gp.TILE_SIZE;
         }
     }
+    
+    /**
+     * Get this level's map data
+     * @return 2D array of integers representing the tileSet index of the tiles that make up the map
+     */
+    public int[][] getMap() { return levelMap; }
+    
+    /**
+     * Get this level's tile set
+     * @return Array of MapTile objects which compose the map
+     */
+    public MapTile[] getTileSet() { return tileSet; }
 
 }

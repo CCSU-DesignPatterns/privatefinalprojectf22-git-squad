@@ -1,6 +1,7 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 /**
  * Base class for tower decorations. Should not be applied directly do a tower, as it will not do anything.
@@ -48,6 +49,26 @@ public class TowerDecorator implements ITower {
 	@Override
 	public void draw(Graphics2D g2) {
 		decoratedTower.draw(g2);
+	}
+
+	@Override
+	public Rectangle getCollisionBox() {
+		return decoratedTower.getCollisionBox();
+	}
+
+	@Override
+	public void setCollisionBox(Rectangle box) {
+		decoratedTower.setCollisionBox(box);
+	}
+
+	@Override
+	public int getX() {
+		return decoratedTower.getX();
+	}
+
+	@Override
+	public int getY() {
+		return decoratedTower.getY();
 	}
 
 }

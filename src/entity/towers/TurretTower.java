@@ -19,7 +19,10 @@ public class TurretTower extends Tower {
 	 */
 	public TurretTower(int x, int y) {
 		super(x, y, TowerType.TURRET);
-		this.setCollisionBox(new Rectangle(2, 2, 12, 12));
+		this.setCollisionBox(new Rectangle(TowerType.TURRET.getCollisionInfo()[0] * gp.SCALE,
+				TowerType.TURRET.getCollisionInfo()[1] * gp.SCALE,
+				TowerType.TURRET.getCollisionInfo()[2] * gp.SCALE,
+				TowerType.TURRET.getCollisionInfo()[3] * gp.SCALE));
 	}
 
 	@Override

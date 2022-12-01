@@ -21,10 +21,9 @@ public class Level1 extends Level {
     protected void loadTileSet() {
         try {
             tileSet[0] = new MapTile("/tiles/Grass.png");
-            //super.tileSet[0].setSprite("/tiles/Grass.png");
 
             tileSet[1] = new MapTile("/tiles/Path.png");
-            //super.tileSet[1].setSprite("/tiles/Path.png");
+            tileSet[1].collision = true;
         }
         catch(SpriteNotFoundException e) {
             System.out.println(e.getMessage());

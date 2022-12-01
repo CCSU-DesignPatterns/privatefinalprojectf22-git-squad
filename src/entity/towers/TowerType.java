@@ -6,26 +6,26 @@ package entity.towers;
  *
  */
 public enum TowerType {
-	TURRET(1, 0.2, 50, 100, "turret", "/towers/Turret.png"),
-	CANNON(10, 2.0, 25, 250, "cannon", "/towers/Cannon.png"),
-	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/Sniper.png"),
-	HOME(0, 0, 0, 0, "home", "/towers/Home.png");
+	TURRET(1, 0.2, 50, 100, "turret", "/towers/Turret.png", 2, 2, 12, 12),
+	CANNON(10, 2.0, 25, 250, "cannon", "/towers/Cannon.png", 4, 3, 8, 11),
+	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/Sniper.png", 5, 0, 6, 15);
 	
-	private final int DAMAGE;
+	private final int DAMAGE, RANGE, COST;
+	private final int[] COLLISION_INFO;
 	private final double FIRE_RATE;
-	private final int RANGE;
-	private final int COST;
 	private final String TYPE; 
 	private final String DEFAULT_SPRITE_FILE_PATH;
 	
 	private TowerType(int DAMAGE, double FIRE_RATE,
-			int RANGE, int COST, String TYPE, String DEFAULT_SPRITE_FILE_PATH){
+			int RANGE, int COST, String TYPE, String DEFAULT_SPRITE_FILE_PATH,
+			int X, int Y, int WIDTH, int HEIGHT){
 		this.DAMAGE = DAMAGE;
 		this.FIRE_RATE = FIRE_RATE;
 		this.RANGE = RANGE;
 		this.COST = COST;
 		this.TYPE = TYPE;
 		this.DEFAULT_SPRITE_FILE_PATH = DEFAULT_SPRITE_FILE_PATH;
+		this.COLLISION_INFO = new int[]{X, Y, WIDTH, HEIGHT};
 	}
 	
 	/**
@@ -63,4 +63,10 @@ public enum TowerType {
 	 * @return file path
 	 */
 	public String getSpriteFilePath() { return DEFAULT_SPRITE_FILE_PATH; }
+	
+	/**
+	 * Get the unscaled x and y offsets, width, and height of a tower's collision box in an array
+	 * @return int[x, y, width, height]
+	 */
+	public int[] getCollisionInfo() { return COLLISION_INFO; }
 }
