@@ -16,11 +16,11 @@ public class CollisionChecker {
 	public static void check(Entity entity) {
 		GamePanel gp = GamePanel.getInstance();
 		
-		if(entity.getX() >= 0 && entity.getX() <= gp.SCREEN_WIDTH && entity.getY() >= 0 && entity.getY() <= gp.SCREEN_HEIGHT) {
-			int entityLeft = entity.getX() + entity.getCollisionBox().x;
-			int entityRight = entity.getX() + entity.getCollisionBox().x + entity.getCollisionBox().width;
-			int entityTop = entity.getY() + entity.getCollisionBox().y;
-			int entityBottom = entity.getY() + entity.getCollisionBox().y + entity.getCollisionBox().height;
+		if(entity.getX() >= 0 && entity.getX() <= gp.SCREEN_WIDTH - gp.TILE_SIZE && entity.getY() >= 0 && entity.getY() <= gp.SCREEN_HEIGHT - gp.TILE_SIZE) {
+			int entityLeft = entity.getCollisionBox().x;
+			int entityRight = entity.getCollisionBox().x + entity.getCollisionBox().width;
+			int entityTop = entity.getCollisionBox().y;
+			int entityBottom = entity.getCollisionBox().y + entity.getCollisionBox().height;
 			
 			int entityLeftCol = entityLeft / gp.TILE_SIZE;
 			int entityRightCol = entityRight / gp.TILE_SIZE;

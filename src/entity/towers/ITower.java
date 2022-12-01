@@ -28,6 +28,12 @@ public interface ITower {
 	public void setCollisionBox(Rectangle box);
 	
 	/**
+	 * Get the {@link TowerType} of this ITower
+	 * @return
+	 */
+	public TowerType getType();
+	
+	/**
 	 * Returns the ITower's x value
 	 * @return <code>int</code> x value 
 	 */

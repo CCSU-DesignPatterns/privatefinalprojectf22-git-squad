@@ -43,10 +43,11 @@ public class GameplayUI {
 	private GamePanel gp;
 	private JPanel shop;
 	private JLabel healthLabel, moneyLabel, shopLabel, turretLabel, cannonLabel, sniperLabel;
-	private JButton turretButton, cannonButton, sniperButton;
-	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop;
+	private JButton turretButton, cannonButton, sniperButton, startButton;
+	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop, start, wait;
 	private Font arial30, arial50;
 	private GameplayUIButtonHandler listener;
+	private boolean waveRunning = false;
 	
 	/**
 	 * Create new gameplay UI
@@ -74,6 +75,12 @@ public class GameplayUI {
 			
 			sniperShop = ImageIO.read(getClass().getResourceAsStream("/ui/UISniperButton.png"));
 			sniperShop = ImageScaler.scaleImage(sniperShop, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			
+			start = ImageIO.read(getClass().getResourceAsStream("/ui/StartButton.png"));
+			start = ImageScaler.scaleImage(start, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			
+			wait = ImageIO.read(getClass().getResourceAsStream("/ui/WaitButton.png"));
+			wait = ImageScaler.scaleImage(wait, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
 		}
 		catch(Exception e) {
 			throw new SpriteNotFoundException("GameplayUI");
@@ -137,6 +144,14 @@ public class GameplayUI {
 		c.gridy++;
 		shop.add(sniperLabel, c);
 		
+		startButton = new JButton(new ImageIcon(start));
+		startButton.setBorder(BorderFactory.createEmptyBorder());
+		startButton.setContentAreaFilled(false);
+		startButton.addActionListener(listener);
+		startButton.setActionCommand("Start");
+		c.gridy++;
+		shop.add(startButton, c);
+		
 		Main.getPane().add(shop, Integer.valueOf(1));
 		
 		healthLabel = new JLabel();
@@ -176,6 +191,14 @@ public class GameplayUI {
 		Main.getPane().remove(shop);
 		Main.getPane().remove(healthLabel);
 		Main.getPane().remove(moneyLabel);
+	}
+	
+	/**
+	 * Set whether the enemy wave is currently running
+	 * @param running - True if running, false otherwise
+	 */
+	public void setWaveRunning(boolean running) {
+		waveRunning = running;
 	}
 	
 	/**
@@ -231,6 +254,13 @@ public class GameplayUI {
 					System.out.println(ex.getMessage());
 				}
 				
+				break;
+			case("Start"):
+				if(!waveRunning) {
+					//start enemy wave
+					setWaveRunning(true);
+					startButton.setIcon(new ImageIcon(wait));
+				}
 				break;
 			}
 			

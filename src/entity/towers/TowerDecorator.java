@@ -71,4 +71,9 @@ public class TowerDecorator implements ITower {
 		return decoratedTower.getY();
 	}
 
+	@Override
+	public TowerType getType() {
+		return decoratedTower.getType();
+	}
+
 }

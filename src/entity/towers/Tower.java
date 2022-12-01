@@ -17,7 +17,7 @@ public abstract class Tower extends Entity implements ITower {
 	protected double fireRate;
 	protected int range;
 	protected int cost;
-	protected String type;
+	protected TowerType type;
 	protected long lastTime;
 	protected long currentTime;
 	protected double delta;
@@ -38,7 +38,7 @@ public abstract class Tower extends Entity implements ITower {
 		this.fireRate = type.getFireRate();
 		this.range = type.getRange();
 		this.cost = type.getCost();
-		this.type = type.getType();
+		this.type = type;
 		this.lastTime = System.nanoTime();
 		this.angle = 0;
 	}
@@ -48,6 +48,12 @@ public abstract class Tower extends Entity implements ITower {
 	 * @return TowerManager or null
 	 */
 	public TowerManager getComposite() { return null; }
+	
+	/**
+	 * Get the TowerType enum for what type of tower this is
+	 * @return {@link TowerType}
+	 */
+	public TowerType getType() { return type; }
 	
 	/**
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.

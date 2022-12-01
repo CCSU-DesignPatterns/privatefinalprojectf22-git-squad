@@ -39,6 +39,12 @@ public class KeyHandler implements KeyListener{
 				System.out.println("Resuming game...");
 				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
 			}
+			else if(gp.getState().getType().equals(StateType.PLACEMENT)) {
+				PlacementState current = (PlacementState)gp.getState();
+				System.out.println("Cancelling placement...");
+				current.getPlayer().addMoney(current.getTower().getType().getCost());
+				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+			}
 		}
 		
 	}
