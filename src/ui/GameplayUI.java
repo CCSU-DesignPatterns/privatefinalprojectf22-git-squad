@@ -43,7 +43,7 @@ public class GameplayUI {
 	private GamePanel gp;
 	private JPanel shop;
 	private JLabel healthLabel, moneyLabel, shopLabel, turretLabel, cannonLabel, sniperLabel;
-	private JButton turretButton, cannonButton, sniperButton, startButton;
+	private JButton turretButton, cannonButton, sniperButton, startButton, toggleShopButton;
 	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop, start, wait;
 	private Font arial30, arial50;
 	private GameplayUIButtonHandler listener;
