@@ -31,9 +31,9 @@ public class EnemyWaves {
 		// Create only base enemies for now
 		// Note that the starting position is set to default values
 		// Further development is needed to define the correct starting point
-		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType1));
-		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType2));
-		enemySet.add(enemyFactory.createEnemy(1, 1, EnemyType.EnemyType3));
+		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType1));
+		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType2));
+		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType3));
 	}
 	
 	/**
@@ -78,7 +78,9 @@ public class EnemyWaves {
 		frameCount++;
 		
 		if(frameCount > spawnRate) {
-			spawnNext();
+			if(currentIndex < enemyWaves[0].length) {
+				spawnNext();
+			}
 			frameCount = 0;
 		}
 	}

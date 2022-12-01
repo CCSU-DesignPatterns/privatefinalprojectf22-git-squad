@@ -1,6 +1,8 @@
 package entity.enemies;
 
 import java.awt.Rectangle;
+
+import entity.Direction;
 import entity.Entity;
 
 /**
@@ -35,24 +37,99 @@ public class Enemy extends Entity implements IEnemy {
 	 * @param newPos
 	 */
 	protected void move() {
-		switch (this.currentDirection) {
-			case UP:
-				y -= speed;
-				break;
-			case DOWN:
-				y += speed;
-				break;
-			case RIGHT:
-				x += speed;
-				break;
-			case LEFT:
-				x -= speed;
-				break;				
+		updateDirection();
+		
+		switch(currentDirection) {
+		case UP:
+			y -= speed;
+			break;
+		case DOWN:
+			y += speed;
+			break;
+		case LEFT:
+			x -= speed;
+			break;
+		case RIGHT:
+			x += speed;
+			break;
 		}
 		
 		// Add to the distance traveled
 		addDistance();
-	};
+	}
+	
+	private void updateDirection() {
+		switch (this.currentDirection) {
+		case UP:
+			if(y % gp.TILE_SIZE == 0) {
+				int row = y / gp.TILE_SIZE;
+				int col = x / gp.TILE_SIZE;
+				if(row != 0) { // if not on top of screen
+					int nextTile = gp.getState().getLevel().getMap()[col][row - 1];
+					if(nextTile == 0) { // if tile above is not path
+						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
+							this.setDirection(Direction.LEFT);
+						}
+						else if(col != gp.MAX_SCREEN_COL && gp.getState().getLevel().getMap()[col + 1][row] == 1) { // if tile right is path
+							this.setDirection(Direction.RIGHT);
+						}
+					}
+				}
+			}
+			break;
+		case DOWN:
+			if(y % gp.TILE_SIZE == 0) {
+				int row = y / gp.TILE_SIZE;
+				int col = x / gp.TILE_SIZE;
+				if(row != gp.MAX_SCREEN_ROW) { // if not on bottom of screen
+					int nextTile = gp.getState().getLevel().getMap()[col][row + 1];
+					if(nextTile == 0) { // if tile below is not path
+						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
+							this.setDirection(Direction.LEFT);
+						}
+						else if(col != gp.MAX_SCREEN_COL && gp.getState().getLevel().getMap()[col + 1][row] == 1) { // if tile right is path
+							this.setDirection(Direction.RIGHT);
+						}
+					}
+				}
+			}
+			break;
+		case RIGHT:
+			if(x % gp.TILE_SIZE == 0) {
+				int row = y / gp.TILE_SIZE;
+				int col = x / gp.TILE_SIZE;
+				if(col != gp.MAX_SCREEN_COL) { // if not on right of screen
+					int nextTile = gp.getState().getLevel().getMap()[col + 1][row];
+					if(nextTile == 0) { // if tile right is not path
+						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
+							this.setDirection(Direction.UP);
+						}
+						else if(row != gp.MAX_SCREEN_ROW && gp.getState().getLevel().getMap()[col][row + 1] == 1) { // if tile bottom is path
+							this.setDirection(Direction.DOWN);
+						}
+					}
+				}
+			}
+			break;
+		case LEFT:
+			if(x % gp.TILE_SIZE == 0) {
+				int row = y / gp.TILE_SIZE;
+				int col = x / gp.TILE_SIZE;
+				if(col != 0) { // if not on right of screen
+					int nextTile = gp.getState().getLevel().getMap()[col - 1][row];
+					if(nextTile == 0) { // if tile left is not path
+						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
+							this.setDirection(Direction.UP);
+						}
+						else if(row != gp.MAX_SCREEN_ROW && gp.getState().getLevel().getMap()[col][row + 1] == 1) { // if tile bottom is path
+							this.setDirection(Direction.DOWN);
+						}
+					}
+				}
+			}
+			break;				
+		}
+	}
 	
 	/**
 	 * Adds to the distance traveled by the Enemy entity
