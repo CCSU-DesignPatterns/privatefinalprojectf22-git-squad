@@ -1,5 +1,7 @@
 package entity.towers;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -40,7 +42,7 @@ public abstract class Tower extends Entity implements ITower {
 		this.cost = type.getCost();
 		this.type = type;
 		this.lastTime = System.nanoTime();
-		this.angle = 0;
+		this.angle = -45;
 	}
 	
 	/**
@@ -61,7 +63,8 @@ public abstract class Tower extends Entity implements ITower {
 	public void update() {
 		updateTarget();
 		updateDelta();
-		if(delta > getFireRate() && target != null) {
+		double fireDelay = 1000000000 * getFireRate();
+		if(delta > fireDelay && target != null) {
 			attack();
 			delta = 0;
 		}
@@ -78,6 +81,7 @@ public abstract class Tower extends Entity implements ITower {
 	public void updateDelta() {
 		currentTime = System.nanoTime();
 		delta += (currentTime - lastTime) / fireRate;
+		lastTime = currentTime;
 	}
 	
 	/**
@@ -96,12 +100,16 @@ public abstract class Tower extends Entity implements ITower {
 	 */
 	@Override
 	public void draw(Graphics2D g2) {
-		if(target != null)
-			angle = Math.toRadians(Math.atan2(target.getX() - x,  target.getY() - y));
+		if(target != null) 
+			angle = Math.atan2(target.getX() - x,  target.getY() - y);
 		AffineTransform original = g2.getTransform();
 		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+		g2.setColor(Color.white);
+		g2.fillOval(x - range + (gp.TILE_SIZE / 2), y - range + (gp.TILE_SIZE / 2), range * 2, range  * 2);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		g2.setTransform(tx);
-		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);
+		g2.drawImage(sprite, x, y, null);
 		g2.setTransform(original);
 	}
 

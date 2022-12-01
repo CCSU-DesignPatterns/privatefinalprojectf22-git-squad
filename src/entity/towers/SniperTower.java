@@ -27,13 +27,16 @@ public class SniperTower extends Tower {
 
 	@Override
 	public void attack() {
-		if(target != null)
+		if(target != null) {
 			target.takeDamage(damage);
+			if(target.getHealth() <= 0) {
+				target = null;
+			}
+		}
 	}
 
 	@Override
 	public void updateTarget() {
-		target = null;
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 			if(target == null || e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
 				target = e;

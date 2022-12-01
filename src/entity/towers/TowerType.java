@@ -7,8 +7,8 @@ package entity.towers;
  */
 public enum TowerType {
 	TURRET(1, 0.2, 50, 100, "turret", "/towers/Turret.png", 2, 2, 12, 12),
-	CANNON(10, 2.0, 25, 250, "cannon", "/towers/Cannon.png", 4, 3, 8, 11),
-	SNIPER(5, 1.0, 1000, 200, "sniper", "/towers/Sniper.png", 5, 0, 6, 15);
+	CANNON(10, 1.0, 35, 250, "cannon", "/towers/Cannon.png", 4, 3, 8, 11),
+	SNIPER(5, 1.5, 1000, 200, "sniper", "/towers/Sniper.png", 5, 0, 6, 15);
 	
 	private final int DAMAGE, RANGE, COST;
 	private final int[] COLLISION_INFO;

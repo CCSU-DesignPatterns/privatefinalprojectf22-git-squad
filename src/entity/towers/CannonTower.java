@@ -46,14 +46,16 @@ public class CannonTower extends Tower {
 					e.takeDamage(damage);
 				}
 			}
+			if(target.getHealth() <= 0) {
+				target = null;
+			}
 		}
 	}
 
 	@Override
 	public void updateTarget() {
-		target = null;
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
-			if(Math.sqrt((Math.pow((e.getX() - x), 2) + Math.pow(e.getY() - y, 2))) <= range && // if enemy is within range
+			if(Math.hypot(e.getX() - x, e.getY() - y) <= range && // if enemy is within range
 					(target ==  null || e.getDistanceTraveled() > target.getDistanceTraveled())) { // and if enemy is at the front of those within range
 				target = e;
 			}
