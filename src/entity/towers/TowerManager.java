@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.GamePanel;
+
 /**
  * This class acts as a composite, allowing GamePanel to update and draw all the player's towers at once rather
  * than having to loop through each one.
@@ -41,7 +43,8 @@ public class TowerManager implements ITower {
 	 * @param t Tower to be added
 	 */
 	public void add(ITower t) { 
-		t.getCollisionBox().setLocation(t.getCollisionBox().getLocation().x + t.getX(), t.getCollisionBox().getLocation().y + t.getY());
+		t.getCollisionBox().setLocation(t.getX() + (t.getType().getCollisionInfo()[0] * GamePanel.getInstance().SCALE), t.getY() + (t.getType().getCollisionInfo()[1] * GamePanel.getInstance().SCALE));
+		System.out.println("Tower at X=" + t.getX() + ", Y=" + t.getY());
 		System.out.println("Collision box at X=" + t.getCollisionBox().getLocation().x + ", Y=" + t.getCollisionBox().getLocation().y);
 		children.add(t); 
 	}
@@ -104,5 +107,11 @@ public class TowerManager implements ITower {
 	public int getY() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public TowerType getType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
