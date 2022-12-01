@@ -47,7 +47,7 @@ public class EnemyFactory {
     		return new UpgradedEnemy20S(baseEnemy);
     	}
     	else {
-    		return null;
+    		return baseEnemy;
     	}
     }
 }

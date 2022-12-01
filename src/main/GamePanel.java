@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
+import levels.Level1;
+import levels.LevelDifficulty;
 import tile.TileManager;
 
 //import entity.Player;
@@ -25,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// Game Screen Settings
 	private final int ORIGINAL_TILE_SIZE = 16; // Original art will be 16x16 pixels
-	private final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
+	public final int SCALE = 3; // Art will be scaled up 3x due to larger screen resolution
 	public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // Needs to be public for entities to draw the correct size tiles
 	
 	public final int MAX_SCREEN_COL = 20; // Screen width will fit 16 tiles
@@ -35,27 +37,28 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	private final int FPS = 60;
 	
-	// Input handling and game thread
-	TileManager tileM;
-	TowerManager towerM;
-	public EnemyManager enemyM;
-	KeyHandler keyH;
-	MouseHandler mouseH;
-	Thread gameThread;
+	// Game Object Management
+	
+	// Input Handling
+	public final KeyHandler KEY_HANDLER;
+	public final MouseHandler MOUSE_HANDLER;
+	
+	// Game Variables
+	private GameState state;
+	private Thread gameThread;
 	
 	private GamePanel() {
 		instance = this;
-		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-		this.setBackground(Color.green);
+		
+		this.KEY_HANDLER = new KeyHandler();
+		this.MOUSE_HANDLER = new MouseHandler();
+		this.state = new GameplayState(new Level1(), new TowerManager(), new EnemyManager(), new Player(LevelDifficulty.MEDIUM.getStartingHealth(), LevelDifficulty.MEDIUM.getStartingMoney()));
+		
+		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);
-		this.addKeyListener(keyH);
-		this.addMouseListener(mouseH);
+		this.addKeyListener(KEY_HANDLER);
+		this.addMouseListener(MOUSE_HANDLER);
 		this.setFocusable(true);
-		this.tileM = new TileManager();
-		this.towerM = new TowerManager();
-		this.enemyM = new EnemyManager();
-		this.keyH = new KeyHandler();
-		this.mouseH = new MouseHandler();
 	}
 	
 	/**
@@ -107,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if(timer >= 1000000000) {
-				System.out.println("FPS: " + drawCount);
+//				System.out.println("FPS: " + drawCount);
 				drawCount = 0;
 				timer = 0;
 			}
@@ -118,8 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
 	 * {@summary Responsible for updating the position/state of every graphical component of the game.}
 	 */
 	private void update() {
-		enemyM.update();
-		towerM.update();
+		state.update();
 	}
 	
 	/**
@@ -128,9 +130,21 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		tileM.draw(g2);
-		enemyM.draw(g2);
-		towerM.draw(g2);
-		g2.dispose();
+		state.draw(g2);
+	}
+	
+	/**
+	 * Get the current state of the game.
+	 * @return {@link GameState} Current state of game
+	 */
+	public GameState getState() { return state; }
+	
+	/**
+	 * Use to change the state of the game
+	 * @param state Game state to be updated to
+	 */
+	public void updateState(GameState state) {
+		this.state.endState();
+		this.state = state;
 	}
 }

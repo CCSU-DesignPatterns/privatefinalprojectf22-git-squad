@@ -21,10 +21,9 @@ public class Level1 extends Level {
     protected void loadTileSet() {
         try {
             tileSet[0] = new MapTile("/tiles/Grass.png");
-            //super.tileSet[0].setSprite("/tiles/Grass.png");
 
             tileSet[1] = new MapTile("/tiles/Path.png");
-            //super.tileSet[1].setSprite("/tiles/Path.png");
+            tileSet[1].collision = true;
         }
         catch(SpriteNotFoundException e) {
             System.out.println(e.getMessage());
@@ -34,7 +33,7 @@ public class Level1 extends Level {
     @Override
     protected void loadMap() {
         try {
-            InputStream is = getClass().getResourceAsStream(levelData);
+            InputStream is = getClass().getResourceAsStream("/levels/level01.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             for(int row = 0; row < gp.MAX_SCREEN_ROW; row++) {
@@ -50,7 +49,7 @@ public class Level1 extends Level {
             br.close();
         }
         catch(Exception e) {
-
+        	System.out.println("Could not find level data");
         }
     }
 }
