@@ -80,9 +80,12 @@ public class EnemyWaves {
 	}
 	
 	/**
-	 * Moves to the next 
+	 * Spawns the next wave of enemies
 	 */
 	public void nextWave() {
+		for(int i = 0; i < enemyWaves[currentWave].length; i++) {
+			spawnEnemy(enemyWaves[currentWave][i] - 1);
+		}
 		currentWave++;
 	}
 }

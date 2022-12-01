@@ -12,6 +12,7 @@ public class Enemy extends Entity implements IEnemy {
 	// Attributes
 	protected int speed = 2;	// Pixels per update. Default is 2
 	protected int distTraveled = 0;	// The distance traveled in pixels
+	private EnemyType currentType;	// This is currently needed to keep track of the type of enemy it is
 	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
@@ -24,6 +25,9 @@ public class Enemy extends Entity implements IEnemy {
 		this.setHealth(type.getHealth());
 		this.setStrength(type.getStrength());
 		this.setCollisionBox(new Rectangle(10,10));	// This might have to be updated
+		
+		// Store the enemy type
+		currentType = type;
 	}
 	
 	/**
@@ -86,8 +90,8 @@ public class Enemy extends Entity implements IEnemy {
 	 * Returns a clone of an instance of Enemy
 	 */
 	public IEnemy clone() {
-		//TODO Implement object cloning
-		return null;
+		IEnemy clone = new Enemy(x, y, currentType);
+		return clone;
 	}
 	
 	/**
