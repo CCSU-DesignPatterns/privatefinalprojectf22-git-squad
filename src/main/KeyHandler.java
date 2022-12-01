@@ -5,19 +5,18 @@ import java.awt.event.KeyListener;
 
 /**
  * {@summary Handles input detection from the user's keyboard.}
- * @author RyiSnow
+ * @author Ryan Sharp, RyiSnow
  *
  */
 public class KeyHandler implements KeyListener{
-
-//	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	
+	private GamePanel gp = GamePanel.getInstance();
 	
 	/**
 	 * {@summary Called automatically when a key is typed.}
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -27,20 +26,26 @@ public class KeyHandler implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-//		int code = e.getKeyCode();
-//		
-//		if (code == KeyEvent.VK_W) {
-//			upPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_S) {
-//			downPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_A) {
-//			leftPressed = true;
-//		}
-//		else if(code == KeyEvent.VK_D) {
-//			rightPressed = true;
-//		}
+		int code = e.getKeyCode();
+		
+		if(code == KeyEvent.VK_ESCAPE) {
+			if(gp.getState().getType().equals(StateType.GAMEPLAY)) {
+				GameplayState current = (GameplayState)gp.getState();
+				System.out.println("Pausing game...");
+				gp.updateState(new PausedState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+			}
+			else if (gp.getState().getType().equals(StateType.PAUSE)) {
+				PausedState current = (PausedState)gp.getState();
+				System.out.println("Resuming game...");
+				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+			}
+			else if(gp.getState().getType().equals(StateType.PLACEMENT)) {
+				PlacementState current = (PlacementState)gp.getState();
+				System.out.println("Cancelling placement...");
+				current.getPlayer().addMoney(current.getTower().getType().getCost());
+				gp.updateState(new GameplayState(current.getLevel(), current.getTowerManager(), current.getEnemyManager(), current.getPlayer()));
+			}
+		}
 		
 	}
 	
@@ -49,20 +54,8 @@ public class KeyHandler implements KeyListener{
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		int code = e.getKeyCode();
-//		
-//		if (code == KeyEvent.VK_W) {
-//			upPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_S) {
-//			downPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_A) {
-//			leftPressed = false;
-//		}
-//		else if(code == KeyEvent.VK_D) {
-//			rightPressed = false;
-//		}
+		
+		
 	}
 
 }

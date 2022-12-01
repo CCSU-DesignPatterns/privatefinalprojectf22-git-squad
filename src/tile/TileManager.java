@@ -49,6 +49,7 @@ public class TileManager {
 		try {
 			tileSet[0] = new Tile();
 			tileSet[0].setSprite("/tiles/Grass.png");
+			tileSet[0].collision = true;
 			
 			tileSet[1] = new Tile();
 			tileSet[1].setSprite("/tiles/Path.png");
