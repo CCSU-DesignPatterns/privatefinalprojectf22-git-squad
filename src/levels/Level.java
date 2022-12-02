@@ -2,6 +2,7 @@ package levels;
 
 import main.GamePanel;
 import java.awt.Graphics2D;
+import entity.Direction;
 
 /**
  * @author RyiSnow, Ryan Sharp, Ricardo Almeida (refactoring)
@@ -28,6 +29,13 @@ public abstract class Level implements iLevel {
     
     // length of the path in pixels
     protected int pathLength;
+    
+    // Coordinates for the start point of the path. Default is (0,0)
+    int startX = 0;
+    int startY = 0;
+    
+    // Starting direction. Default is RIGHT
+    Direction startDir = Direction.RIGHT;
 
     /**
      * Default constructor
@@ -36,17 +44,7 @@ public abstract class Level implements iLevel {
         gp = GamePanel.getInstance();
         tileSet = new MapTile[10];
         levelMap = new int[gp.MAX_SCREEN_COL][gp.MAX_SCREEN_ROW];
-        loadTileSet();
-        loadMap();
     }
-
-    /**
-     * Spawns a wave of enemies
-     */
-/*    public void spawnEnemies() {
-        //Not yet implemented. This is for testing only
-        System.out.println("Enemies spawned");
-    }*/
 
     /**
      *  Loads the set of map tiles
@@ -97,4 +95,21 @@ public abstract class Level implements iLevel {
      */
     public int getPathLength() { return pathLength; }
     
+    /**
+     * Returns the starting X coordinate for enemies
+     * @return <code>int</code> Starting X coordinate
+     */
+    public int getStartX() { return startX; }
+    
+    /**
+     * Returns the starting Y coordinate for enemies
+     * @return <code>int</code> Starting Y coordinate
+     */
+    public int getStartY() { return startY; }
+    
+    /**
+     * Returns the start direction for the enemies
+     * @return <code>Direction</code> The start direction
+     */
+    public Direction getStartDir() { return startDir; }
 }
