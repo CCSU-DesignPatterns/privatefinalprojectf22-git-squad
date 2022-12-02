@@ -114,4 +114,10 @@ public class TowerManager implements ITower {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int getRange() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

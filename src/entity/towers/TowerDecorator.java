@@ -76,4 +76,9 @@ public class TowerDecorator implements ITower {
 		return decoratedTower.getType();
 	}
 
+	@Override
+	public int getRange() {
+		return decoratedTower.getRange();
+	}
+
 }

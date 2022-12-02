@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.GamePanel;
-import tile.ImageScaler;
+import main.UtilityCenter;
 
 /**
  * {@summary Parent of all entities in the game. Handles basic properties of all entities like position and sprite.}
@@ -46,7 +46,7 @@ public abstract class Entity {
 	protected void setSpriteImage(String spritePath) throws SpriteNotFoundException {
 		try {
 			this.sprite = ImageIO.read(getClass().getResourceAsStream(spritePath));
-			this.sprite = ImageScaler.scaleImage(sprite, gp.TILE_SIZE, gp.TILE_SIZE);
+			this.sprite = UtilityCenter.scaleImage(sprite, gp.TILE_SIZE, gp.TILE_SIZE);
 		}
 		catch (IOException e) {
 			throw new SpriteNotFoundException(spritePath);

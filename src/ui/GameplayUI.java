@@ -30,7 +30,7 @@ import main.GameplayState;
 import main.InsufficientFundsException;
 import main.Main;
 import main.PlacementState;
-import tile.ImageScaler;
+import main.UtilityCenter;
 import levels.Level;
 
 /**
@@ -63,31 +63,31 @@ public class GameplayUI {
 		
 		try {
 			heart = ImageIO.read(getClass().getResourceAsStream("/ui/Lives.png"));
-			heart = ImageScaler.scaleImage(heart, 30, 30);
+			heart = UtilityCenter.scaleImage(heart, 30, 30);
 			
 			coin = ImageIO.read(getClass().getResourceAsStream("/ui/Money.png"));
-			coin = ImageScaler.scaleImage(coin, 30, 30);
+			coin = UtilityCenter.scaleImage(coin, 30, 30);
 			
 			turretShop = ImageIO.read(getClass().getResourceAsStream("/ui/UITurretButton.png"));
-			turretShop = ImageScaler.scaleImage(turretShop, gp.TILE_SIZE, gp.TILE_SIZE);
+			turretShop = UtilityCenter.scaleImage(turretShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			cannonShop = ImageIO.read(getClass().getResourceAsStream("/ui/UICannonButton.png"));
-			cannonShop = ImageScaler.scaleImage(cannonShop, gp.TILE_SIZE, gp.TILE_SIZE);
+			cannonShop = UtilityCenter.scaleImage(cannonShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			sniperShop = ImageIO.read(getClass().getResourceAsStream("/ui/UISniperButton.png"));
-			sniperShop = ImageScaler.scaleImage(sniperShop, gp.TILE_SIZE, gp.TILE_SIZE);
+			sniperShop = UtilityCenter.scaleImage(sniperShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			start = ImageIO.read(getClass().getResourceAsStream("/ui/StartButton.png"));
-			start = ImageScaler.scaleImage(start, gp.TILE_SIZE, gp.TILE_SIZE);
+			start = UtilityCenter.scaleImage(start, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			wait = ImageIO.read(getClass().getResourceAsStream("/ui/WaitButton.png"));
-			wait = ImageScaler.scaleImage(wait, gp.TILE_SIZE, gp.TILE_SIZE);
+			wait = UtilityCenter.scaleImage(wait, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			openShop = ImageIO.read(getClass().getResourceAsStream("/ui/ShopButton.png"));
-			openShop = ImageScaler.scaleImage(openShop, 30, 30);
+			openShop = UtilityCenter.scaleImage(openShop, 30, 30);
 			
 			closeShop = ImageIO.read(getClass().getResourceAsStream("/ui/CloseButton.png"));
-			closeShop = ImageScaler.scaleImage(closeShop, 30, 30);
+			closeShop = UtilityCenter.scaleImage(closeShop, 30, 30);
 		}
 		catch(Exception e) {
 			throw new SpriteNotFoundException("GameplayUI");
@@ -118,7 +118,7 @@ public class GameplayUI {
 		shop.add(turretButton, c);
 		
 		turretLabel = new JLabel();
-		setupLabel(turretLabel, arial20, String.valueOf(TowerType.TURRET.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 20, 20)));
+		setupLabel(turretLabel, arial20, String.valueOf(TowerType.TURRET.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		turretLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(turretLabel, c);
@@ -132,7 +132,7 @@ public class GameplayUI {
 		shop.add(cannonButton, c);
 		
 		cannonLabel = new JLabel();
-		setupLabel(cannonLabel, arial20, String.valueOf(TowerType.CANNON.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 20, 20)));
+		setupLabel(cannonLabel, arial20, String.valueOf(TowerType.CANNON.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		cannonLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(cannonLabel, c);
@@ -146,7 +146,7 @@ public class GameplayUI {
 		shop.add(sniperButton, c);
 		
 		sniperLabel = new JLabel();
-		setupLabel(sniperLabel, arial20, String.valueOf(TowerType.SNIPER.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 20, 20)));
+		setupLabel(sniperLabel, arial20, String.valueOf(TowerType.SNIPER.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		sniperLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(sniperLabel, c);
