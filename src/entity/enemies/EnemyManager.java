@@ -4,11 +4,18 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import levels.Level;
+
 public class EnemyManager implements IEnemy {
 
 	List<IEnemy> children = new ArrayList<IEnemy>();
-	private EnemyWaves waves = new EnemyWaves();
+	private EnemyWaves waves;
 	private List<IEnemy> removalQueue = new ArrayList<IEnemy>();
+	
+	public EnemyManager(Level level) {
+		waves = new EnemyWaves(level);
+		
+	}
 	
 	@Override
 	public IEnemy getComposite() {

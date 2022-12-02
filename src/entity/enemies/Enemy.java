@@ -27,8 +27,9 @@ public class Enemy extends Entity implements IEnemy {
 	 * @param health Integer value that represents strength of an enemy
 	 * @param spritePath Path to a graphical representation of an enemy
 	 */
-	public Enemy(int x, int y, EnemyType type) {
+	public Enemy(int x, int y, EnemyType type, Direction dir) {
 		super(x, y, type.getSpritePath());
+		this.setDirection(dir);
 		this.setHealth(type.getHealth());
 		this.setOriginalHealth(type.getHealth());
 		this.setStrength(type.getStrength());
@@ -208,7 +209,7 @@ public class Enemy extends Entity implements IEnemy {
 	 * Returns a clone of the current Enemy instance
 	 */
 	public Enemy clone() {
-		Enemy clone = new Enemy(x, y, currentType);
+		Enemy clone = new Enemy(x, y, currentType, currentDirection);
 		clone.setHealth(this.getHealth());
 		clone.setStrength(this.getStrength());
 		clone.setCollisionBox(this.getCollisionBox());
@@ -216,7 +217,6 @@ public class Enemy extends Entity implements IEnemy {
 		clone.y = this.y;
 		clone.gp = this.gp;
 		clone.collision = this.collision;
-		clone.currentDirection = this.currentDirection;
 		return clone;
 	}
 	
