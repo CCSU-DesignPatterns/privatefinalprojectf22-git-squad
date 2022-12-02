@@ -95,4 +95,21 @@ public abstract class Level implements iLevel {
      */
     public int getPathLength() { return pathLength; }
     
+    /**
+     * Returns the starting X coordinate for enemies
+     * @return <code>int</code> Starting X coordinate
+     */
+    public int getStartX() { return startX; }
+    
+    /**
+     * Returns the starting Y coordinate for enemies
+     * @return <code>int</code> Starting Y coordinate
+     */
+    public int getStartY() { return startY; }
+    
+    /**
+     * Returns the start direction for the enemies
+     * @return <code>Direction</code> The start direction
+     */
+    public Direction getStartDir() { return startDir; }
 }
