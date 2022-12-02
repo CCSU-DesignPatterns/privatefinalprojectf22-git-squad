@@ -34,6 +34,12 @@ public interface ITower {
 	public TowerType getType();
 	
 	/**
+	 * Get the range of the tower
+	 * @return int range
+	 */
+	public int getRange();
+	
+	/**
 	 * Returns the ITower's x value
 	 * @return <code>int</code> x value 
 	 */

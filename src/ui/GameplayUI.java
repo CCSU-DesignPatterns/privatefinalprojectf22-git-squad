@@ -30,7 +30,7 @@ import main.GameplayState;
 import main.InsufficientFundsException;
 import main.Main;
 import main.PlacementState;
-import tile.ImageScaler;
+import main.UtilityCenter;
 import levels.Level;
 
 /**
@@ -44,51 +44,58 @@ public class GameplayUI {
 	private JPanel shop;
 	private JLabel healthLabel, moneyLabel, shopLabel, turretLabel, cannonLabel, sniperLabel;
 	private JButton turretButton, cannonButton, sniperButton, startButton, toggleShopButton;
-	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop, start, wait;
-	private Font arial30, arial50;
+	private BufferedImage heart, coin, turretShop, cannonShop, sniperShop, start, wait, openShop, closeShop;
+	private Font arial30, arial20;
 	private GameplayUIButtonHandler listener;
-	private boolean waveRunning = false;
+	private boolean waveRunning;
 	
 	/**
 	 * Create new gameplay UI
 	 * @throws SpriteNotFoundException - Thrown if the images needed cannot be found.
 	 */
 	public GameplayUI() throws SpriteNotFoundException{
+		waveRunning = false;
 		gp = GamePanel.getInstance();
 		listener = new GameplayUIButtonHandler();
 		
 		arial30 = new Font("arial", Font.PLAIN, 30);
-		arial50 = new Font("arial", Font.PLAIN, 50);
+		arial20 = new Font("arial", Font.PLAIN, 20);
 		
 		try {
 			heart = ImageIO.read(getClass().getResourceAsStream("/ui/Lives.png"));
-			heart = ImageScaler.scaleImage(heart, 30, 30);
+			heart = UtilityCenter.scaleImage(heart, 30, 30);
 			
 			coin = ImageIO.read(getClass().getResourceAsStream("/ui/Money.png"));
-			coin = ImageScaler.scaleImage(coin, 30, 30);
+			coin = UtilityCenter.scaleImage(coin, 30, 30);
 			
 			turretShop = ImageIO.read(getClass().getResourceAsStream("/ui/UITurretButton.png"));
-			turretShop = ImageScaler.scaleImage(turretShop, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			turretShop = UtilityCenter.scaleImage(turretShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			cannonShop = ImageIO.read(getClass().getResourceAsStream("/ui/UICannonButton.png"));
-			cannonShop = ImageScaler.scaleImage(cannonShop, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			cannonShop = UtilityCenter.scaleImage(cannonShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			sniperShop = ImageIO.read(getClass().getResourceAsStream("/ui/UISniperButton.png"));
-			sniperShop = ImageScaler.scaleImage(sniperShop, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			sniperShop = UtilityCenter.scaleImage(sniperShop, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			start = ImageIO.read(getClass().getResourceAsStream("/ui/StartButton.png"));
-			start = ImageScaler.scaleImage(start, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			start = UtilityCenter.scaleImage(start, gp.TILE_SIZE, gp.TILE_SIZE);
 			
 			wait = ImageIO.read(getClass().getResourceAsStream("/ui/WaitButton.png"));
-			wait = ImageScaler.scaleImage(wait, gp.TILE_SIZE * 2, gp.TILE_SIZE * 2);
+			wait = UtilityCenter.scaleImage(wait, gp.TILE_SIZE, gp.TILE_SIZE);
+			
+			openShop = ImageIO.read(getClass().getResourceAsStream("/ui/ShopButton.png"));
+			openShop = UtilityCenter.scaleImage(openShop, 30, 30);
+			
+			closeShop = ImageIO.read(getClass().getResourceAsStream("/ui/CloseButton.png"));
+			closeShop = UtilityCenter.scaleImage(closeShop, 30, 30);
 		}
 		catch(Exception e) {
 			throw new SpriteNotFoundException("GameplayUI");
 		}
 		
-		int shopX = gp.SCREEN_WIDTH - (4*gp.TILE_SIZE);
+		int shopX = gp.SCREEN_WIDTH - (3*gp.TILE_SIZE);
 		shop = new JPanel();
-		shop.setBounds(shopX, 0, gp.TILE_SIZE * 4, gp.SCREEN_HEIGHT);
+		shop.setBounds(shopX, 0, gp.TILE_SIZE * 3, gp.SCREEN_HEIGHT / 2);
 		shop.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		shop.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -96,7 +103,7 @@ public class GameplayUI {
 		shop.setOpaque(true);
 		
 		shopLabel = new JLabel();
-		setupLabel(shopLabel, arial50, "SHOP", Color.white, null);
+		setupLabel(shopLabel, arial30, "SHOP", Color.white, null);
 		shopLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -111,7 +118,7 @@ public class GameplayUI {
 		shop.add(turretButton, c);
 		
 		turretLabel = new JLabel();
-		setupLabel(turretLabel, arial30, String.valueOf(TowerType.TURRET.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 30, 30)));
+		setupLabel(turretLabel, arial20, String.valueOf(TowerType.TURRET.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		turretLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(turretLabel, c);
@@ -125,7 +132,7 @@ public class GameplayUI {
 		shop.add(cannonButton, c);
 		
 		cannonLabel = new JLabel();
-		setupLabel(cannonLabel, arial30, String.valueOf(TowerType.CANNON.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 30, 30)));
+		setupLabel(cannonLabel, arial20, String.valueOf(TowerType.CANNON.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		cannonLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(cannonLabel, c);
@@ -139,20 +146,30 @@ public class GameplayUI {
 		shop.add(sniperButton, c);
 		
 		sniperLabel = new JLabel();
-		setupLabel(sniperLabel, arial30, String.valueOf(TowerType.SNIPER.getCost()), Color.white, new ImageIcon(ImageScaler.scaleImage(coin, 30, 30)));
+		setupLabel(sniperLabel, arial20, String.valueOf(TowerType.SNIPER.getCost()), Color.white, new ImageIcon(UtilityCenter.scaleImage(coin, 20, 20)));
 		sniperLabel.setHorizontalAlignment(JLabel.CENTER);
 		c.gridy++;
 		shop.add(sniperLabel, c);
 		
+		Main.getPane().add(shop, Integer.valueOf(1));
+		
+		toggleShopButton = new JButton(new ImageIcon(closeShop));
+		toggleShopButton.setBounds(gp.SCREEN_WIDTH - 50, 20, 30, 30);
+		toggleShopButton.setBorder(BorderFactory.createEmptyBorder());
+		toggleShopButton.setContentAreaFilled(false);
+		toggleShopButton.addActionListener(listener);
+		toggleShopButton.setActionCommand("Toggle Shop");
+		shop.add(toggleShopButton, c);
+		Main.getPane().add(toggleShopButton, Integer.valueOf(2));
+		
+		
 		startButton = new JButton(new ImageIcon(start));
+		startButton.setBounds(gp.SCREEN_WIDTH - 2 * gp.TILE_SIZE, gp.SCREEN_HEIGHT - 2 * gp.TILE_SIZE, gp.TILE_SIZE, gp.TILE_SIZE);
 		startButton.setBorder(BorderFactory.createEmptyBorder());
 		startButton.setContentAreaFilled(false);
 		startButton.addActionListener(listener);
 		startButton.setActionCommand("Start");
-		c.gridy++;
-		shop.add(startButton, c);
-		
-		Main.getPane().add(shop, Integer.valueOf(1));
+		Main.getPane().add(startButton, Integer.valueOf(2));
 		
 		healthLabel = new JLabel();
 		setupLabel(healthLabel, arial30, String.valueOf(200), Color.white, new ImageIcon(heart));
@@ -191,6 +208,8 @@ public class GameplayUI {
 		Main.getPane().remove(shop);
 		Main.getPane().remove(healthLabel);
 		Main.getPane().remove(moneyLabel);
+		Main.getPane().remove(startButton);
+		Main.getPane().remove(toggleShopButton);
 	}
 	
 	/**
@@ -199,8 +218,9 @@ public class GameplayUI {
 	 */
 	public void setWaveRunning(boolean running) {
 		if(running != waveRunning) {
-			waveRunning = running;
-			if(running) {
+			System.out.println("updating running status");
+			this.waveRunning = running;
+			if(waveRunning) {
 				startButton.setIcon(new ImageIcon(wait));
 			}
 			else {
@@ -233,6 +253,16 @@ public class GameplayUI {
 			GameplayState current = (GameplayState)gp.getState();
 			
 			switch(e.getActionCommand()) {
+			case("Toggle Shop"):
+				if(shop.isVisible()) {
+					shop.setVisible(false);
+					toggleShopButton.setIcon(new ImageIcon(openShop));
+				}
+				else {
+					shop.setVisible(true);
+					toggleShopButton.setIcon(new ImageIcon(closeShop));
+				}
+				break;
 			case ("Buy Turret"):
 				try {
 					gp.getState().getPlayer().removeMoney(TowerType.TURRET.getCost());

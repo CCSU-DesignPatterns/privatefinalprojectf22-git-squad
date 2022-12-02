@@ -1,10 +1,11 @@
-package tile;
+package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class ImageScaler {
+public class UtilityCenter {
 	public static BufferedImage scaleImage(BufferedImage image, int width, int height) {
 		BufferedImage scaledImage = new BufferedImage(width, height, image.getType());
 		Graphics2D g2 = scaledImage.createGraphics();

@@ -24,7 +24,6 @@ public abstract class Tower extends Entity implements ITower {
 	protected long currentTime;
 	protected double delta;
 	protected IEnemy target;
-	private double angle;
 	
 	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
 	
@@ -57,6 +56,8 @@ public abstract class Tower extends Entity implements ITower {
 	 * @return {@link TowerType}
 	 */
 	public TowerType getType() { return type; }
+	
+	public int getRange() { return range; }
 	
 	/**
 	 * Default update routine for towers. Updates list of targets (enemies in range) and attacks if ready.
@@ -102,14 +103,10 @@ public abstract class Tower extends Entity implements ITower {
 	@Override
 	public void draw(Graphics2D g2) {
 		if(target != null) {
-			angle = (Math.atan2(x - target.getX(), y - target.getY()) * -1) + Math.PI;
+			setAngle((Math.atan2(x - target.getX(), y - target.getY()) * -1) + Math.PI);
 		}
 		AffineTransform original = g2.getTransform();
 		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
-		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
-		g2.setColor(Color.white);
-		g2.fillOval(x - range + (gp.TILE_SIZE / 2), y - range + (gp.TILE_SIZE / 2), range * 2, range  * 2);
-		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		g2.setTransform(tx);
 		g2.drawImage(sprite, x, y, null);
 		g2.setTransform(original);

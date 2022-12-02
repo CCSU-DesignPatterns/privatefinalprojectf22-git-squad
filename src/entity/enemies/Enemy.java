@@ -1,6 +1,10 @@
 package entity.enemies;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 
 import entity.Direction;
 import entity.Entity;
@@ -15,6 +19,7 @@ public class Enemy extends Entity implements IEnemy {
 	protected int speed = 2;	// Pixels per update. Default is 2
 	protected int distTraveled = 0;	// The distance traveled in pixels
 	private EnemyType currentType;	// This is currently needed to keep track of the type of enemy it is
+	protected int originalHealth;
 	
 	/**
 	 * Constructor that takes a coordinates object and a String representing
@@ -25,6 +30,7 @@ public class Enemy extends Entity implements IEnemy {
 	public Enemy(int x, int y, EnemyType type) {
 		super(x, y, type.getSpritePath());
 		this.setHealth(type.getHealth());
+		this.setOriginalHealth(type.getHealth());
 		this.setStrength(type.getStrength());
 		this.setCollisionBox(new Rectangle(10,10));	// This might have to be updated
 		
@@ -74,9 +80,11 @@ public class Enemy extends Entity implements IEnemy {
 					if(nextTile == 0) { // if tile above is not path
 						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
 							this.setDirection(Direction.LEFT);
+							this.setAngle(Math.toRadians(180));
 						}
 						else if(col != gp.MAX_SCREEN_COL && gp.getState().getLevel().getMap()[col + 1][row] == 1) { // if tile right is path
 							this.setDirection(Direction.RIGHT);
+							this.setAngle(Math.toRadians(0));
 						}
 					}
 				}
@@ -91,9 +99,11 @@ public class Enemy extends Entity implements IEnemy {
 					if(nextTile == 0) { // if tile below is not path
 						if(col != 0 && gp.getState().getLevel().getMap()[col - 1][row] == 1) { // if tile left is path
 							this.setDirection(Direction.LEFT);
+							this.setAngle(Math.toRadians(180));
 						}
 						else if(col != gp.MAX_SCREEN_COL && gp.getState().getLevel().getMap()[col + 1][row] == 1) { // if tile right is path
 							this.setDirection(Direction.RIGHT);
+							this.setAngle(Math.toRadians(0));
 						}
 					}
 				}
@@ -108,9 +118,11 @@ public class Enemy extends Entity implements IEnemy {
 					if(nextTile == 0) { // if tile right is not path
 						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
 							this.setDirection(Direction.UP);
+							this.setAngle(Math.toRadians(-90));
 						}
 						else if(row != gp.MAX_SCREEN_ROW && gp.getState().getLevel().getMap()[col][row + 1] == 1) { // if tile bottom is path
 							this.setDirection(Direction.DOWN);
+							this.setAngle(Math.toRadians(90));
 						}
 					}
 				}
@@ -125,9 +137,11 @@ public class Enemy extends Entity implements IEnemy {
 					if(nextTile == 0) { // if tile left is not path
 						if(row != 0 && gp.getState().getLevel().getMap()[col][row - 1] == 1) { // if tile up is path
 							this.setDirection(Direction.UP);
+							this.setAngle(Math.toRadians(-90));
 						}
 						else if(row != gp.MAX_SCREEN_ROW && gp.getState().getLevel().getMap()[col][row + 1] == 1) { // if tile bottom is path
 							this.setDirection(Direction.DOWN);
+							this.setAngle(Math.toRadians(90));
 						}
 					}
 				}
@@ -135,6 +149,20 @@ public class Enemy extends Entity implements IEnemy {
 			break;				
 		}
 	}
+	
+	/**
+	 * set the original health of the enemy for future reference
+	 * @param health
+	 */
+	public void setOriginalHealth(int health) {
+		originalHealth = health;
+	}
+	
+	/**
+	 * get the original health of the enemy for reference
+	 * @return original amount of health
+	 */
+	public int getOriginalHealth() { return originalHealth; }
 	
 	/**
 	 * Adds to the distance traveled by the Enemy entity
@@ -258,5 +286,20 @@ public class Enemy extends Entity implements IEnemy {
 	@Override
 	public void destroy() {
 		gp.getState().getEnemyManager().remove(this);
+	}
+	
+	@Override
+	public void draw(Graphics2D g2) {
+		super.draw(g2);
+		if(getHealth() < getOriginalHealth()) {
+			//System.out.println("drawing health bar");
+			g2.setColor(Color.red);
+			g2.fillRect(x, y - (2 * gp.SCALE) - (gp.TILE_SIZE / 8), (int)(((double)getHealth() / getOriginalHealth()) * gp.TILE_SIZE), gp.TILE_SIZE / 8);
+			Stroke original = g2.getStroke();
+			g2.setStroke(new BasicStroke(gp.SCALE));
+			g2.setColor(Color.black);
+			g2.drawRect(x, y - (2 * gp.SCALE) - (gp.TILE_SIZE / 8), gp.TILE_SIZE, gp.TILE_SIZE / 8);
+			g2.setStroke(original);
+		}
 	}
 }

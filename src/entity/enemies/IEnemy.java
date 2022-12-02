@@ -21,4 +21,15 @@ public interface IEnemy extends Cloneable {
 	public void setStrength(int strength);
 	public void destroy();
 	public IEnemy clone();
+	/**
+	 * set the original health of the enemy for future reference
+	 * @param health
+	 */
+	public void setOriginalHealth(int health);
+	
+	/**
+	 * get the original health of the enemy for reference
+	 * @return original amount of health
+	 */
+	public int getOriginalHealth();
 }

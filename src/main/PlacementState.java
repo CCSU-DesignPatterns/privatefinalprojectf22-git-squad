@@ -1,11 +1,15 @@
 package main;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import entity.enemies.EnemyManager;
@@ -23,7 +27,8 @@ public class PlacementState implements GameState {
 	private Player player;
 	private Tower tower;
 	private GamePanel gp;
-	Composite transparent, opaque;
+	private Composite transparent, opaque;
+	private JLabel instructions;
 	
 	public PlacementState(Level level, TowerManager towerM, EnemyManager enemyM, Player player, Tower tower) {
 		this.level = level;
@@ -34,6 +39,15 @@ public class PlacementState implements GameState {
 		this.gp = GamePanel.getInstance();
 		transparent = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f);
 		opaque = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
+		
+		instructions = new JLabel();
+		instructions.setFont(new Font("arial", Font.PLAIN, 40));
+		instructions.setText("Click to place tower. Press esc to cancel.");
+		instructions.setForeground(Color.white);
+		instructions.setHorizontalAlignment(JLabel.CENTER);
+		instructions.setVerticalAlignment(JLabel.CENTER);
+		instructions.setBounds((int)((gp.SCREEN_WIDTH / 2) - (instructions.getPreferredSize().getWidth() / 2)), gp.TILE_SIZE, (int)instructions.getPreferredSize().getWidth(), (int)instructions.getPreferredSize().getHeight());
+		Main.getPane().add(instructions, Integer.valueOf(1));
 	}
 	
 	@Override
@@ -55,9 +69,18 @@ public class PlacementState implements GameState {
 		towerM.draw(g2);
 		if(tower.getCollision()) {
 			g2.setComposite(transparent);
+			tower.draw(g2);
+			g2.setComposite(opaque);
 		}
-		tower.draw(g2);
-		g2.dispose();
+		else {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+			g2.setColor(Color.white);
+			g2.fillOval(tower.getX() - tower.getRange() + (gp.TILE_SIZE / 2), tower.getY() - tower.getRange() + (gp.TILE_SIZE / 2), tower.getRange() * 2, tower.getRange()  * 2);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+			tower.draw(g2);
+			g2.dispose();
+		}
+		
 	}
 
 	@Override
@@ -67,8 +90,7 @@ public class PlacementState implements GameState {
 
 	@Override
 	public void endState() {
-		// TODO Auto-generated method stub
-		
+		Main.getPane().remove(instructions);
 	}
 	
 	/**
