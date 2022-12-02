@@ -30,7 +30,11 @@ public class TurretTower extends Tower {
 		if(target != null) {
 			target.takeDamage(damage);
 			if(target.getHealth() <= 0) {
+				gp.getState().getPlayer().addMoney(damage + target.getHealth());
 				target = null;
+			}
+			else {
+				gp.getState().getPlayer().addMoney(damage);
 			}
 		}
 	}
@@ -45,6 +49,7 @@ public class TurretTower extends Tower {
 			if(Math.hypot(e.getX() - x, e.getY() - y) <= range && // if enemy is within range
 					(target == null || e.getDistanceTraveled() > target.getDistanceTraveled())) { // and if enemy is at the front of those within range, or there is no current target
 				target = e;
+				setAngle((Math.atan2(x - e.getX(), y - e.getY()) * -1) + Math.PI);
 			}
 		}
 	}

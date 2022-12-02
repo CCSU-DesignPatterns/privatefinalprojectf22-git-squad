@@ -30,7 +30,11 @@ public class SniperTower extends Tower {
 		if(target != null) {
 			target.takeDamage(damage);
 			if(target.getHealth() <= 0) {
+				gp.getState().getPlayer().addMoney(damage + target.getHealth());
 				target = null;
+			}
+			else {
+				gp.getState().getPlayer().addMoney(damage);
 			}
 		}
 	}
@@ -40,6 +44,7 @@ public class SniperTower extends Tower {
 		for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 			if(target == null || e.getDistanceTraveled() > target.getDistanceTraveled()) { // and if enemy is at the front of those within range
 				target = e;
+				setAngle((Math.atan2(x - e.getX(), y - e.getY()) * -1) + Math.PI);
 			}
 		}
 	}

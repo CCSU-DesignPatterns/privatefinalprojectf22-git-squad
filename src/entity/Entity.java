@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ public abstract class Entity {
 	protected int strength = 1;	// Default strength is 1
 	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
+	protected double angle = 0;
 	protected GamePanel gp;
 	protected boolean collision = false;
 	protected Direction currentDirection = Direction.RIGHT;	// Default direction is RIGHT
@@ -149,6 +151,12 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Set the angle at which to draw the entity
+	 * @param angle in radians
+	 */
+	protected void setAngle(double angle) { this.angle = angle; }
+	
+	/**
 	 * Causes the entity to take damage
 	 * @param damageAmount Integer representing amount of damage to the entity
 	 */
@@ -166,10 +174,14 @@ public abstract class Entity {
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
 	public void draw(Graphics2D g2) {
-		g2.drawImage(sprite, x, y, null);		
+		AffineTransform original = g2.getTransform();
+		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
+		g2.setTransform(tx);
+		g2.drawImage(sprite, x, y, null);
+		g2.setTransform(original);	
 	}
 
-
+	
 	/**
 	 * Equals override
 	 * @return boolean True or False

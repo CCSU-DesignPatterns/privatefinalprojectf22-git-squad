@@ -24,7 +24,7 @@ public class EnemyManager implements IEnemy {
 		
 		if(removalQueue.size() > 0) {
 			
-			System.out.println("Destroying " + removalQueue.size() + " enemies...");
+			//System.out.println("Destroying " + removalQueue.size() + " enemies...");
 			
 			for(IEnemy e : removalQueue) {
 				children.remove(e);
@@ -101,5 +101,17 @@ public class EnemyManager implements IEnemy {
 	@Override
 	public void destroy() {
 		removalQueue = children;
+	}
+
+	@Override
+	public void setOriginalHealth(int health) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getOriginalHealth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

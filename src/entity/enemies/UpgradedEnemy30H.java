@@ -68,4 +68,14 @@ public class UpgradedEnemy30H extends UpgradedEnemy {
 	public void setStrength(int strength) {
 		baseEnemy.setStrength(strength);
 	}
+	
+	@Override
+	public void setOriginalHealth(int health) {
+		baseEnemy.setOriginalHealth(health);
+	}
+
+	@Override
+	public int getOriginalHealth() {
+		return maxHealth;
+	}
 }

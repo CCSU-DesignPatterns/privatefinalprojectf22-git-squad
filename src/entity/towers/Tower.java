@@ -24,7 +24,6 @@ public abstract class Tower extends Entity implements ITower {
 	protected long currentTime;
 	protected double delta;
 	protected IEnemy target;
-	private double angle;
 	
 	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
 	
@@ -102,7 +101,7 @@ public abstract class Tower extends Entity implements ITower {
 	@Override
 	public void draw(Graphics2D g2) {
 		if(target != null) {
-			angle = (Math.atan2(x - target.getX(), y - target.getY()) * -1) + Math.PI;
+			setAngle((Math.atan2(x - target.getX(), y - target.getY()) * -1) + Math.PI);
 		}
 		AffineTransform original = g2.getTransform();
 		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));

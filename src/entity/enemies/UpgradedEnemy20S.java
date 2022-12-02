@@ -50,4 +50,14 @@ public class UpgradedEnemy20S extends UpgradedEnemy {
 			BonusStrength = strength;
 		}
 	}
+
+	@Override
+	public void setOriginalHealth(int health) {
+		baseEnemy.setOriginalHealth(health);
+	}
+
+	@Override
+	public int getOriginalHealth() {
+		return baseEnemy.getOriginalHealth();
+	}
 }
