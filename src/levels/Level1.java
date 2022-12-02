@@ -56,7 +56,6 @@ public class Level1 extends Level {
             br.close();
             
             pathLength *= gp.TILE_SIZE;
-            pathLength += gp.TILE_SIZE;
         }
         catch(Exception e) {
         	System.out.println("Could not find level data");
