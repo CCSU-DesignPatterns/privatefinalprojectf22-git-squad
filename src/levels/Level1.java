@@ -36,8 +36,8 @@ public class Level1 extends Level {
 
             // Get the first line in the file and extract the start point and direction
             String firstLine[] = (br.readLine()).split(" ");
-            startX = Integer.parseInt(firstLine[0]);
-            startY = Integer.parseInt(firstLine[1]);
+            startX = Integer.parseInt(firstLine[0]) * gp.TILE_SIZE;
+            startY = Integer.parseInt(firstLine[1]) * gp.TILE_SIZE;
             startDir = Direction.valueOf(firstLine[2]);
             
             // Populate the map array
@@ -56,7 +56,6 @@ public class Level1 extends Level {
             br.close();
             
             pathLength *= gp.TILE_SIZE;
-            pathLength += gp.TILE_SIZE;
         }
         catch(Exception e) {
         	System.out.println("Could not find level data");

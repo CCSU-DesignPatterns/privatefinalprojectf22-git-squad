@@ -1,6 +1,10 @@
 package entity.enemies;
 
 import java.util.*;
+
+import entity.Direction;
+import levels.Level;
+
 import java.io.*;
 import main.*;
 
@@ -14,15 +18,26 @@ public class EnemyWaves {
 	private int currentWave = -1;
 	private int currentIndex = 0;
 	private boolean running;
+	private int spawnX, spawnY;
+	private Direction startDir;
 	
 	/**
 	 * Default constructor
 	 */
-	public EnemyWaves() { 
+	public EnemyWaves(Level level) { 
 		this.gp = GamePanel.getInstance();
+		setSpawnInfo(level.getStartX(), level.getStartY(), level.getStartDir());
 		enemySet = new ArrayList<IEnemy>();
 		loadEnemySet();
 		loadEnemyWaves("/difficulties/Easy-Difficulty.txt");
+	}
+	
+	private void setSpawnInfo(int x, int y, Direction dir) {
+		spawnX = x;
+		spawnY = y;
+		startDir = dir;
+		
+		System.out.println("Start x: " + spawnX + ", start Y: " + spawnY + ", Start dir: " + startDir.toString());
 	}
 	
 	/**
@@ -32,9 +47,9 @@ public class EnemyWaves {
 		// Create only base enemies for now
 		// Note that the starting position is set to default values
 		// Further development is needed to define the correct starting point
-		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType1));
-		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType2));
-		enemySet.add(enemyFactory.createEnemy(0, 3 * gp.TILE_SIZE, EnemyType.EnemyType3));
+		enemySet.add(enemyFactory.createEnemy(spawnX, spawnY, EnemyType.EnemyType1, startDir));
+		enemySet.add(enemyFactory.createEnemy(spawnX, spawnY, EnemyType.EnemyType2, startDir));
+		enemySet.add(enemyFactory.createEnemy(spawnX, spawnY, EnemyType.EnemyType3, startDir));
 	}
 	
 	private void createJaggedArray(String filePath) {
@@ -51,7 +66,7 @@ public class EnemyWaves {
         	e.printStackTrace();
         }
         
-        System.out.println(numLines + " lines found");
+        //System.out.println(numLines + " lines found");
         enemyWaves = new int[numLines][];
 	}
 	
@@ -72,14 +87,14 @@ public class EnemyWaves {
 			while(lineIndex < enemyWaves.length) {
 				line = fileReader.readLine().split(" ");
 				enemyWaves[lineIndex] = new int[line.length];
-				System.out.println("Line " + lineIndex + " has " + line.length + " numbers");
+				//System.out.println("Line " + lineIndex + " has " + line.length + " numbers");
 				for(int i = 0; i < line.length; i++) {
 					int digit = Integer.parseInt(line[i]);
 					enemyWaves[lineIndex][i] = digit;
-					System.out.print(digit + " ");
+					//System.out.print(digit + " ");
 				}
 				
-				System.out.println();
+				//System.out.println();
 				
 				lineIndex++;
 			}
