@@ -56,6 +56,7 @@ public class Level2 extends Level {
             br.close();
             
             pathLength *= gp.TILE_SIZE;
+            pathLength += 3 * gp.TILE_SIZE; // account for overlaps
         }
         catch(Exception e) {
         	System.out.println("Could not find level data");

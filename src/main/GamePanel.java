@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		this.KEY_HANDLER = new KeyHandler();
 		this.MOUSE_HANDLER = new MouseHandler();
-		Level startLevel = new Level3();
+		Level startLevel = new Level2();
 		this.state = new GameplayState(startLevel, new TowerManager(), new EnemyManager(startLevel), new Player(LevelDifficulty.MEDIUM.getStartingHealth(), LevelDifficulty.MEDIUM.getStartingMoney()));
 		
 		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);

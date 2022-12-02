@@ -35,6 +35,20 @@ public class Enemy extends Entity implements IEnemy {
 		this.setStrength(type.getStrength());
 		this.setCollisionBox(new Rectangle(10,10));	// This might have to be updated
 		
+		switch(currentDirection) {
+		case UP:
+			this.angle = Math.toRadians(-90);
+			break;
+		case DOWN:
+			this.angle = Math.toRadians(90);
+			break;
+		case LEFT:
+			this.angle = Math.toRadians(180);
+			break;
+		case RIGHT:
+			this.angle = Math.toRadians(0);
+			break;
+		}
 		// Store the enemy type
 		currentType = type;
 	}
@@ -217,6 +231,7 @@ public class Enemy extends Entity implements IEnemy {
 		clone.y = this.y;
 		clone.gp = this.gp;
 		clone.collision = this.collision;
+		clone.angle = this.angle;
 		return clone;
 	}
 	

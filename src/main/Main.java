@@ -30,7 +30,8 @@ public class Main {
 		
 		GamePanel gamePanel = GamePanel.getInstance(); //Updated this to use singleton pattern rather than creating instance variable
 		
-		pane.setPreferredSize(new Dimension(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT));
+		pane.setSize(new Dimension(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT));
+		pane.setLocation(0, 0);
 		pane.add(gamePanel, Integer.valueOf(0));
 		
 		window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
