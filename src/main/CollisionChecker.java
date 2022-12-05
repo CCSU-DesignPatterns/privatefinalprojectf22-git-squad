@@ -12,12 +12,6 @@ import levels.MapTile;
  */
 public class CollisionChecker {
 	
-	GamePanel gp;
-	
-	public CollisionChecker() {
-		this.gp = GamePanel.getInstance();
-	}
-	
 	/**
 	 * Check whether the given entity has collided with anything
 	 * @param entity - entity being checked
