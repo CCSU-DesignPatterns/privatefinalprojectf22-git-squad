@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -31,7 +30,6 @@ import main.InsufficientFundsException;
 import main.Main;
 import main.PlacementState;
 import main.UtilityCenter;
-import levels.Level;
 
 /**
  * UI class to display the proper UI during the gameplay state
@@ -164,7 +162,7 @@ public class GameplayUI {
 		
 		
 		startButton = new JButton(new ImageIcon(start));
-		startButton.setBounds(gp.SCREEN_WIDTH - 2 * gp.TILE_SIZE, gp.SCREEN_HEIGHT - 2 * gp.TILE_SIZE, gp.TILE_SIZE, gp.TILE_SIZE);
+		startButton.setBounds((int)(gp.SCREEN_WIDTH - (1.5 * gp.TILE_SIZE)), (int)(gp.SCREEN_HEIGHT - (1.5 * gp.TILE_SIZE)), gp.TILE_SIZE, gp.TILE_SIZE);
 		startButton.setBorder(BorderFactory.createEmptyBorder());
 		startButton.setContentAreaFilled(false);
 		startButton.addActionListener(listener);

@@ -2,6 +2,7 @@ package levels;
 
 /**
  * Creates levels
+ * @author Ricardo Almeida
  */
 public class LevelFactory implements iLevelFactory{
     /**

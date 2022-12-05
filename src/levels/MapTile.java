@@ -7,6 +7,7 @@ import entity.SpriteNotFoundException;
 
 /**
  * Defines a graphics tile for use in drawing a level
+ * @author Ricardo Almeida
  */
 public class MapTile {
 

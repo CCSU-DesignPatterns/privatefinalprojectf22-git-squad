@@ -43,6 +43,11 @@ public abstract class Entity {
 		}
 	}
 	
+	/**
+	 * Set the sprite of an entity
+	 * @param spritePath
+	 * @throws SpriteNotFoundException
+	 */
 	protected void setSpriteImage(String spritePath) throws SpriteNotFoundException {
 		try {
 			this.sprite = ImageIO.read(getClass().getResourceAsStream(spritePath));

@@ -8,6 +8,11 @@ import levels.Level;
 import java.io.*;
 import main.*;
 
+/**
+ * Handles the preparation and creation of enemy waves as well as spawning enemies
+ * @author Ricardo Almeida, minor changes by Ryan Sharp
+ *
+ */
 public class EnemyWaves {
 	protected GamePanel gp;					// The main game panel
 	protected List<IEnemy> enemySet;		// List of enemies to be spawned (cloned)
@@ -24,12 +29,12 @@ public class EnemyWaves {
 	/**
 	 * Default constructor
 	 */
-	public EnemyWaves(Level level) { 
+	public EnemyWaves(Level level, Difficulty d) { 
 		this.gp = GamePanel.getInstance();
 		setSpawnInfo(level.getStartX(), level.getStartY(), level.getStartDir());
 		enemySet = new ArrayList<IEnemy>();
 		loadEnemySet();
-		loadEnemyWaves("/difficulties/Easy-Difficulty.txt");
+		loadEnemyWaves(d.getPath());
 	}
 	
 	private void setSpawnInfo(int x, int y, Direction dir) {

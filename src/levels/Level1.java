@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import entity.Direction;
 
+/**
+ * Loads the tileset and path for the grasslands level
+ * @author Ricardo Almeida
+ *
+ */
 public class Level1 extends Level {
     /**
      * Default constructor

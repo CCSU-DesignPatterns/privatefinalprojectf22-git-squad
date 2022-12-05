@@ -34,7 +34,7 @@ public class Main {
 		pane.setLocation(0, 0);
 		pane.add(gamePanel, Integer.valueOf(0));
 		
-		window.setSize(gamePanel.SCREEN_WIDTH, gamePanel.SCREEN_HEIGHT);
+		window.setSize(gamePanel.SCREEN_WIDTH + (gamePanel.TILE_SIZE / 2) - 10, gamePanel.SCREEN_HEIGHT + gamePanel.TILE_SIZE - 10);
 		
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);

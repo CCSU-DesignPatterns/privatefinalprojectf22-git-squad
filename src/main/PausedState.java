@@ -5,8 +5,7 @@ import java.awt.Graphics2D;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
 import levels.Level;
-import tile.TileManager;
-import ui.UI;
+import ui.PauseUI;
 
 /**
  * Game state used when the player is in a level and the game is paused
@@ -20,7 +19,7 @@ class PausedState implements GameState {
 	private TowerManager towerM;
 	private EnemyManager enemyM;
 	private Player player;
-	private UI ui;
+	private PauseUI ui;
 	
 	/**
 	 * Create new paused state with the given tile, tower, and enemy managers
@@ -33,7 +32,7 @@ class PausedState implements GameState {
 		this.towerM = towerM;
 		this.enemyM = enemyM;
 		this.player = player;
-		this.ui = new UI();
+		this.ui = new PauseUI();
 	}
 	
 	@Override
@@ -47,7 +46,6 @@ class PausedState implements GameState {
 		level.draw(g2);
 		enemyM.draw(g2);
 		towerM.draw(g2);
-		ui.draw(g2);
 		g2.dispose();
 	}
 
@@ -58,8 +56,7 @@ class PausedState implements GameState {
 
 	@Override
 	public void endState() {
-		// TODO Auto-generated method stub
-		
+		ui.remove();
 	}
 	
 	/**

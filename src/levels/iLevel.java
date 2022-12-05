@@ -4,6 +4,7 @@ import java.awt.*;
 
 /**
  * Levels interface
+ * @author Ricardo Almeida
  */
 public interface iLevel {
     /**

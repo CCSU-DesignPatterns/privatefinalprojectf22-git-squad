@@ -11,7 +11,7 @@ import entity.Entity;
 
 /**
  * 
- * @author Pedro Arias, refactored by Ricardo Almeida
+ * @author Pedro Arias, refactored by Ricardo Almeida, updated by Ryan Sharp
  *
  */
 public class Enemy extends Entity implements IEnemy {
@@ -238,7 +238,7 @@ public class Enemy extends Entity implements IEnemy {
 	/**
 	 * TODO Needs implementation
 	 */
-	public IEnemy getComposite() {
+	public EnemyManager getComposite() {
 		return null;
 	}
 
