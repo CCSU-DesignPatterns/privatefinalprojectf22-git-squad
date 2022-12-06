@@ -2,10 +2,12 @@ package entity;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.GamePanel;
+import main.UtilityCenter;
 
 /**
  * {@summary Parent of all entities in the game. Handles basic properties of all entities like position and sprite.}
@@ -19,6 +21,7 @@ public abstract class Entity {
 	protected int strength = 1;	// Default strength is 1
 	protected Rectangle collisionBox = new Rectangle(1, 1);
 	protected BufferedImage sprite;
+	protected double angle = 0;
 	protected GamePanel gp;
 	protected boolean collision = false;
 	protected Direction currentDirection = Direction.RIGHT;	// Default direction is RIGHT
@@ -40,9 +43,15 @@ public abstract class Entity {
 		}
 	}
 	
+	/**
+	 * Set the sprite of an entity
+	 * @param spritePath
+	 * @throws SpriteNotFoundException
+	 */
 	protected void setSpriteImage(String spritePath) throws SpriteNotFoundException {
 		try {
 			this.sprite = ImageIO.read(getClass().getResourceAsStream(spritePath));
+			this.sprite = UtilityCenter.scaleImage(sprite, gp.TILE_SIZE, gp.TILE_SIZE);
 		}
 		catch (IOException e) {
 			throw new SpriteNotFoundException(spritePath);
@@ -55,10 +64,34 @@ public abstract class Entity {
 	 */
 	public int getX() { return x; }
 	
+	/**
+	 * Returns the entity's y value
+	 * @return <code>int</code> y value 
+	 */
 	public int getY() { return y; }
 	
+	/**
+	 * Set the position of an entity to the given x and y pixel coordinates
+	 * @param x
+	 * @param y
+	 */
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * Check whether an entity has collided with an object
+	 * @return true if collided, otherwise false
+	 */
 	public boolean getCollision() { return collision; }		
 
+	/**
+	 * Set whether an entity has collided with an object
+	 * @param col - true if collided, otherwise false
+	 */
+	public void setCollision(boolean col) { collision = col; }
+	
 	/**
 	 * @return Entity instance health
 	 */
@@ -110,7 +143,7 @@ public abstract class Entity {
 	 * Sets the collision box for this instance
 	 * @param box Rectangle object
 	 */
-	protected void setCollisionBox(Rectangle box) {
+	public void setCollisionBox(Rectangle box) {
 		this.collisionBox = box;
 	}
 	
@@ -121,6 +154,12 @@ public abstract class Entity {
 	public void setDirection(Direction newDirection) {
 		currentDirection = newDirection;
 	}
+	
+	/**
+	 * Set the angle at which to draw the entity
+	 * @param angle in radians
+	 */
+	protected void setAngle(double angle) { this.angle = angle; }
 	
 	/**
 	 * Causes the entity to take damage
@@ -140,17 +179,21 @@ public abstract class Entity {
 	 * @param g2 Graphics element responsible for drawing on the screen.
 	 */
 	public void draw(Graphics2D g2) {
-		g2.drawImage(sprite, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);		
+		AffineTransform original = g2.getTransform();
+		AffineTransform tx = AffineTransform.getRotateInstance(angle, x + (gp.TILE_SIZE / 2), y + (gp.TILE_SIZE / 2));
+		g2.setTransform(tx);
+		g2.drawImage(sprite, x, y, null);
+		g2.setTransform(original);	
 	}
 
-
+	
 	/**
 	 * Equals override
 	 * @return boolean True or False
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if((x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
+		if(obj != null && (x == ((Entity)obj).x) && (y == ((Entity)obj).y) &&
 				health == ((Entity)obj).health &&
 				strength == ((Entity)obj).strength &&
 				collisionBox.equals(((Entity)obj).collisionBox) &&

@@ -6,9 +6,9 @@ package entity.enemies;
  *
  */
 enum EnemyType {
-	EnemyType1(1, 5, "EnemyType1", "/enemies/assets/orange.png"),
-	EnemyType2(2, 7, "EnemyType2", "/enemies/assets/blue.png"),
-	EnemyType3(4, 9, "EnemyType3", "/enemies/assets/yellow.png");
+	EnemyType1(1, 5, "EnemyType1", "/enemies/EnemyRed.png"),
+	EnemyType2(2, 10, "EnemyType2", "/enemies/EnemyBlue.png"),
+	EnemyType3(4, 15, "EnemyType3", "/enemies/EnemyGreen.png");
 	
 	private final int STRENGTH;
 	private final int HEALTH;

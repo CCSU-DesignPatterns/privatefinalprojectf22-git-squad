@@ -2,20 +2,51 @@ package entity.enemies;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
+import levels.Level;
+
+/**
+ * Composite class for enemies. Keeps track of all living enemies and updates them every frame
+ * @author Ricardo Almeida, Ryan Sharp
+ *
+ */
 public class EnemyManager implements IEnemy {
 
-	ArrayList<IEnemy> children = new ArrayList<IEnemy>();
+	private List<IEnemy> children = new ArrayList<IEnemy>();
+	private EnemyWaves waves;
+	private List<IEnemy> removalQueue = new ArrayList<IEnemy>();
+	
+	/**
+	 * Create new enemy manager for the given level and difficulty
+	 * @param level - level being played
+	 * @param d - difficulty being played
+	 */
+	public EnemyManager(Level level, Difficulty d) {
+		waves = new EnemyWaves(level, d);
+	}
 	
 	@Override
-	public IEnemy getComposite() {
+	public EnemyManager getComposite() {
 		return this;
 	}
 
 	@Override
 	public void update() {
+		waves.update();
 		for(IEnemy e : children) {
 			e.update();
+		}
+		
+		if(removalQueue.size() > 0) {
+			
+			//System.out.println("Destroying " + removalQueue.size() + " enemies...");
+			
+			for(IEnemy e : removalQueue) {
+				children.remove(e);
+			}
+			
+			removalQueue.clear();
 		}
 	}
 
@@ -26,10 +57,23 @@ public class EnemyManager implements IEnemy {
 		}
 	}
 	
+	/**
+	 * Add an enemy to the composite
+	 * @param e - enemy to be added
+	 */
 	public void add(IEnemy e) { children.add(e); }
 	
-	public void remove(IEnemy e) { children.remove(e); }
+	/**
+	 * remove an enemy from the composite
+	 * @param e - enemy to be removed
+	 */
+	public void remove(IEnemy e) { removalQueue.add(e); }
 	
+	/**
+	 * get an enemy from the composite
+	 * @param target - enemy to be retrieved
+	 * @return enemy if found, otherwise null
+	 */
 	public IEnemy getChild(IEnemy target) {
 		for(IEnemy e : children) {
 			if(e.equals(target))
@@ -37,8 +81,18 @@ public class EnemyManager implements IEnemy {
 		}
 		return null;
 	}
-
-	public ArrayList<IEnemy> getChildren() { return children; }
+	
+	/**
+	 * Get the enemy waves for the level
+	 * @return
+	 */
+	public EnemyWaves getWaves() { return waves; }
+	
+	/**
+	 * Get the list of enemies in the composite
+	 * @return
+	 */
+	public List<IEnemy> getChildren() { return children; }
 
 	@Override
 	public int getDistanceTraveled() { return 0; }
@@ -79,5 +133,22 @@ public class EnemyManager implements IEnemy {
 	public void setStrength(int strength) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void destroy() {
+		removalQueue = children;
+	}
+
+	@Override
+	public void setOriginalHealth(int health) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getOriginalHealth() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

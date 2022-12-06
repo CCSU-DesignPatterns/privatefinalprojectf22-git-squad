@@ -1,7 +1,11 @@
 package entity.towers;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
+
+import main.GamePanel;
 
 /**
  * This class acts as a composite, allowing GamePanel to update and draw all the player's towers at once rather
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TowerManager implements ITower {
 
-	ArrayList<ITower> children = new ArrayList<ITower>();
+	protected List<ITower> children = new ArrayList<ITower>();
 	
 	/**
 	 * Calls the update function on all towers individually.
@@ -38,7 +42,12 @@ public class TowerManager implements ITower {
 	 * Add a tower to the TowerManager's children.
 	 * @param t Tower to be added
 	 */
-	public void add(ITower t) { children.add(t); }
+	public void add(ITower t) { 
+		t.getCollisionBox().setLocation(t.getX() + (t.getType().getCollisionInfo()[0] * GamePanel.getInstance().SCALE), t.getY() + (t.getType().getCollisionInfo()[1] * GamePanel.getInstance().SCALE));
+		System.out.println("Tower at X=" + t.getX() + ", Y=" + t.getY());
+		System.out.println("Collision box at X=" + t.getCollisionBox().getLocation().x + ", Y=" + t.getCollisionBox().getLocation().y);
+		children.add(t); 
+	}
 
 	/**
 	 * Remove a tower from the TowerManager's children.
@@ -59,8 +68,14 @@ public class TowerManager implements ITower {
 		return null;
 	}
 	
+	/**
+	 * Get the list of towers managed by this TowerManager
+	 * @return List of {@link ITower} objects
+	 */
+	public List<ITower> getChildren() { return children; }
+	
 	@Override
-	public ITower getComposite() { return this; }
+	public TowerManager getComposite() { return this; }
 
 	@Override
 	public void updateTarget() {}
@@ -70,4 +85,39 @@ public class TowerManager implements ITower {
 
 	@Override
 	public double getFireRate() { return 0; }
+
+	@Override
+	public Rectangle getCollisionBox() {
+		return null;
+	}
+
+	@Override
+	public void setCollisionBox(Rectangle box) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public TowerType getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getRange() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

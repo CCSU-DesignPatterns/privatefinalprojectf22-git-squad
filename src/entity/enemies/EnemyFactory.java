@@ -1,5 +1,6 @@
 package entity.enemies;
 
+import entity.Direction;
 
 /**
  * Enemy factory that creates enemy entities
@@ -20,14 +21,14 @@ public class EnemyFactory {
      * @param type <code>EnemyType</code> Type of enemy to create
      * @return IEnemy entity
      */
-    public IEnemy createEnemy(int x, int y, EnemyType type) {
+    public IEnemy createEnemy(int x, int y, EnemyType type, Direction dir) {
         switch(type) {
 	        case EnemyType1:
-	        	return new Enemy(x, y, EnemyType.EnemyType1);
+	        	return new Enemy(x, y, EnemyType.EnemyType1, dir);
 	        case EnemyType2:
-	        	return new Enemy(x, y, EnemyType.EnemyType2);
+	        	return new Enemy(x, y, EnemyType.EnemyType2, dir);
 	        case EnemyType3:
-	        	return new Enemy(x, y, EnemyType.EnemyType3);
+	        	return new Enemy(x, y, EnemyType.EnemyType3, dir);
 	        default:
 	        	return null;
         }    	
@@ -47,7 +48,7 @@ public class EnemyFactory {
     		return new UpgradedEnemy20S(baseEnemy);
     	}
     	else {
-    		return null;
+    		return baseEnemy;
     	}
     }
 }
