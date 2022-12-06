@@ -7,6 +7,11 @@ import java.io.InputStreamReader;
 import entity.Direction;
 import entity.SpriteNotFoundException;
 
+/**
+ * loads the tileset and path for the desert level
+ * @author Ricardo Almeida
+ *
+ */
 public class Level2 extends Level {
     /**
      * Default constructor

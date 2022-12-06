@@ -6,5 +6,5 @@ package main;
  *
  */
 public enum StateType {
-	GAMEPLAY, PAUSE, PLACEMENT;
+	GAMEPLAY, PAUSE, PLACEMENT, MENU;
 }

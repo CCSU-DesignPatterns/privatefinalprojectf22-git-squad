@@ -8,19 +8,82 @@ import java.awt.Graphics2D;
  *
  */
 public interface IEnemy extends Cloneable {
-	public IEnemy getComposite();	
+	/**
+	 * Get the EnemyManager composite
+	 * @return itself if this is the enemy manager, otherwise null
+	 */
+	public EnemyManager getComposite();	
+	
+	/**
+	 * update the state of this IEnemy
+	 */
 	public void update();	
-	public void draw(Graphics2D g2);	
+	
+	/**
+	 * redraw this IEnemy
+	 * @param g2
+	 */
+	public void draw(Graphics2D g2);
+	
+	/**
+	 * Get the distance this IEnemy has travelled
+	 * @return
+	 */
 	public int getDistanceTraveled();	
-	public void takeDamage(int damage);	
+	
+	/**
+	 * Take the given amount of damage
+	 * @param damage
+	 */
+	public void takeDamage(int damage);
+	
+	/**
+	 * Get the x component of this enemy's position
+	 * @return
+	 */
 	public int getX();	
+	
+	/**
+	 * get the y component of this enemy's position
+	 * @return
+	 */
 	public int getY();	
+	
+	/**
+	 * get the health of this enemy
+	 * @return
+	 */
 	public int getHealth();
+	
+	/**
+	 * get the strength of this enemy
+	 * @return
+	 */
 	public int getStrength();
+	
+	/**
+	 * set the health of this enemy
+	 * @param health
+	 */
 	public void setHealth(int health);
+	
+	/**
+	 * set the strength of this enemy
+	 * @param strength
+	 */
 	public void setStrength(int strength);
+	
+	/**
+	 * destroy this enemy
+	 */
 	public void destroy();
+	
+	/**
+	 * clone this enemy
+	 * @return cloned enemy
+	 */
 	public IEnemy clone();
+	
 	/**
 	 * set the original health of the enemy for future reference
 	 * @param health

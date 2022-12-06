@@ -1,20 +1,9 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
-
-import entity.enemies.EnemyManager;
-import entity.towers.TowerManager;
-import levels.Level;
-import levels.Level1;
-import levels.Level2;
-import levels.Level3;
-import levels.LevelDifficulty;
-import tile.TileManager;
 
 //import entity.Player;
 
@@ -55,8 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		this.KEY_HANDLER = new KeyHandler();
 		this.MOUSE_HANDLER = new MouseHandler();
-		Level startLevel = new Level2();
-		this.state = new GameplayState(startLevel, new TowerManager(), new EnemyManager(startLevel), new Player(LevelDifficulty.MEDIUM.getStartingHealth(), LevelDifficulty.MEDIUM.getStartingMoney()));
+		this.state = new MainMenuState();
 		
 		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		this.setDoubleBuffered(true);

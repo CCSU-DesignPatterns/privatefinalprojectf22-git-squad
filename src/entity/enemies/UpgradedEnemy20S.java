@@ -1,5 +1,10 @@
 package entity.enemies;
 
+/**
+ * decorator to give an enemy a bonus 20 strength
+ * @author Ricardo Almeida
+ *
+ */
 public class UpgradedEnemy20S extends UpgradedEnemy {
 	private int BonusStrength = 20;
 	

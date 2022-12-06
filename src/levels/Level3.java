@@ -7,6 +7,11 @@ import java.io.InputStreamReader;
 import entity.Direction;
 import entity.SpriteNotFoundException;
 
+/**
+ * loads the tileset and path for the snow level
+ * @author Ricardo Almeida
+ *
+ */
 public class Level3 extends Level {
     /**
      * Default constructor

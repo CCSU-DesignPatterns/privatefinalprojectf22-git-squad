@@ -1,11 +1,7 @@
 package entity.towers;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-
 import entity.Entity;
 import entity.enemies.IEnemy;
 
@@ -24,8 +20,6 @@ public abstract class Tower extends Entity implements ITower {
 	protected long currentTime;
 	protected double delta;
 	protected IEnemy target;
-	
-	//IMPLEMENT TOWER INTERFACE FOR DECORATORS AND THIS TO IMPLEMENT
 	
 	/**
 	 * {@summary Handles initial position and stats of tower being created.}

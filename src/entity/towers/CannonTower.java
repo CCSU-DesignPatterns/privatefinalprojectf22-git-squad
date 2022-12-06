@@ -1,6 +1,5 @@
 package entity.towers;
 
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Random;
 
@@ -42,7 +41,7 @@ public class CannonTower extends Tower {
 			int explosionOffsetY = r.nextInt(accuracy*2) - accuracy;
 			for(IEnemy e : gp.getState().getEnemyManager().getChildren()) {
 				if(Math.sqrt((Math.pow((e.getX() - (target.getX() - explosionOffsetX)), 2) 
-						+ Math.pow(e.getY() - (target.getY() - explosionOffsetY), 2))) <= explosionRadius) { // for each enemy in radius of the explosion
+						+ Math.pow(e.getY() - (target.getY() - explosionOffsetY), 2))) <= explosionRadius * gp.SCALE) { // for each enemy in radius of the explosion
 					e.takeDamage(damage);
 				}
 			}

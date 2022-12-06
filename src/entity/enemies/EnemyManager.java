@@ -6,19 +6,28 @@ import java.util.List;
 
 import levels.Level;
 
+/**
+ * Composite class for enemies. Keeps track of all living enemies and updates them every frame
+ * @author Ricardo Almeida, Ryan Sharp
+ *
+ */
 public class EnemyManager implements IEnemy {
 
-	List<IEnemy> children = new ArrayList<IEnemy>();
+	private List<IEnemy> children = new ArrayList<IEnemy>();
 	private EnemyWaves waves;
 	private List<IEnemy> removalQueue = new ArrayList<IEnemy>();
 	
-	public EnemyManager(Level level) {
-		waves = new EnemyWaves(level);
-		
+	/**
+	 * Create new enemy manager for the given level and difficulty
+	 * @param level - level being played
+	 * @param d - difficulty being played
+	 */
+	public EnemyManager(Level level, Difficulty d) {
+		waves = new EnemyWaves(level, d);
 	}
 	
 	@Override
-	public IEnemy getComposite() {
+	public EnemyManager getComposite() {
 		return this;
 	}
 
@@ -48,10 +57,23 @@ public class EnemyManager implements IEnemy {
 		}
 	}
 	
+	/**
+	 * Add an enemy to the composite
+	 * @param e - enemy to be added
+	 */
 	public void add(IEnemy e) { children.add(e); }
 	
+	/**
+	 * remove an enemy from the composite
+	 * @param e - enemy to be removed
+	 */
 	public void remove(IEnemy e) { removalQueue.add(e); }
 	
+	/**
+	 * get an enemy from the composite
+	 * @param target - enemy to be retrieved
+	 * @return enemy if found, otherwise null
+	 */
 	public IEnemy getChild(IEnemy target) {
 		for(IEnemy e : children) {
 			if(e.equals(target))
@@ -60,8 +82,16 @@ public class EnemyManager implements IEnemy {
 		return null;
 	}
 	
+	/**
+	 * Get the enemy waves for the level
+	 * @return
+	 */
 	public EnemyWaves getWaves() { return waves; }
-
+	
+	/**
+	 * Get the list of enemies in the composite
+	 * @return
+	 */
 	public List<IEnemy> getChildren() { return children; }
 
 	@Override

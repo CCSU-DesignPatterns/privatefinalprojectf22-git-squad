@@ -5,14 +5,17 @@ import entity.towers.ITower;
 import levels.Level;
 import levels.MapTile;
 
+/**
+ * Used to check the collision status of various entities as they update each frame
+ * @author Ryan Sharp, RyiSnow
+ *
+ */
 public class CollisionChecker {
 	
-	GamePanel gp;
-	
-	public CollisionChecker() {
-		this.gp = GamePanel.getInstance();
-	}
-	
+	/**
+	 * Check whether the given entity has collided with anything
+	 * @param entity - entity being checked
+	 */
 	public static void check(Entity entity) {
 		GamePanel gp = GamePanel.getInstance();
 		

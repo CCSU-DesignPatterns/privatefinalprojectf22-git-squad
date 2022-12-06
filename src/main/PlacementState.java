@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
@@ -16,7 +15,6 @@ import entity.enemies.EnemyManager;
 import entity.towers.Tower;
 import entity.towers.TowerManager;
 import levels.Level;
-import tile.TileManager;
 
 public class PlacementState implements GameState {
 

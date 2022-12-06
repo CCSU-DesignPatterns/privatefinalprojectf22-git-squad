@@ -5,9 +5,7 @@ import java.awt.Graphics2D;
 import entity.SpriteNotFoundException;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
-import entity.towers.TurretTower;
 import levels.Level;
-import tile.TileManager;
 import ui.GameplayUI;
 
 /**

@@ -1,6 +1,5 @@
 package entity.towers;
 
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import entity.enemies.IEnemy;

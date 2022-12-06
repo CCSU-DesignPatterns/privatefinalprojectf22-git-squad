@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import entity.enemies.EnemyManager;
 import entity.towers.TowerManager;
 import levels.Level;
-import tile.TileManager;
 
 /**
  * Interface for game states. Defines basic functionality that needs to be implemented for every state.

@@ -26,8 +26,8 @@ public abstract class UpgradedEnemy implements IEnemy {
 	/**
 	 * Returns the composite object
 	 */
-	public IEnemy getComposite() {
-		return this;
+	public EnemyManager getComposite() {
+		return null;
 	}
 	
 	/**
